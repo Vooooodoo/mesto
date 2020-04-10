@@ -1,0 +1,9 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts/fonts.css);
+@import url(../blocks/page/page.css);
+@import url(../blocks/root/root.css);
+@import url(../blocks/header/header.css);
+
+/*header, section, footer, div, h1, h2, h3, img, p, a, ul, li, span, nav {
+  border: 1px solid rgb(140, 0, 255);
+}*/
