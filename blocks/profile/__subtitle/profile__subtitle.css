@@ -1,0 +1,20 @@
+.profile__subtitle {
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+}
+
+@media all and (max-width: 628px) {
+	.profile__subtitle {
+    justify-self: center;
+    margin-left: 40px;
+  }
+}
+
+@media all and (max-width: 375px) {
+	.profile__subtitle {
+    font-size: 14px;
+    line-height: 17px;
+    margin-left: 25px;
+  }
+}
