@@ -16,6 +16,10 @@
   transition: opacity .2s linear;
 }
 
+.profile__edit-button:focus {
+  outline: none;
+}
+
 @media all and (max-width: 375px) {
 	.profile__edit-button {
     width: 18px;

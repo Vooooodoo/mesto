@@ -6,3 +6,7 @@
   padding: 0;
   background-image: url(./card__like.svg);
 }
+
+.card__like:focus {
+  outline: none;
+}
