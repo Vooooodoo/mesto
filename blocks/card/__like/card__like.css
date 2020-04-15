@@ -4,7 +4,8 @@
   background-color: transparent;
   border: 0;
   padding: 0;
-  background-image: url(./card__like.svg);
+  background-image: url(../../../images/card__like.svg);
+  cursor: pointer;
 }
 
 .card__like:focus {
