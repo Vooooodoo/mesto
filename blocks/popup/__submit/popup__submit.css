@@ -18,3 +18,10 @@
 .popup__submit:focus {
   outline: none;
 }
+
+@media all and (max-width: 400px) {
+	.popup__submit {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

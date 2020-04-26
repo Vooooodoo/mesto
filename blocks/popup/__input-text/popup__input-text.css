@@ -16,3 +16,31 @@
 .popup__input-text:focus {
   outline-color: rgb(140, 0, 255);
 }
+
+.popup__input-text::-webkit-input-placeholder {
+  color: #C4C4C4;
+}
+
+.popup__input-text::-moz-placeholder {
+  color: #C4C4C4;
+}
+
+.popup__input-text::-ms-input-placeholder {
+  color: #C4C4C4;
+}
+
+.popup__input-text::placeholder {
+  color: #C4C4C4;
+}
+
+@media all and (max-width: 400px) {
+	.popup__input-text {
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 10px;
+  }
+
+  .popup__input-text:last-of-type {
+    margin-bottom: 36px;
+  }
+}
