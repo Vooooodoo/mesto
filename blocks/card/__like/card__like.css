@@ -5,7 +5,12 @@
   border: 0;
   padding: 0;
   background-image: url(../../../images/card__like.svg);
+}
+
+.card__like:hover {
   cursor: pointer;
+  opacity: .6;
+  transition: opacity .2s linear;
 }
 
 .card__like:focus {
