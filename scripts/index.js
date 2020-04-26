@@ -10,19 +10,19 @@ const elementProfileSubtitle = document.querySelector('.profile__subtitle');
 const elementPopupSubmit = document.querySelector('.popup__submit');
 
 //popup open/close functions
-function editPopupOpen () {
+function editPopupOpen() {
   elementPopup.classList.add('popup_opened');
 
   elementPopupInputText[0].value = elementProfileTitle.textContent;
   elementPopupInputText[1].value = elementProfileSubtitle.textContent;
 }
 
-function editPopupClose () {
+function editPopupClose() {
   elementPopup.classList.remove('popup_opened');
 }
 
 //popup edit function
-function formSubmitHandler (evt) {
+function formSubmitHandler(evt) {
   evt.preventDefault();
 
   elementProfileTitle.textContent = elementPopupInputText[0].value;
