@@ -87,17 +87,20 @@ function editPopupSubmit(evt) {
 }
 
 //add cards functions
-function addCardsList() {
-  cardElementArray.push(cardTemplate.cloneNode(true));
+function addDefaultCardsList() {
+  for (let i = 0; i < 6; i++) {
+    cardElementArray.push(cardElement);
+  }
 
   cardElementArray.forEach(element => {
-    cardElementPhoto.src = initialCards[0].link;
-    cardElementTitle.textContent = initialCards[0].name;
+    cardElementPhoto.src = initialCards[cardElementArray.indexOf(element)].link;
+    cardElementTitle.textContent = initialCards[cardElementArray.indexOf(element)].name;
   });
 
-  cardsList.append(cardElementArray);
+  cardsList.append(...cardElementArray);
 };
-// addCardsList();
+
+addDefaultCardsList();
 
 function addCard(evt) {
   evt.preventDefault();
