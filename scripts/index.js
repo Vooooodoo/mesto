@@ -1,38 +1,126 @@
-//popup open/close vars
-const elementPopup = document.querySelector('.popup');
-const elementProfileEditButton = document.querySelector('.profile__edit-button');
-const elementPopupClose = document.querySelector('.popup__close');
+//popups open/close vars
+const elementPopup = document.querySelectorAll('.popup');
+const elementEditPopup = elementPopup[0];
+const elementAddPopup = elementPopup[1];
 
-//popup edit vars
+const editPopupIndex = 0; //индекс объекта в массиве
+const addPopupIndex = 1;
+
+const elementProfileEditButton = document.querySelector('.profile__edit-button');
+const elementProfileAddButton = document.querySelector('.profile__add-button');
+
+const elementPopupClose = document.querySelectorAll('.popup__close');
+const elementEditPopupClose = elementPopupClose[0];
+const elementAddPopupClose = elementPopupClose[1];
+
+//popups submit vars
 const elementPopupInputText = document.querySelectorAll('.popup__input-text');
+const elementEditPopupInputName = elementPopupInputText[0];
+const elementEditPopupInputAbout = elementPopupInputText[1];
+const elementAddPopupInputName = elementPopupInputText[2];
+const elementAddPopupInputLink = elementPopupInputText[3];
+
 const elementProfileTitle = document.querySelector('.profile__title');
 const elementProfileSubtitle = document.querySelector('.profile__subtitle');
-const elementPopupSubmit = document.querySelector('.popup__submit');
 
-//popup open/close functions
-function editPopupOpen() {
-  elementPopup.classList.add('popup_opened');
+const elementPopupSubmit = document.querySelectorAll('.popup__submit');
+const elementEditPopupSubmit = elementPopupSubmit[0];
+const elementAddPopupSubmit = elementPopupSubmit[1];
 
-  elementPopupInputText[0].value = elementProfileTitle.textContent;
-  elementPopupInputText[1].value = elementProfileSubtitle.textContent;
+//cards vars
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const cardElementArray = [];
+
+const cardTemplate = document.querySelector('#card-template').content;
+const cardsList = document.querySelector('.cards__list');
+
+const cardElement = cardTemplate.cloneNode(true); //клонируем содержимое тега template
+const cardElementTitle = cardElement.querySelector('.card__title'); //нашли заголовок клона
+const cardElementPhoto = cardElement.querySelector('.card__photo'); //нашли фото клона
+
+
+
+//popups open/close functions
+function popupOpen(popupIndex) {
+  elementPopup[popupIndex].classList.add('popup_opened');
+
+  elementEditPopupInputName.value = elementProfileTitle.textContent;
+  elementEditPopupInputAbout.value = elementProfileSubtitle.textContent;
 }
 
-function editPopupClose() {
-  elementPopup.classList.remove('popup_opened');
+function popupClose(popupIndex) {
+  elementPopup[popupIndex].classList.remove('popup_opened');
 }
 
-//popup edit function
-function formSubmitHandler(evt) {
+//edit popup submit function
+function editPopupSubmit(evt) {
   evt.preventDefault();
 
-  elementProfileTitle.textContent = elementPopupInputText[0].value;
-  elementProfileSubtitle.textContent = elementPopupInputText[1].value;
+  elementProfileTitle.textContent = elementEditPopupInputName.value;
+  elementProfileSubtitle.textContent = elementEditPopupInputAbout.value;
 }
 
-//popup open/close listeners
-elementProfileEditButton.addEventListener('click', editPopupOpen);
-elementPopupClose.addEventListener('click', editPopupClose);
+//add cards functions
+function addCardsList() {
+  cardElementArray.push(cardTemplate.cloneNode(true));
 
-//popup edit listeners
-elementPopup.addEventListener('submit', formSubmitHandler);
-elementPopupSubmit.addEventListener('click', editPopupClose);
+  cardElementArray.forEach(element => {
+    cardElementPhoto.src = initialCards[0].link;
+    cardElementTitle.textContent = initialCards[0].name;
+  });
+
+  cardsList.append(cardElementArray);
+};
+// addCardsList();
+
+function addCard(evt) {
+  evt.preventDefault();
+
+  cardElementPhoto.src = elementAddPopupInputLink.value;
+  cardElementTitle.textContent = elementAddPopupInputName.value;
+
+  cardElementArray.unshift(cardElement);
+
+  elementAddPopupInputLink.value = '';
+  elementAddPopupInputName.value = '';
+}
+
+//popups open/close listeners
+elementProfileEditButton.addEventListener('click', () => popupOpen(editPopupIndex));
+elementEditPopupClose.addEventListener('click', () => popupClose(editPopupIndex));
+
+elementProfileAddButton.addEventListener('click', () => popupOpen(addPopupIndex));
+elementAddPopupClose.addEventListener('click', () => popupClose(addPopupIndex));
+
+//popups submit listeners
+elementEditPopup.addEventListener('submit', editPopupSubmit);
+elementEditPopupSubmit.addEventListener('click', () => popupClose(editPopupIndex));
+
+elementAddPopup.addEventListener('submit', addCard);
+elementAddPopupSubmit.addEventListener('click', () => popupClose(addPopupIndex));

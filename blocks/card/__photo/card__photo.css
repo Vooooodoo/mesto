@@ -1,4 +1,31 @@
 .card__photo {
   width: 100%;
+  height: calc(282 / 282 * (100vw - (100vw - 936px) - 90px) / 3);;
+  object-fit: cover;
+  object-position: center;
   border-radius: 10px 10px 0 0;
+}
+
+@media all and (max-width: 935px) {
+	.card__photo {
+    height: calc(282 / 282 * (100vw - 90px) / 3);
+  }
+}
+
+@media all and (max-width: 750px) {
+	.card__photo {
+    height: calc(282 / 282 * (100vw - 72px) / 2);
+  }
+}
+
+@media all and (max-width: 520px) {
+	.card__photo {
+    height: calc(282 / 282 * (100vw - 54px));
+  }
+}
+
+@media all and (max-width: 400px) {
+	.card__photo {
+    height: calc(282 / 282 * (100vw - 38px));
+  }
 }
