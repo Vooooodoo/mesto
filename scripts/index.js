@@ -60,12 +60,6 @@ const cardElementArray = [];
 const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.cards__list');
 
-const cardElement = cardTemplate.cloneNode(true); //клонируем содержимое тега template
-const cardElementTitle = cardElement.querySelector('.card__title'); //нашли заголовок клона
-const cardElementPhoto = cardElement.querySelector('.card__photo'); //нашли фото клона
-
-
-
 //popups open/close functions
 function popupOpen(popupIndex) {
   elementPopup[popupIndex].classList.add('popup_opened');
@@ -88,27 +82,36 @@ function editPopupSubmit(evt) {
 
 //add cards functions
 function addDefaultCardsList() {
-  for (let i = 0; i < 6; i++) {
-    cardElementArray.push(cardElement);
-  }
+  for (let i = 0; i < initialCards.length; i++) {
+    cardElementArray.push(cardTemplate.cloneNode(true));
+  } //запушили в массив cardElementArray шесть клонов шаблона
 
-  cardElementArray.forEach(element => {
-    cardElementPhoto.src = initialCards[cardElementArray.indexOf(element)].link;
-    cardElementTitle.textContent = initialCards[cardElementArray.indexOf(element)].name;
-  });
+  cardElementArray.forEach(cardElement => {
+    cardElement.querySelector('.card__photo').src = initialCards[cardElementArray.indexOf(cardElement)].link;
+    cardElement.querySelector('.card__title').textContent = initialCards[cardElementArray.indexOf(cardElement)].name;
+  }); //каждому клону вставили соответствующую ссылку на фото и заголовок из массива initialCards
 
-  cardsList.append(...cardElementArray);
+  cardsList.append(...cardElementArray); //добавили готовые клоны в разметку
 };
 
 addDefaultCardsList();
 
-function addCard(evt) {
+function addNewCard(evt) {
   evt.preventDefault();
 
-  cardElementPhoto.src = elementAddPopupInputLink.value;
-  cardElementTitle.textContent = elementAddPopupInputName.value;
+  cardElementArray.unshift(cardTemplate.cloneNode(true)); //добавили новый клон шаблона в начало массива cardElementArray
 
-  cardElementArray.unshift(cardElement);
+  initialCards.unshift(
+    {
+      name: elementAddPopupInputName.value,
+      link: elementAddPopupInputLink.value
+    }
+  ); //добавили новый объект с информацией поля ввода в массив initialCards
+
+  cardElementArray[0].querySelector('.card__photo').src = initialCards[0].link; //вставили клону ссылку из поля ввода
+  cardElementArray[0].querySelector('.card__title').textContent = initialCards[0].name; //вставили клону заголовок из поля ввода
+
+  cardsList.prepend(cardElementArray[0]); //добавили нового клона, с данными от пользователя, в начало списка
 
   elementAddPopupInputLink.value = '';
   elementAddPopupInputName.value = '';
@@ -125,5 +128,5 @@ elementAddPopupClose.addEventListener('click', () => popupClose(addPopupIndex));
 elementEditPopup.addEventListener('submit', editPopupSubmit);
 elementEditPopupSubmit.addEventListener('click', () => popupClose(editPopupIndex));
 
-elementAddPopup.addEventListener('submit', addCard);
+elementAddPopup.addEventListener('submit', addNewCard);
 elementAddPopupSubmit.addEventListener('click', () => popupClose(addPopupIndex));
