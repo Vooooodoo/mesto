@@ -1,10 +1,12 @@
+@import url(./_inactive/card__like_inactive.css);
+@import url(./_active/card__like_active.css);
+
 .card__like {
   width: 21px;
   height: 18px;
   background-color: transparent;
   border: 0;
   padding: 0;
-  background-image: url(../../../images/card__like.svg);
 }
 
 .card__like:hover {
