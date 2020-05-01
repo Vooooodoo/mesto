@@ -1,11 +1,11 @@
 .profile__info {
-  max-width: 336px;
+  max-width: 400px;
   display: grid;
   grid-template-columns: repeat(2, max-content);
   grid-column-gap: 17px;
   grid-row-gap: 10px;
   align-items: center;
-  margin-right: 30px;
+  margin-right: 17px;
 }
 
 @media all and (max-width: 628px) {
@@ -14,7 +14,7 @@
   }
 }
 
-@media all and (max-width: 375px) {
+@media all and (max-width: 424px) {
 	.profile__info {
     margin: 0 auto 36px;
     grid-column-gap: 7px;

@@ -20,7 +20,7 @@
   outline: none;
 }
 
-@media all and (max-width: 375px) {
+@media all and (max-width: 424px) {
 	.profile__edit-button {
     width: 18px;
     height: 18px;
