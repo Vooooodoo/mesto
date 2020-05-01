@@ -1,5 +1,3 @@
-//todo допилить, чтобы пустые карточки не добавлялись
-
 //VARIABLES
 //popups open/close vars
 const elementPopup = document.querySelectorAll('.popup');
