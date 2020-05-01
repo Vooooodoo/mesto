@@ -33,7 +33,7 @@ const elementAddPopupSubmit = elementPopupSubmit[1];
 //add cards vars
 const initialCards = [
   {
-    name: 'Архыз',
+    name: 'Кавказ',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
@@ -95,7 +95,8 @@ function addDefaultCardsList() {
     cardElement.querySelector('.card__photo').alt = initialCards[cardElementArray.indexOf(cardElement)].name + '.';
     cardElement.querySelector('.card__title').textContent = initialCards[cardElementArray.indexOf(cardElement)].name;
     cardElement.querySelector('.card__like').addEventListener('click', cardLikeToggle);
-  }); //*каждому клону вставили соответствующую ссылку на фото, заголовок - альтернативный текст из массива initialCards и лисенер
+    cardElement.querySelector('.card__trash').addEventListener('click', cardDelete);
+  }); //*каждому клону вставили соответствующую ссылку на фото, заголовок - альтернативный текст из массива initialCards и лисенеры
 
   cardsList.append(...cardElementArray); //*добавили готовые клоны в HTML разметку
 };
@@ -118,6 +119,7 @@ function addNewCard(evt) {
   cardElementArray[0].querySelector('.card__photo').alt = initialCards[0].name + '.'; //*вставили клону альтернативный текст - заголовок из поля ввода
   cardElementArray[0].querySelector('.card__title').textContent = initialCards[0].name; //*вставили клону заголовок из поля ввода
   cardElementArray[0].querySelector('.card__like').addEventListener('click', cardLikeToggle); //*добавили клону лисенер
+  cardElementArray[0].querySelector('.card__trash').addEventListener('click', cardDelete)
 
   cardsList.prepend(cardElementArray[0]); //*добавили нового клона, с данными от пользователя, в начало списка
 
@@ -130,6 +132,14 @@ function cardLikeToggle(evt) {
   const eventTarget = evt.target;
 
   eventTarget.classList.toggle('card__like_active');
+}
+
+//card delete function
+function cardDelete(evt) {
+  const eventTarget = evt.target;
+  const cardsListItem = eventTarget.closest('.card');
+
+  cardsListItem.remove();
 }
 
 //LISTENERS
