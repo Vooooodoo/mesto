@@ -96,7 +96,7 @@ function addDefaultCardsList() {
     cardElement.querySelector('.card__trash').addEventListener('click', cardDelete);
   }); //*каждому клону вставили соответствующую ссылку на фото, заголовок - альтернативный текст из массива initialCards и лисенеры
 
-  cardsList.append(...cardElementArray); //*добавили готовые клоны в HTML разметку
+  cardsList.append(...cardElementArray); //*добавили готовые клоны в DOM-дерево
 };
 
 addDefaultCardsList();
