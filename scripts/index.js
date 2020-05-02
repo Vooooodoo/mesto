@@ -1,5 +1,5 @@
 //VARIABLES
-//popups open/close vars
+//form popups open/close vars
 const elementPopup = document.querySelectorAll('.popup');
 const elementEditPopup = elementPopup[0];
 const elementAddPopup = elementPopup[1];
@@ -13,6 +13,13 @@ const elementProfileAddButton = document.querySelector('.profile__add-button');
 const elementPopupClose = document.querySelectorAll('.popup__close');
 const elementEditPopupClose = elementPopupClose[0];
 const elementAddPopupClose = elementPopupClose[1];
+
+//photo popup open/close vars
+const elementPhotoPopup = document.querySelector('.photo-popup');
+const elementPhotoPopupClose = document.querySelector('.photo-popup__close');
+
+const elementPhotoPopupPhoto = document.querySelector('.photo-popup__photo');
+const elementPhotoPopupTitle = document.querySelector('.photo-popup__title');
 
 //popups submit vars
 const elementPopupInputText = document.querySelectorAll('.popup__input-text');
@@ -62,7 +69,7 @@ const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.cards__list');
 
 //FUNCTIONS
-//popups open/close functions
+//form popups open/close functions
 function popupOpen(popupIndex) {
   elementPopup[popupIndex].classList.add('popup_opened');
 
@@ -72,6 +79,21 @@ function popupOpen(popupIndex) {
 
 function popupClose(popupIndex) {
   elementPopup[popupIndex].classList.remove('popup_opened');
+}
+
+//photo popup open/close functions
+function photoPopupOpen(evt) {
+  const eventTargetClosestElement = evt.target.closest('.card');
+
+  elementPhotoPopupPhoto.src = evt.target.src;
+  elementPhotoPopupPhoto.alt = eventTargetClosestElement.querySelector('.card__title').textContent + '.';
+  elementPhotoPopupTitle.textContent = eventTargetClosestElement.querySelector('.card__title').textContent;
+
+  elementPhotoPopup.classList.add('photo-popup_opened');
+}
+
+function photoPopupClose() {
+  elementPhotoPopup.classList.remove('photo-popup_opened');
 }
 
 //edit popup submit function
@@ -94,6 +116,7 @@ function addDefaultCardsList() {
     cardElement.querySelector('.card__title').textContent = initialCards[cardElementArray.indexOf(cardElement)].name;
     cardElement.querySelector('.card__like').addEventListener('click', cardLikeToggle);
     cardElement.querySelector('.card__trash').addEventListener('click', cardDelete);
+    cardElement.querySelector('.card__photo').addEventListener('click', photoPopupOpen);
   }); //*каждому клону вставили соответствующую ссылку на фото, заголовок - альтернативный текст из массива initialCards и лисенеры
 
   cardsList.append(...cardElementArray); //*добавили готовые клоны в DOM-дерево
@@ -113,11 +136,13 @@ function addNewCard(evt) {
     }
   ); //*добавили новый объект с информацией поля ввода в массив initialCards
 
-  cardElementArray[0].querySelector('.card__photo').src = initialCards[0].link; //*вставили клону ссылку из поля ввода
-  cardElementArray[0].querySelector('.card__photo').alt = initialCards[0].name + '.'; //*вставили клону альтернативный текст - заголовок из поля ввода
-  cardElementArray[0].querySelector('.card__title').textContent = initialCards[0].name; //*вставили клону заголовок из поля ввода
-  cardElementArray[0].querySelector('.card__like').addEventListener('click', cardLikeToggle); //*добавили клону лисенер
-  cardElementArray[0].querySelector('.card__trash').addEventListener('click', cardDelete)
+  cardElementArray[0].querySelector('.card__photo').src = initialCards[0].link;
+  cardElementArray[0].querySelector('.card__photo').alt = initialCards[0].name + '.';
+  cardElementArray[0].querySelector('.card__title').textContent = initialCards[0].name;
+  cardElementArray[0].querySelector('.card__like').addEventListener('click', cardLikeToggle);
+  cardElementArray[0].querySelector('.card__trash').addEventListener('click', cardDelete);
+  cardElementArray[0].querySelector('.card__photo').addEventListener('click', photoPopupOpen);
+  //*заполнили новый клон данными из полей ввода и добавили лисенеры
 
   cardsList.prepend(cardElementArray[0]); //*добавили нового клона, с данными от пользователя, в начало списка
 
@@ -141,12 +166,15 @@ function cardDelete(evt) {
 }
 
 //LISTENERS
-//popups open/close listeners
+//form popups open/close listeners
 elementProfileEditButton.addEventListener('click', () => popupOpen(editPopupIndex));
 elementEditPopupClose.addEventListener('click', () => popupClose(editPopupIndex));
 
 elementProfileAddButton.addEventListener('click', () => popupOpen(addPopupIndex));
 elementAddPopupClose.addEventListener('click', () => popupClose(addPopupIndex));
+
+//photo popup close listener
+elementPhotoPopupClose.addEventListener('click', photoPopupClose);
 
 //popups submit listeners
 elementEditPopup.addEventListener('submit', editPopupSubmit);
