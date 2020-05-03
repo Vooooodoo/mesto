@@ -17,10 +17,10 @@
 
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="Исследователь океана Жак-Ив Кусто.">
+        <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="Русский путешественник Фёдор Конюхов.">
         <div class="profile__info">
           <h1 class="profile__title">Фёдор Конюхов</h1>
-          <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
+          <button class="profile__edit-button" type="button" aria-label="Редактировать профиль."></button>
           <p class="profile__subtitle">Путешественник</p>
         </div>
 
@@ -35,11 +35,11 @@
 
             <button class="popup__submit" type="submit">Сохранить</button>
 
-            <button class="popup__close" type="reset" aria-label="Закрыть"></button>
+            <button class="popup__close" type="reset" aria-label="Закрыть форму редактирования профиля."></button>
           </form>
         </div>
 
-        <button class="profile__add-button" type="button"></button>
+        <button class="profile__add-button" type="button" aria-label="Добавить новое место."></button>
 
         <div class="popup popup_closed">
           <form class="popup__container">
@@ -52,21 +52,21 @@
 
             <button class="popup__submit" type="submit">Создать</button>
 
-            <button class="popup__close" type="reset" aria-label="Закрыть"></button>
+            <button class="popup__close" type="reset" aria-label="Закрыть форму добавления нового места."></button>
           </form>
         </div>
       </section>
 
       <section class="cards">
         <ul class="cards__list">
-
+          <!-- список из карточек заполняется посредством JS -->
         </ul>
 
         <div class="photo-popup photo-popup_closed">
           <div class="photo-popup__container">
             <img class="photo-popup__photo" src="" alt="">
             <h2 class="photo-popup__title">Алтай</h2>
-            <button class="photo-popup__close" type="button" aria-label="Закрыть"></button>
+            <button class="photo-popup__close" type="button" aria-label="Закрыть окно с фотографией."></button>
           </div>
         </div>
       </section>
@@ -80,10 +80,10 @@
   <template id="card-template">
     <li class="card">
       <img class="card__photo" src="" alt="">
-      <button class="card__trash" type="button" aria-label="Удалить"></button>
+      <button class="card__trash" type="button" aria-label="Удалить место."></button>
       <div class="card__container">
         <h2 class="card__title"></h2>
-        <button class="card__like card__like_inactive" type="button" aria-label="Лайкнуть"></button>
+        <button class="card__like card__like_inactive" type="button" aria-label="Лайкнуть место."></button>
       </div>
     </li>
   </template>
