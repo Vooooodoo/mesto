@@ -4,7 +4,7 @@ const elementPopup = document.querySelectorAll('.popup');
 const elementEditPopup = elementPopup[0];
 const elementAddPopup = elementPopup[1];
 
-const editPopupIndex = 0; //*индекс объекта в массиве
+const editPopupIndex = 0; //*индекс объекта(попап редактирования профиля) в массиве
 const addPopupIndex = 1;
 
 const elementProfileEditButton = document.querySelector('.profile__edit-button');
@@ -119,7 +119,7 @@ function addDefaultCardsList() {
     cardElement.querySelector('.card__photo').addEventListener('click', photoPopupOpen);
   }); //*каждому клону вставили соответствующую ссылку на фото, заголовок - альтернативный текст из массива initialCards и лисенеры
 
-  cardsList.append(...cardElementArray); //*добавили готовые клоны в DOM-дерево
+  cardsList.append(...cardElementArray); //*добавили готовые клоны в разметку
 };
 
 addDefaultCardsList();
@@ -142,9 +142,9 @@ function addNewCard(evt) {
   cardElementArray[0].querySelector('.card__like').addEventListener('click', cardLikeToggle);
   cardElementArray[0].querySelector('.card__trash').addEventListener('click', cardDelete);
   cardElementArray[0].querySelector('.card__photo').addEventListener('click', photoPopupOpen);
-  //*заполнили новый клон данными из полей ввода и добавили лисенеры
+  //*заполнили новый клон данными из полей ввода(массив initialCards) и добавили лисенеры
 
-  cardsList.prepend(cardElementArray[0]); //*добавили нового клона, с данными от пользователя, в начало списка
+  cardsList.prepend(cardElementArray[0]); //*добавили нового клона, с данными от пользователя, в начало разметки списка
 
   elementAddPopupInputLink.value = '';
   elementAddPopupInputName.value = '';

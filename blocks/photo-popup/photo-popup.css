@@ -7,6 +7,7 @@
 
 .photo-popup {
   position: fixed;
+  display: flex;
   top: 0;
   left: 0;
   width: 100%;
@@ -18,8 +19,5 @@
   line-height: 0;
 }
 
-.photo-popup:hover .photo-popup__container {
-  visibility: visible;
-  opacity: 1;
-}
+
 

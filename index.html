@@ -20,7 +20,7 @@
         <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="Исследователь океана Жак-Ив Кусто.">
         <div class="profile__info">
           <h1 class="profile__title">Фёдор Конюхов</h1>
-          <button class="profile__edit-button" type="button"></button>
+          <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
           <p class="profile__subtitle">Путешественник</p>
         </div>
 
@@ -35,7 +35,7 @@
 
             <button class="popup__submit" type="submit">Сохранить</button>
 
-            <button class="popup__close" type="reset"></button>
+            <button class="popup__close" type="reset" aria-label="Закрыть"></button>
           </form>
         </div>
 
@@ -52,7 +52,7 @@
 
             <button class="popup__submit" type="submit">Создать</button>
 
-            <button class="popup__close" type="reset"></button>
+            <button class="popup__close" type="reset" aria-label="Закрыть"></button>
           </form>
         </div>
       </section>
@@ -66,7 +66,7 @@
           <div class="photo-popup__container">
             <img class="photo-popup__photo" src="" alt="">
             <h2 class="photo-popup__title">Алтай</h2>
-            <button class="photo-popup__close" type="button"></button>
+            <button class="photo-popup__close" type="button" aria-label="Закрыть"></button>
           </div>
         </div>
       </section>
@@ -80,10 +80,10 @@
   <template id="card-template">
     <li class="card">
       <img class="card__photo" src="" alt="">
-      <button class="card__trash" type="button"></button>
+      <button class="card__trash" type="button" aria-label="Удалить"></button>
       <div class="card__container">
         <h2 class="card__title"></h2>
-        <button class="card__like card__like_inactive" type="button"></button>
+        <button class="card__like card__like_inactive" type="button" aria-label="Лайкнуть"></button>
       </div>
     </li>
   </template>
