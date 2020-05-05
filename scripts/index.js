@@ -2,19 +2,14 @@
 
 //VARIABLES
 //form popups open/close vars
-const elementPopup = document.querySelectorAll('.popup');
 const elementEditPopup = document.querySelector('#edit-popup');
-const elementAddPopup = elementPopup[1];
-
-const editPopupIndex = 0; //*индекс объекта(попап редактирования профиля) в массиве
-const addPopupIndex = 1;
+const elementAddPopup = document.querySelector('#add-popup');
 
 const elementProfileEditButton = document.querySelector('.profile__edit-button');
 const elementProfileAddButton = document.querySelector('.profile__add-button');
 
-const elementPopupClose = document.querySelectorAll('.popup__close');
-const elementEditPopupClose = elementPopupClose[0];
-const elementAddPopupClose = elementPopupClose[1];
+const elementEditPopupClose = elementEditPopup.querySelector('.popup__close');
+const elementAddPopupClose = elementAddPopup.querySelector('.popup__close');
 
 //photo popup open/close vars
 const elementPhotoPopup = document.querySelector('.photo-popup');
@@ -25,17 +20,16 @@ const elementPhotoPopupTitle = document.querySelector('.photo-popup__title');
 
 //popups submit vars
 const elementPopupInputText = document.querySelectorAll('.popup__input-text');
-const elementEditPopupInputName = elementPopupInputText[0];
-const elementEditPopupInputAbout = elementPopupInputText[1];
-const elementAddPopupInputName = elementPopupInputText[2];
-const elementAddPopupInputLink = elementPopupInputText[3];
+const elementEditPopupInputName = document.querySelector('#edit-popup-input-name');
+const elementEditPopupInputAbout = document.querySelector('#edit-popup-input-about');
+const elementAddPopupInputName = document.querySelector('#add-popup-input-name');
+const elementAddPopupInputLink = document.querySelector('#add-popup-input-link');
 
 const elementProfileTitle = document.querySelector('.profile__title');
 const elementProfileSubtitle = document.querySelector('.profile__subtitle');
 
-const elementPopupSubmit = document.querySelectorAll('.popup__submit');
-const elementEditPopupSubmit = elementPopupSubmit[0];
-const elementAddPopupSubmit = elementPopupSubmit[1];
+const elementEditPopupSubmit = elementEditPopup.querySelector('.popup__submit');
+const elementAddPopupSubmit = elementAddPopup.querySelector('.popup__submit');
 
 //add cards vars
 const initialCards = [
@@ -72,15 +66,15 @@ const cardsList = document.querySelector('.cards__list');
 
 //FUNCTIONS
 //form popups open/close functions
-function popupOpen(popupIndex) {
-  elementPopup[popupIndex].classList.add('popup_opened');
+function popupOpen(popupType) {
+  popupType.classList.add('popup_opened');
 
   elementEditPopupInputName.value = elementProfileTitle.textContent;
   elementEditPopupInputAbout.value = elementProfileSubtitle.textContent;
 }
 
-function popupClose(popupIndex) {
-  elementPopup[popupIndex].classList.remove('popup_opened');
+function popupClose(popupType) {
+  popupType.classList.remove('popup_opened');
 }
 
 //photo popup open/close functions
@@ -169,18 +163,18 @@ function cardDelete(evt) {
 
 //LISTENERS
 //form popups open/close listeners
-elementProfileEditButton.addEventListener('click', () => popupOpen(editPopupIndex));
-elementEditPopupClose.addEventListener('click', () => popupClose(editPopupIndex));
+elementProfileEditButton.addEventListener('click', () => popupOpen(elementEditPopup));
+elementEditPopupClose.addEventListener('click', () => popupClose(elementEditPopup));
 
-elementProfileAddButton.addEventListener('click', () => popupOpen(addPopupIndex));
-elementAddPopupClose.addEventListener('click', () => popupClose(addPopupIndex));
+elementProfileAddButton.addEventListener('click', () => popupOpen(elementAddPopup));
+elementAddPopupClose.addEventListener('click', () => popupClose(elementAddPopup));
 
 //photo popup close listener
 elementPhotoPopupClose.addEventListener('click', photoPopupClose);
 
 //popups submit listeners
 elementEditPopup.addEventListener('submit', editPopupSubmit);
-elementEditPopupSubmit.addEventListener('click', () => popupClose(editPopupIndex));
+elementEditPopupSubmit.addEventListener('click', () => popupClose(elementEditPopup));
 
 elementAddPopup.addEventListener('submit', addNewCard);
-elementAddPopupSubmit.addEventListener('click', () => popupClose(addPopupIndex));
+elementAddPopupSubmit.addEventListener('click', () => popupClose(elementAddPopup));
