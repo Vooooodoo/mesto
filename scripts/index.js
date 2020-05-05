@@ -1,5 +1,3 @@
-//todo зафиксить, чтобы браузер ругался на незаполненные поля ввода, а не закрывал их
-
 //VARIABLES
 //form popups open/close vars
 const elementEditPopup = document.querySelector('#edit-popup');
@@ -98,6 +96,8 @@ function editPopupSubmit(evt) {
 
   elementProfileTitle.textContent = elementEditPopupInputName.value;
   elementProfileSubtitle.textContent = elementEditPopupInputAbout.value;
+
+  popupClose(elementEditPopup);
 }
 
 //add cards functions
@@ -144,6 +144,8 @@ function addNewCard(evt) {
 
   elementAddPopupInputLink.value = '';
   elementAddPopupInputName.value = '';
+
+  popupClose(elementAddPopup);
 }
 
 //cards like function
@@ -174,7 +176,4 @@ elementPhotoPopupClose.addEventListener('click', photoPopupClose);
 
 //popups submit listeners
 elementEditPopup.addEventListener('submit', editPopupSubmit);
-elementEditPopupSubmit.addEventListener('click', () => popupClose(elementEditPopup));
-
 elementAddPopup.addEventListener('submit', addNewCard);
-elementAddPopupSubmit.addEventListener('click', () => popupClose(elementAddPopup));
