@@ -1,7 +1,9 @@
+//todo зафиксить, чтобы браузер ругался на незаполненные поля ввода, а не закрывал их
+
 //VARIABLES
 //form popups open/close vars
 const elementPopup = document.querySelectorAll('.popup');
-const elementEditPopup = elementPopup[0];
+const elementEditPopup = document.querySelector('#edit-popup');
 const elementAddPopup = elementPopup[1];
 
 const editPopupIndex = 0; //*индекс объекта(попап редактирования профиля) в массиве
