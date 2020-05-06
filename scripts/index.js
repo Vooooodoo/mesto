@@ -57,8 +57,6 @@ const initialCards = [
   }
 ];
 
-const cardElementArray = [];
-
 const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.cards__list');
 
@@ -101,24 +99,29 @@ function editPopupSubmit(evt) {
 }
 
 //add cards functions
-function addDefaultCardsList() {
-  for (let i = 0; i < initialCards.length; i++) {
-    cardElementArray.push(cardTemplate.cloneNode(true));
-  } //*запушили в массив cardElementArray шесть клонов шаблона
+function createCard(object) {
+  const cardElement = cardTemplate.cloneNode(true); //*созадали пустого клона
 
-  cardElementArray.forEach(cardElement => {
-    cardElement.querySelector('.card__photo').src = initialCards[cardElementArray.indexOf(cardElement)].link;
-    cardElement.querySelector('.card__photo').alt = initialCards[cardElementArray.indexOf(cardElement)].name + '.';
-    cardElement.querySelector('.card__title').textContent = initialCards[cardElementArray.indexOf(cardElement)].name;
-    cardElement.querySelector('.card__like').addEventListener('click', cardLikeToggle);
-    cardElement.querySelector('.card__trash').addEventListener('click', cardDelete);
-    cardElement.querySelector('.card__photo').addEventListener('click', photoPopupOpen);
-  }); //*каждому клону вставили соответствующую ссылку на фото, заголовок - альтернативный текст из массива initialCards и лисенеры
+  cardElement.querySelector('.card__photo').src = object.link;
+  cardElement.querySelector('.card__photo').alt = object.name + '.';
+  cardElement.querySelector('.card__title').textContent = object.name;
+  cardElement.querySelector('.card__like').addEventListener('click', cardLikeToggle);
+  cardElement.querySelector('.card__trash').addEventListener('click', cardDelete);
+  cardElement.querySelector('.card__photo').addEventListener('click', photoPopupOpen);
+  //*вставили клону ссылку на фото и заголовок - альтернативный текст из соответствующего объекта + прикрепили лисенеры
 
-  cardsList.append(...cardElementArray); //*добавили готовые клоны в разметку
-};
+  return cardElement; //*вернули готового клона
+}
 
-addDefaultCardsList();
+function addDefaultCards() {
+  const cardElementArray = initialCards.map(item => {
+    return createCard(item);
+  }); //*запушили в массив cardElementArray готовых клонов
+
+  cardsList.append(...cardElementArray); //*добавили готовые клоны в разметку, разложив массив
+}
+
+addDefaultCards();
 
 function addNewCard(evt) {
   evt.preventDefault();
