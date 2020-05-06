@@ -118,7 +118,7 @@ function addDefaultCards() {
     return createCard(item);
   }); //*запушили в массив cardElementArray готовых клонов
 
-  cardsList.append(...cardElementArray); //*добавили готовые клоны в разметку, разложив массив
+  cardsList.append(...cardElementArray); //*добавили готовые клоны в разметку, разложив массив cardElementArray
 }
 
 addDefaultCards();
@@ -126,24 +126,16 @@ addDefaultCards();
 function addNewCard(evt) {
   evt.preventDefault();
 
-  cardElementArray.unshift(cardTemplate.cloneNode(true)); //*добавили новый клон шаблона в начало массива cardElementArray
-
   initialCards.unshift(
     {
       name: elementAddPopupInputName.value,
       link: elementAddPopupInputLink.value
     }
-  ); //*добавили новый объект с информацией поля ввода в массив initialCards
+  ); //*добавили новый объект с информацией поля ввода в начало массива initialCards
 
-  cardElementArray[0].querySelector('.card__photo').src = initialCards[0].link;
-  cardElementArray[0].querySelector('.card__photo').alt = initialCards[0].name + '.';
-  cardElementArray[0].querySelector('.card__title').textContent = initialCards[0].name;
-  cardElementArray[0].querySelector('.card__like').addEventListener('click', cardLikeToggle);
-  cardElementArray[0].querySelector('.card__trash').addEventListener('click', cardDelete);
-  cardElementArray[0].querySelector('.card__photo').addEventListener('click', photoPopupOpen);
-  //*заполнили новый клон данными из полей ввода(массив initialCards) и добавили лисенеры
+  const newCard = createCard(initialCards[0]); //*создали нового клона, указав в качестве аргумента функции createCard объект с информацией поля ввода
 
-  cardsList.prepend(cardElementArray[0]); //*добавили нового клона, с данными от пользователя, в начало разметки списка
+  cardsList.prepend(newCard); //*добавили нового клона, с данными от пользователя, в начало разметки списка
 
   elementAddPopupInputLink.value = '';
   elementAddPopupInputName.value = '';
