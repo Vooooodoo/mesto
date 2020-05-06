@@ -116,7 +116,7 @@ function createCard(object) {
 function addDefaultCards() {
   const cardElementArray = initialCards.map(item => {
     return createCard(item);
-  }); //*запушили в массив cardElementArray готовых клонов
+  }); //*заполнили массив cardElementArray готовыми клонами
 
   cardsList.append(...cardElementArray); //*добавили готовые клоны в разметку, разложив массив cardElementArray
 }
@@ -133,7 +133,7 @@ function addNewCard(evt) {
     }
   ); //*добавили новый объект с информацией поля ввода в начало массива initialCards
 
-  const newCard = createCard(initialCards[0]); //*создали нового клона, указав в качестве аргумента функции createCard объект с информацией поля ввода
+  const newCard = createCard(initialCards[0]); //*создали нового клона, указав в качестве аргумента функции createCard, объект с информацией поля ввода
 
   cardsList.prepend(newCard); //*добавили нового клона, с данными от пользователя, в начало разметки списка
 
