@@ -16,8 +16,7 @@ const elementPhotoPopupClose = document.querySelector('.photo-popup__close');
 const elementPhotoPopupPhoto = document.querySelector('.photo-popup__photo');
 const elementPhotoPopupTitle = document.querySelector('.photo-popup__title');
 
-//popups submit vars
-const elementPopupInputText = document.querySelectorAll('.popup__input-text');
+//form popups submit vars
 const elementEditPopupInputName = document.querySelector('#edit-popup-input-name');
 const elementEditPopupInputAbout = document.querySelector('#edit-popup-input-about');
 const elementAddPopupInputName = document.querySelector('#add-popup-input-name');
@@ -78,7 +77,7 @@ function photoPopupOpen(evt) {
   const eventTargetClosestElement = evt.target.closest('.card');
 
   elementPhotoPopupPhoto.src = evt.target.src;
-  elementPhotoPopupPhoto.alt = eventTargetClosestElement.querySelector('.card__title').textContent + '.';
+  elementPhotoPopupPhoto.alt = `${eventTargetClosestElement.querySelector('.card__title').textContent}.`;
   elementPhotoPopupTitle.textContent = eventTargetClosestElement.querySelector('.card__title').textContent;
 
   elementPhotoPopup.classList.add('photo-popup_opened');
@@ -100,10 +99,10 @@ function editPopupSubmit(evt) {
 
 //add cards functions
 function createCard(object) {
-  const cardElement = cardTemplate.cloneNode(true); //*созадали пустого клона
+  const cardElement = cardTemplate.cloneNode(true); //*создали пустого клона
 
   cardElement.querySelector('.card__photo').src = object.link;
-  cardElement.querySelector('.card__photo').alt = object.name + '.';
+  cardElement.querySelector('.card__photo').alt = `${object.name}.`;
   cardElement.querySelector('.card__title').textContent = object.name;
   cardElement.querySelector('.card__like').addEventListener('click', cardLikeToggle);
   cardElement.querySelector('.card__trash').addEventListener('click', cardDelete);
@@ -116,7 +115,7 @@ function createCard(object) {
 function addDefaultCards() {
   const cardElementArray = initialCards.map(item => {
     return createCard(item);
-  }); //*заполнили массив cardElementArray готовыми клонами
+  }); //*создали массив cardElementArray и заполнили его готовыми клонами
 
   cardsList.append(...cardElementArray); //*добавили готовые клоны в разметку, разложив массив cardElementArray
 }
