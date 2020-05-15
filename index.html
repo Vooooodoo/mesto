@@ -30,6 +30,7 @@
 
               <fieldset class="popup__fieldset">
                 <input id="edit-popup-input-name" class="popup__input-text" type="text" name="name" placeholder="Имя" minlength="2" maxlength="40" pattern="^[А-Яа-яЁёa-zA-Z\s\-]+$" required>
+                <span class="popup__invalid-text"></span>
                 <input id="edit-popup-input-about" class="popup__input-text" type="text" name="about" placeholder="О себе" minlength="2" maxlength="400" required>
               </fieldset>
 
@@ -46,7 +47,7 @@
               <h3 class="popup__title">Новое место</h3>
 
               <fieldset class="popup__fieldset">
-                <input id="add-popup-input-name" class="popup__input-text" type="text" name="name" placeholder="Название" maxlength="24" required>
+                <input id="add-popup-input-name" class="popup__input-text" type="text" name="name" placeholder="Название" minlength="1" maxlength="30" required>
                 <input id="add-popup-input-link" class="popup__input-text" type="url" name="link" placeholder="Ссылка на картинку" required>
               </fieldset>
 

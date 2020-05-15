@@ -168,6 +168,6 @@ elementAddPopupClose.addEventListener('click', () => popupClose(elementAddPopup)
 //photo popup close listener
 elementPhotoPopupClose.addEventListener('click', photoPopupClose);
 
-//popups submit listeners
+//form popups submit listeners
 elementEditPopup.addEventListener('submit', editPopupSubmit);
 elementAddPopup.addEventListener('submit', addNewCard);
