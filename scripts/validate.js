@@ -1,15 +1,3 @@
-//VARIABLES
-//form popups validation vars
-const elementEditPopupForm = document.forms.edit;
-const elementAddPopupForm = document.forms.add;
-
-const elementEditPopupInputName = elementEditPopupForm.elements.name;
-const elementEditPopupInputAbout = elementEditPopupForm.elements.about;
-const elementAddPopupInputName = elementAddPopupForm.elements.name;
-const elementAddPopupInputLink = elementAddPopupForm.elements.link;
-
-
-
 //FUNCTIONS
 //form popups validation fuctions
 function showInputError(element) {
@@ -21,7 +9,7 @@ function hideInputError(element) {
 };
 
 function isValid(evt) {
-  if (!evt.target.validity.valid && evt.target.classList.contains('popup__input-text')) {
+  if (!evt.target.validity.valid) {
     showInputError(evt.target);
   } else {
     hideInputError(evt.target);
@@ -31,3 +19,4 @@ function isValid(evt) {
 //LISTENERS
 //form popups validation listeners
 document.addEventListener('input', isValid);
+
