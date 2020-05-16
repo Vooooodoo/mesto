@@ -3,6 +3,9 @@
 const elementEditPopup = document.querySelector('#edit-popup');
 const elementAddPopup = document.querySelector('#add-popup');
 
+const elementEditPopupForm = document.forms.edit;
+const elementAddPopupForm = document.forms.add;
+
 const elementProfileEditButton = document.querySelector('.profile__edit-button');
 const elementProfileAddButton = document.querySelector('.profile__add-button');
 
@@ -76,11 +79,13 @@ function popupClose(popupType) {
 function photoPopupOpen(evt) {
   const eventTargetClosestElement = evt.target.closest('.card');
 
-  elementPhotoPopupPhoto.src = evt.target.src;
-  elementPhotoPopupPhoto.alt = `${eventTargetClosestElement.querySelector('.card__title').textContent}.`;
-  elementPhotoPopupTitle.textContent = eventTargetClosestElement.querySelector('.card__title').textContent;
+  if (evt.target.classList.contains('card__photo')) {
+    elementPhotoPopupPhoto.src = evt.target.src;
+    elementPhotoPopupPhoto.alt = `${eventTargetClosestElement.querySelector('.card__title').textContent}.`;
+    elementPhotoPopupTitle.textContent = eventTargetClosestElement.querySelector('.card__title').textContent;
 
-  elementPhotoPopup.classList.add('photo-popup_opened');
+    elementPhotoPopup.classList.add('photo-popup_opened');
+  }
 }
 
 function photoPopupClose() {
@@ -104,10 +109,7 @@ function createCard(object) {
   cardElement.querySelector('.card__photo').src = object.link;
   cardElement.querySelector('.card__photo').alt = `${object.name}.`;
   cardElement.querySelector('.card__title').textContent = object.name;
-  cardElement.querySelector('.card__like').addEventListener('click', cardLikeToggle);
-  cardElement.querySelector('.card__trash').addEventListener('click', cardDelete);
-  cardElement.querySelector('.card__photo').addEventListener('click', photoPopupOpen);
-  //*вставили клону ссылку на фото и заголовок - альтернативный текст из соответствующего объекта + прикрепили лисенеры
+  //*вставили клону ссылку на фото и заголовок-альтернативный текст из объекта, передав его в качестве аргумента
 
   return cardElement; //*вернули готового клона
 }
@@ -136,25 +138,25 @@ function addNewCard(evt) {
 
   cardsList.prepend(newCard); //*добавили нового клона, с данными от пользователя, в начало разметки списка
 
-  elementAddPopupInputLink.value = '';
-  elementAddPopupInputName.value = '';
+  elementAddPopupForm.reset();
 
   popupClose(elementAddPopup);
 }
 
 //cards like function
 function cardLikeToggle(evt) {
-  const eventTarget = evt.target;
-
-  eventTarget.classList.toggle('card__like_active');
+  if (evt.target.classList.contains('card__like')) {
+    evt.target.classList.toggle('card__like_active');
+  }
 }
 
 //card delete function
 function cardDelete(evt) {
-  const eventTarget = evt.target;
-  const cardsListItem = eventTarget.closest('.card');
+  const cardsListItem = evt.target.closest('.card');
 
-  cardsListItem.remove();
+  if (evt.target.classList.contains('card__trash')) {
+    cardsListItem.remove();
+  }
 }
 
 //LISTENERS
@@ -171,3 +173,9 @@ elementPhotoPopupClose.addEventListener('click', photoPopupClose);
 //form popups submit listeners
 elementEditPopup.addEventListener('submit', editPopupSubmit);
 elementAddPopup.addEventListener('submit', addNewCard);
+
+//add cards listeners
+cardsList.addEventListener('click', cardLikeToggle);
+cardsList.addEventListener('click', cardDelete);
+cardsList.addEventListener('click', photoPopupOpen);
+//*прикрепили лисенеры на родительский элемент списка и за счёт делегирования отслеживаем все дочерние по условию в функции-обработчике
