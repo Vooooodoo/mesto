@@ -1,3 +1,5 @@
+@import url(./_type/popup__input-text_type_error.css);
+
 .popup__input-text {
   display: block;
   padding: 10px 0;

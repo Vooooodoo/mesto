@@ -1,12 +1,33 @@
 //VARIABLES
 //form popups validation vars
-const elementEditPopup = document.querySelector('#edit-popup');
-const elementAddPopup = document.querySelector('#add-popup');
+const elementEditPopupForm = document.forms.edit;
+const elementAddPopupForm = document.forms.add;
 
-const elementEditPopupInputName = document.querySelector('#edit-popup-input-name');
-const elementEditPopupInputAbout = document.querySelector('#edit-popup-input-about');
-const elementAddPopupInputName = document.querySelector('#add-popup-input-name');
-const elementAddPopupInputLink = document.querySelector('#add-popup-input-link');
+const elementEditPopupInputName = elementEditPopupForm.elements.name;
+const elementEditPopupInputAbout = elementEditPopupForm.elements.about;
+const elementAddPopupInputName = elementAddPopupForm.elements.name;
+const elementAddPopupInputLink = elementAddPopupForm.elements.link;
 
-const elementEditPopupSubmit = elementEditPopup.querySelector('.popup__submit');
-const elementAddPopupSubmit = elementAddPopup.querySelector('.popup__submit');
+
+
+//FUNCTIONS
+//form popups validation fuctions
+function showInputError(element) {
+  element.classList.add('popup__input-text_type_error');
+};
+
+function hideInputError(element) {
+  element.classList.remove('popup__input-text_type_error');
+};
+
+function isValid(evt) {
+  if (!evt.target.validity.valid && evt.target.classList.contains('popup__input-text')) {
+    showInputError(evt.target);
+  } else {
+    hideInputError(evt.target);
+  }
+};
+
+//LISTENERS
+//form popups validation listeners
+document.addEventListener('input', isValid);

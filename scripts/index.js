@@ -20,10 +20,10 @@ const elementPhotoPopupPhoto = document.querySelector('.photo-popup__photo');
 const elementPhotoPopupTitle = document.querySelector('.photo-popup__title');
 
 //form popups submit vars
-const elementEditPopupInputName = document.querySelector('#edit-popup-input-name');
-const elementEditPopupInputAbout = document.querySelector('#edit-popup-input-about');
-const elementAddPopupInputName = document.querySelector('#add-popup-input-name');
-const elementAddPopupInputLink = document.querySelector('#add-popup-input-link');
+const elementEditPopupInputName = elementEditPopupForm.elements.name;
+const elementEditPopupInputAbout = elementEditPopupForm.elements.about;
+const elementAddPopupInputName = elementAddPopupForm.elements.name;
+const elementAddPopupInputLink = elementAddPopupForm.elements.link;
 
 const elementProfileTitle = document.querySelector('.profile__title');
 const elementProfileSubtitle = document.querySelector('.profile__subtitle');
