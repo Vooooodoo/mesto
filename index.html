@@ -30,14 +30,14 @@
 
               <fieldset class="popup__fieldset">
                 <input id="edit-popup-input-name" name="name" class="popup__input-text" type="text" placeholder="Имя" minlength="2" maxlength="40" pattern="^[А-Яа-яЁёa-zA-Z\s\-]+$" required>
-                <span id="edit-popup-input-name-error" class="popup__input-error_hide popup__input-error_show"></span>
+                <span id="edit-popup-input-name-error" class="popup__input-error popup__input-error_hide"></span>
                 <input id="edit-popup-input-about" name="about" class="popup__input-text" type="text" placeholder="О себе" minlength="2" maxlength="400" required>
-                <span id="edit-popup-input-about-error" class="popup__input-error_hide popup__input-error_show"></span>
+                <span id="edit-popup-input-about-error" class="popup__input-error popup__input-error_hide"></span>
               </fieldset>
 
               <button class="popup__submit popup__submit_valid" type="submit">Сохранить</button>
 
-              <button class="popup__close" type="reset" aria-label="Закрыть форму редактирования профиля."></button>
+              <button class="popup__close" type="button" aria-label="Закрыть форму редактирования профиля."></button>
             </form>
           </div>
 
@@ -49,9 +49,9 @@
 
               <fieldset class="popup__fieldset">
                 <input id="add-popup-input-name" name="name" class="popup__input-text" type="text" placeholder="Название" minlength="1" maxlength="30" required>
-                <span id="add-popup-input-name-error" class="popup__input-error_hide popup__input-error_show"></span>
+                <span id="add-popup-input-name-error" class="popup__input-error popup__input-error_hide"></span>
                 <input id="add-popup-input-link" name="link" class="popup__input-text" type="url" placeholder="Ссылка на картинку" required>
-                <span id="add-popup-input-link-error" class="popup__input-error_hide popup__input-error_show"></span>
+                <span id="add-popup-input-link-error" class="popup__input-error popup__input-error_hide"></span>
               </fieldset>
 
               <button class="popup__submit popup__submit_valid popup__submit_invalid" type="submit">Создать</button>
