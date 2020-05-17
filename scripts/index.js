@@ -71,8 +71,10 @@ function popupOpen(popupType) {
   elementEditPopupInputAbout.value = elementProfileSubtitle.textContent;
 }
 
-function popupClose(popupType) {
-  popupType.classList.remove('popup_opened');
+function popupClose(evt) {
+  const closestPopup = evt.target.closest('.popup');
+
+  closestPopup.classList.remove('popup_opened');
 }
 
 //photo popup open/close functions
@@ -99,7 +101,7 @@ function editPopupSubmit(evt) {
   elementProfileTitle.textContent = elementEditPopupInputName.value;
   elementProfileSubtitle.textContent = elementEditPopupInputAbout.value;
 
-  popupClose(elementEditPopup);
+  popupClose(evt);
 }
 
 //add cards functions
@@ -140,7 +142,7 @@ function addNewCard(evt) {
 
   elementAddPopupForm.reset();
 
-  popupClose(elementAddPopup);
+  popupClose(evt);
 }
 
 //cards like function
@@ -162,10 +164,10 @@ function cardDelete(evt) {
 //LISTENERS
 //form popups open/close listeners
 elementProfileEditButton.addEventListener('click', () => popupOpen(elementEditPopup));
-elementEditPopupClose.addEventListener('click', () => popupClose(elementEditPopup));
+elementEditPopupClose.addEventListener('click', popupClose);
 
 elementProfileAddButton.addEventListener('click', () => popupOpen(elementAddPopup));
-elementAddPopupClose.addEventListener('click', () => popupClose(elementAddPopup));
+elementAddPopupClose.addEventListener('click', popupClose);
 
 //photo popup close listener
 elementPhotoPopupClose.addEventListener('click', photoPopupClose);
