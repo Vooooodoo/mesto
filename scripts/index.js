@@ -72,6 +72,12 @@ function popupOpen(popupType) {
 
   editPopupInputNameElement.value = profileTitleElement.textContent;
   editPopupInputAboutElement.value = profileSubtitleElement.textContent;
+
+  editPopupFormElement.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      popupClose(evt);
+    }
+  });
 }
 
 function resetInputsErrors(evt) {
