@@ -1,4 +1,7 @@
 //VARIABLES
+//delegation var
+const elementProfile = document.querySelector('.profile');
+
 //form popups open/close vars
 const elementEditPopup = document.querySelector('#edit-popup');
 const elementAddPopup = document.querySelector('#add-popup');
@@ -74,7 +77,9 @@ function popupOpen(popupType) {
 function popupClose(evt) {
   const closestPopup = evt.target.closest('.popup');
 
-  closestPopup.classList.remove('popup_opened');
+  if (evt.target.classList.contains('popup__close') || evt.target.classList.contains('popup__submit')) {
+    closestPopup.classList.remove('popup_opened');
+  }
 }
 
 //photo popup open/close functions
@@ -164,10 +169,9 @@ function cardDelete(evt) {
 //LISTENERS
 //form popups open/close listeners
 elementProfileEditButton.addEventListener('click', () => popupOpen(elementEditPopup));
-elementEditPopupClose.addEventListener('click', popupClose);
-
 elementProfileAddButton.addEventListener('click', () => popupOpen(elementAddPopup));
-elementAddPopupClose.addEventListener('click', popupClose);
+
+elementProfile.addEventListener('click', popupClose);
 
 //photo popup close listener
 elementPhotoPopupClose.addEventListener('click', photoPopupClose);

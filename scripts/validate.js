@@ -1,8 +1,3 @@
-//VARIABLES
-//form popups validation vars
-const elementProfile = document.querySelector('.profile');
-
-
 //FUNCTIONS
 //form popups validation fuctions
 function showInputError(elementInput, errorMessage) {
