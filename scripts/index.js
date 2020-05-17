@@ -72,18 +72,19 @@ function popupOpen(popupType) {
 
   editPopupInputNameElement.value = profileTitleElement.textContent;
   editPopupInputAboutElement.value = profileSubtitleElement.textContent;
+  addPopupInputNameElement.value = '';
+  addPopupInputLinkElement.value = '';
 
-  editPopupFormElement.addEventListener('keydown', (evt) => {
+  profileElement.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
-      popupClose(evt);
+      popupClose(popupType);
     }
   });
 }
 
-function resetInputsErrors(evt) {
-  const closestPopup = evt.target.closest('.popup');
-  const inputs = closestPopup.querySelectorAll('.popup__input-text');
-  const inputsErrors = closestPopup.querySelectorAll('.popup__input-error');
+function resetInputsErrors(popupType) {
+  const inputs = popupType.querySelectorAll('.popup__input-text');
+  const inputsErrors = popupType.querySelectorAll('.popup__input-error');
 
   inputs.forEach(item => {
     item.classList.remove('popup__input-text_type_error');
@@ -95,14 +96,10 @@ function resetInputsErrors(evt) {
   }); //*убрали тексты ошибок валидации
 }
 
-function popupClose(evt) {
-  const closestPopup = evt.target.closest('.popup');
+function popupClose(popupType) {
+  resetInputsErrors(popupType);
 
-  if (evt.target.classList.contains('popup__close') || evt.target.classList.contains('popup__submit')) {
-    resetInputsErrors(evt);
-
-    closestPopup.classList.remove('popup_opened');
-  }
+  popupType.classList.remove('popup_opened');
 }
 
 //photo popup open/close functions
@@ -129,7 +126,7 @@ function editPopupSubmit(evt) {
   profileTitleElement.textContent = editPopupInputNameElement.value;
   profileSubtitleElement.textContent = editPopupInputAboutElement.value;
 
-  popupClose(evt);
+  popupClose(editPopupElement);
 }
 
 //add cards functions
@@ -170,7 +167,7 @@ function addNewCard(evt) {
 
   addPopupFormElement.reset(); //*сбросили все поля формы
 
-  popupClose(evt);
+  popupClose(addPopupElement);
 }
 
 //cards like function
@@ -194,7 +191,8 @@ function cardDelete(evt) {
 profileEditButtonElement.addEventListener('click', () => popupOpen(editPopupElement));
 profileAddButtonElement.addEventListener('click', () => popupOpen(addPopupElement));
 
-profileElement.addEventListener('click', popupClose);
+editPopupCloseElement.addEventListener('click', () => popupClose(editPopupElement));
+addPopupCloseElement.addEventListener('click', () => popupClose(addPopupElement));
 
 //photo popup close listener
 photoPopupCloseElement.addEventListener('click', photoPopupClose);
