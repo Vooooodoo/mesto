@@ -74,10 +74,27 @@ function popupOpen(popupType) {
   editPopupInputAboutElement.value = profileSubtitleElement.textContent;
 }
 
+function resetInputsErrors(evt) {
+  const closestPopup = evt.target.closest('.popup');
+  const inputs = closestPopup.querySelectorAll('.popup__input-text');
+  const inputsErrors = closestPopup.querySelectorAll('.popup__input-error');
+
+  inputs.forEach(item => {
+    item.classList.remove('popup__input-text_type_error');
+  }); //*убрали подчёркивания ошибок валидации
+
+  inputsErrors.forEach(item => {
+    item.classList.remove('popup__input-error_show');
+    item.textContent = '';
+  }); //*убрали тексты ошибок валидации
+}
+
 function popupClose(evt) {
   const closestPopup = evt.target.closest('.popup');
 
   if (evt.target.classList.contains('popup__close') || evt.target.classList.contains('popup__submit')) {
+    resetInputsErrors(evt);
+
     closestPopup.classList.remove('popup_opened');
   }
 }
@@ -145,7 +162,7 @@ function addNewCard(evt) {
 
   cardsList.prepend(newCard); //*добавили нового клона, с данными от пользователя, в начало разметки списка
 
-  addPopupFormElement.reset();
+  addPopupFormElement.reset(); //*сбросили все поля формы
 
   popupClose(evt);
 }
