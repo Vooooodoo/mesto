@@ -216,14 +216,9 @@ profileAddButtonElement.addEventListener('click', () => popupOpen(addPopupElemen
 editPopupCloseElement.addEventListener('click', () => popupClose(editPopupElement));
 addPopupCloseElement.addEventListener('click', () => popupClose(addPopupElement));
 
-editPopupElement.addEventListener('click', (evt) => {
+profileElement.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup')) {
-    popupClose(editPopupElement);
-  }
-});
-addPopupElement.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup')) {
-    popupClose(addPopupElement);
+    popupClose(evt.target);
   }
 });
 
