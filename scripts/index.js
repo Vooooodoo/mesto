@@ -67,6 +67,20 @@ const cardsList = document.querySelector('.cards__list');
 
 //FUNCTIONS
 //form popups open/close functions
+function resetInputsErrors(popupType) {
+  const inputs = popupType.querySelectorAll('.popup__input-text');
+  const inputsErrors = popupType.querySelectorAll('.popup__input-error');
+
+  inputs.forEach(item => {
+    item.classList.remove('popup__input-text_type_error');
+  }); //*убрали подчёркивания ошибок валидации
+
+  inputsErrors.forEach(item => {
+    item.classList.remove('popup__input-error_show');
+    item.textContent = '';
+  }); //*убрали тексты ошибок валидации
+}
+
 function popupOpen(popupType) {
   popupType.classList.add('popup_opened');
 
@@ -80,20 +94,6 @@ function popupOpen(popupType) {
       popupClose(popupType);
     }
   });
-}
-
-function resetInputsErrors(popupType) {
-  const inputs = popupType.querySelectorAll('.popup__input-text');
-  const inputsErrors = popupType.querySelectorAll('.popup__input-error');
-
-  inputs.forEach(item => {
-    item.classList.remove('popup__input-text_type_error');
-  }); //*убрали подчёркивания ошибок валидации
-
-  inputsErrors.forEach(item => {
-    item.classList.remove('popup__input-error_show');
-    item.textContent = '';
-  }); //*убрали тексты ошибок валидации
 }
 
 function popupClose(popupType) {
