@@ -73,7 +73,7 @@ function resetInputsErrors(popupType) {
 
   inputs.forEach(item => {
     item.classList.remove('popup__input-text_type_error');
-  }); //*убрали подчёркивания ошибок валидации
+  }); //*убрали подчеркивания ошибок валидации
 
   inputsErrors.forEach(item => {
     item.classList.remove('popup__input-error_show');
@@ -213,12 +213,13 @@ function cardDelete(evt) {
 profileEditButtonElement.addEventListener('click', () => popupOpen(editPopupElement));
 profileAddButtonElement.addEventListener('click', () => popupOpen(addPopupElement));
 
-editPopupCloseElement.addEventListener('click', () => popupClose(editPopupElement));
-addPopupCloseElement.addEventListener('click', () => popupClose(addPopupElement));
-
 profileElement.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup')) {
+  const parentPopup = evt.target.closest('.popup'); //*попап-родитель элемента по которому произошел клик
+
+  if (evt.target.classList.contains('popup')) { //*если клик произошел по родителю - закрыть его
     popupClose(evt.target);
+  } else if (evt.target.classList.contains('popup__close')) { //*если клик произошел по дочернему кресту - закрыть родителя
+    popupClose(parentPopup);
   }
 });
 
