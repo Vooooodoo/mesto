@@ -81,25 +81,47 @@ function resetInputsErrors(popupType) {
   }); //*убрали тексты ошибок валидации
 }
 
+function editPopupEscape(evt) {
+  if (evt.key === 'Escape') {
+    popupClose(editPopupElement);
+  }
+}
+
+function addPopupEscape(evt) {
+  if (evt.key === 'Escape') {
+    popupClose(addPopupElement);
+  }
+}
+//*создали две именованные функции-обработчики для каждого попапа, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
+
 function popupOpen(popupType) {
   popupType.classList.add('popup_opened');
 
-  editPopupInputNameElement.value = profileTitleElement.textContent;
-  editPopupInputAboutElement.value = profileSubtitleElement.textContent;
-  addPopupInputNameElement.value = '';
-  addPopupInputLinkElement.value = '';
+  if (popupType === editPopupElement) {
+    editPopupInputNameElement.value = profileTitleElement.textContent;
+    editPopupInputAboutElement.value = profileSubtitleElement.textContent;
+  } else if (popupType === addPopupElement) {
+    addPopupInputNameElement.value = '';
+    addPopupInputLinkElement.value = '';
+  }
 
-  profileElement.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      popupClose(popupType);
-    }
-  });
+  if (popupType === editPopupElement) {
+    profileElement.addEventListener('keydown', editPopupEscape);
+  } else if (popupType === addPopupElement) {
+    profileElement.addEventListener('keydown', addPopupEscape);
+  }
 }
 
 function popupClose(popupType) {
   resetInputsErrors(popupType);
 
   popupType.classList.remove('popup_opened');
+
+  if (popupType === editPopupElement) {
+    profileElement.removeEventListener('keydown', editPopupEscape);
+  } else if (popupType === addPopupElement) {
+    profileElement.removeEventListener('keydown', addPopupEscape);
+  }
 }
 
 //photo popup open/close functions

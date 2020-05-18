@@ -7,7 +7,7 @@ function showInputError(inputElement, errorMessage) {
   inputErrorElement.classList.add('popup__input-error_show');
 
   inputErrorElement.textContent = errorMessage; //*передали спэну в качестве текста сообщение об ошибке из параметра
-};
+}
 
 function hideInputError(inputElement) {
   const inputErrorElement = document.querySelector(`#${inputElement.id}-error`);
@@ -16,7 +16,21 @@ function hideInputError(inputElement) {
   inputErrorElement.classList.remove('popup__input-error_show');
 
   inputErrorElement.textContent = '';
-};
+}
+
+function hasInvalidInput(inputList) {
+  return inputList.some((item) => {
+    return !item.validity.valid;
+  });
+}
+
+function toggleButtonState(inputList, buttonElement) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('popup__submit_invalid');
+  } else {
+    buttonElement.classList.remove('popup__submit_invalid');
+  }
+}
 
 function isValid(evt) {
   if (!evt.target.validity.valid) { //*если инпут не проходит валидацию - предупреждать об ошибке
@@ -24,7 +38,7 @@ function isValid(evt) {
   } else {
     hideInputError(evt.target);
   }
-};
+}
 
 //LISTENERS
 //form popups validation listeners
