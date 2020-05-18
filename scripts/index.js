@@ -216,6 +216,9 @@ profileAddButtonElement.addEventListener('click', () => popupOpen(addPopupElemen
 editPopupCloseElement.addEventListener('click', () => popupClose(editPopupElement));
 addPopupCloseElement.addEventListener('click', () => popupClose(addPopupElement));
 
+editPopupElement.addEventListener('click', () => popupClose(editPopupElement));
+addPopupElement.addEventListener('click', () => popupClose(addPopupElement));
+
 //photo popup close listener
 photoPopupCloseElement.addEventListener('click', photoPopupClose);
 

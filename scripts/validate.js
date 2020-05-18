@@ -18,17 +18,23 @@ function hideInputError(inputElement) {
   inputErrorElement.textContent = '';
 }
 
-function hasInvalidInput(inputList) {
+function hasInvalidInput(evt) {
+  const parentPopup = evt.target.closest('.popup');
+  const inputList = parentPopup.querySelectorAll('.popup__input-text')
+
   return inputList.some((item) => {
     return !item.validity.valid;
   });
 }
 
-function toggleButtonState(inputList, buttonElement) {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__submit_invalid');
+function toggleButtonState(evt) {
+  const parentPopup = evt.target.closest('.popup');
+  const submitButton = parentPopup.querySelector('.popup__submit');
+
+  if (!evt.target.validity.valid) {
+    submitButton.classList.add('popup__submit_invalid');
   } else {
-    buttonElement.classList.remove('popup__submit_invalid');
+    submitButton.classList.remove('popup__submit_invalid');
   }
 }
 
@@ -38,6 +44,8 @@ function isValid(evt) {
   } else {
     hideInputError(evt.target);
   }
+
+  toggleButtonState(evt);
 }
 
 //LISTENERS
