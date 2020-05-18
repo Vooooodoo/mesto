@@ -224,6 +224,13 @@ profileElement.addEventListener('click', (evt) => {
 });
 
 //photo popup close listener
+photoPopupElement.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('photo-popup')) {
+    photoPopupClose();
+  } else if (evt.target.classList.contains('popup__close')) {
+    photoPopupClose();
+  }
+});
 photoPopupCloseElement.addEventListener('click', photoPopupClose);
 
 //form popups submit listeners
