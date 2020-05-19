@@ -89,10 +89,10 @@ function escapeAddPopup(evt) {
 //*создали две именованные функции-обработчики для каждого попапа, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
 
 function openPopup(popupType) {
-  const inputList = Array.from(popupType.querySelectorAll('.popup__input-text'));
   const submitButtonElement = popupType.querySelector('.popup__submit');
 
   popupType.classList.add('popup_opened');
+  submitButtonElement.classList.add('popup__submit_invalid');
 
   if (popupType === editPopup) {
     editPopupNameInput.value = profileTitle.textContent;
@@ -107,8 +107,6 @@ function openPopup(popupType) {
   } else if (popupType === addPopup) {
     profile.addEventListener('keydown', escapeAddPopup);
   }
-
-  toggleButtonState(inputList, submitButtonElement); //*поменяли состояние кнопки сабмит, в зависимости от валидности инпутов
 }
 
 function closePopup(popupType) {
