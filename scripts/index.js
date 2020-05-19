@@ -95,6 +95,9 @@ function escapeAddPopup(evt) {
 //*создали две именованные функции-обработчики для каждого попапа, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
 
 function openPopup(popupType) {
+  const inputList = Array.from(popupType.querySelectorAll('.popup__input-text'));
+  const submitButtonElement = popupType.querySelector('.popup__submit');
+
   popupType.classList.add('popup_opened');
 
   if (popupType === editPopupElement) {
@@ -110,6 +113,8 @@ function openPopup(popupType) {
   } else if (popupType === addPopupElement) {
     profileElement.addEventListener('keydown', escapeAddPopup);
   }
+
+  toggleButtonState(inputList, submitButtonElement);
 }
 
 function closePopup(popupType) {
