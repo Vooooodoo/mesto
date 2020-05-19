@@ -81,20 +81,20 @@ function resetInputsErrors(popupType) {
   }); //*убрали тексты ошибок валидации
 }
 
-function editPopupEscape(evt) {
+function escapeEditPopup(evt) {
   if (evt.key === 'Escape') {
-    popupClose(editPopupElement);
+    closePopup(editPopupElement);
   }
 }
 
-function addPopupEscape(evt) {
+function escapeAddPopup(evt) {
   if (evt.key === 'Escape') {
-    popupClose(addPopupElement);
+    closePopup(addPopupElement);
   }
 }
 //*создали две именованные функции-обработчики для каждого попапа, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
 
-function popupOpen(popupType) {
+function openPopup(popupType) {
   popupType.classList.add('popup_opened');
 
   if (popupType === editPopupElement) {
@@ -106,26 +106,26 @@ function popupOpen(popupType) {
   }
 
   if (popupType === editPopupElement) {
-    profileElement.addEventListener('keydown', editPopupEscape);
+    profileElement.addEventListener('keydown', escapeEditPopup);
   } else if (popupType === addPopupElement) {
-    profileElement.addEventListener('keydown', addPopupEscape);
+    profileElement.addEventListener('keydown', escapeAddPopup);
   }
 }
 
-function popupClose(popupType) {
+function closePopup(popupType) {
   resetInputsErrors(popupType);
 
   popupType.classList.remove('popup_opened');
 
   if (popupType === editPopupElement) {
-    profileElement.removeEventListener('keydown', editPopupEscape);
+    profileElement.removeEventListener('keydown', escapeEditPopup);
   } else if (popupType === addPopupElement) {
-    profileElement.removeEventListener('keydown', addPopupEscape);
+    profileElement.removeEventListener('keydown', escapeAddPopup);
   }
 }
 
 //photo popup open/close functions
-function photoPopupOpen(evt) {
+function openPhotoPopup(evt) {
   const eventTargetClosestElement = evt.target.closest('.card');
 
   if (evt.target.classList.contains('card__photo')) {
@@ -137,18 +137,18 @@ function photoPopupOpen(evt) {
   }
 }
 
-function photoPopupClose() {
+function closePhotoPopup() {
   photoPopupElement.classList.remove('photo-popup_opened');
 }
 
 //edit popup submit function
-function editPopupSubmit(evt) {
+function submitEditPopup(evt) {
   evt.preventDefault();
 
   profileTitleElement.textContent = editPopupInputNameElement.value;
   profileSubtitleElement.textContent = editPopupInputAboutElement.value;
 
-  popupClose(editPopupElement);
+  closePopup(editPopupElement);
 }
 
 //add cards functions
@@ -189,18 +189,18 @@ function addNewCard(evt) {
 
   addPopupFormElement.reset(); //*сбросили все поля формы
 
-  popupClose(addPopupElement);
+  closePopup(addPopupElement);
 }
 
 //cards like function
-function cardLikeToggle(evt) {
+function toggleCardLike(evt) {
   if (evt.target.classList.contains('card__like')) {
     evt.target.classList.toggle('card__like_active');
   }
 }
 
 //card delete function
-function cardDelete(evt) {
+function deleteCard(evt) {
   const cardsListItem = evt.target.closest('.card');
 
   if (evt.target.classList.contains('card__trash')) {
@@ -210,35 +210,32 @@ function cardDelete(evt) {
 
 //LISTENERS
 //form popups open/close listeners
-profileEditButtonElement.addEventListener('click', () => popupOpen(editPopupElement));
-profileAddButtonElement.addEventListener('click', () => popupOpen(addPopupElement));
+profileEditButtonElement.addEventListener('click', () => openPopup(editPopupElement));
+profileAddButtonElement.addEventListener('click', () => openPopup(addPopupElement));
 
 profileElement.addEventListener('click', (evt) => {
   const parentPopup = evt.target.closest('.popup'); //*попап-родитель элемента по которому произошел клик
 
   if (evt.target.classList.contains('popup')) { //*если клик произошел по родителю - закрыть его
-    popupClose(evt.target);
+    closePopup(evt.target);
   } else if (evt.target.classList.contains('popup__close')) { //*если клик произошел по дочернему кресту - закрыть родителя
-    popupClose(parentPopup);
+    closePopup(parentPopup);
   }
 });
 
 //photo popup close listener
 photoPopupElement.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('photo-popup')) {
-    photoPopupClose();
-  } else if (evt.target.classList.contains('popup__close')) {
-    photoPopupClose();
+  if (evt.target.classList.contains('photo-popup') || evt.target.classList.contains('photo-popup__close')) {
+    closePhotoPopup();
   }
 });
-photoPopupCloseElement.addEventListener('click', photoPopupClose);
 
 //form popups submit listeners
-editPopupElement.addEventListener('submit', editPopupSubmit);
+editPopupElement.addEventListener('submit', submitEditPopup);
 addPopupElement.addEventListener('submit', addNewCard);
 
 //add cards listeners
-cardsList.addEventListener('click', cardLikeToggle);
-cardsList.addEventListener('click', cardDelete);
-cardsList.addEventListener('click', photoPopupOpen);
+cardsList.addEventListener('click', toggleCardLike);
+cardsList.addEventListener('click', deleteCard);
+cardsList.addEventListener('click', openPhotoPopup);
 //*прикрепили лисенеры на родительский элемент списка и за счёт делегирования отслеживаем все дочерние по условию в функции-обработчике

@@ -45,7 +45,9 @@ function isValid(evt) {
     hideInputError(evt.target);
   }
 
-  toggleButtonState(evt);
+  if (hasInvalidInput(evt)) {
+    console.log('есть невалидное поле');
+  }
 }
 
 //LISTENERS
