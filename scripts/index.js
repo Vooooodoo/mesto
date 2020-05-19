@@ -1,38 +1,38 @@
 //VARIABLES
 //delegation var
-const profileElement = document.querySelector('.profile');
+const profile = document.querySelector('.profile');
 
-//form popups open/close vars
-const editPopupElement = document.querySelector('#edit-popup');
-const addPopupElement = document.querySelector('#add-popup');
+//form-popups open/close vars
+const editPopup = document.querySelector('#edit-popup');
+const addPopup = document.querySelector('#add-popup');
 
-const editPopupFormElement = document.forms.edit;
-const addPopupFormElement = document.forms.add;
+const editPopupForm = document.forms.edit;
+const addPopupForm = document.forms.add;
 
-const profileEditButtonElement = document.querySelector('.profile__edit-button');
-const profileAddButtonElement = document.querySelector('.profile__add-button');
+const profileEditButton = document.querySelector('.profile__edit-button');
+const profileAddButton = document.querySelector('.profile__add-button');
 
-const editPopupCloseElement = editPopupElement.querySelector('.popup__close');
-const addPopupCloseElement = addPopupElement.querySelector('.popup__close');
+const editPopupCloseButton = editPopup.querySelector('.popup__close');
+const addPopupCloseButton = addPopup.querySelector('.popup__close');
 
-//photo popup open/close vars
-const photoPopupElement = document.querySelector('.photo-popup');
-const photoPopupCloseElement = document.querySelector('.photo-popup__close');
+//photo-popup open/close vars
+const photoPopup = document.querySelector('.photo-popup');
+const photoPopupCloseButton = document.querySelector('.photo-popup__close');
 
-const photoPopupPhotoElement = document.querySelector('.photo-popup__photo');
-const photoPopupTitleElement = document.querySelector('.photo-popup__title');
+const photoPopupPhoto = document.querySelector('.photo-popup__photo');
+const photoPopupTitle = document.querySelector('.photo-popup__title');
 
-//form popups submit vars
-const editPopupInputNameElement = editPopupFormElement.elements.name;
-const editPopupInputAboutElement = editPopupFormElement.elements.about;
-const addPopupInputNameElement = addPopupFormElement.elements.name;
-const addPopupInputLinkElement = addPopupFormElement.elements.link;
+//form-popups submit vars
+const editPopupNameInput = editPopupForm.elements.name;
+const editPopupAboutInput = editPopupForm.elements.about;
+const addPopupNameInput = addPopupForm.elements.name;
+const addPopupLinkInput = addPopupForm.elements.link;
 
-const profileTitleElement = document.querySelector('.profile__title');
-const profileSubtitleElement = document.querySelector('.profile__subtitle');
+const profileTitle = document.querySelector('.profile__title');
+const profileSubtitle = document.querySelector('.profile__subtitle');
 
-const editPopupSubmitElement = editPopupElement.querySelector('.popup__submit');
-const addPopupSubmitElement = addPopupElement.querySelector('.popup__submit');
+const editPopupSubmitButton = editPopup.querySelector('.popup__submit');
+const addPopupSubmitButton = addPopup.querySelector('.popup__submit');
 
 //add cards vars
 const initialCards = [
@@ -66,30 +66,24 @@ const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.cards__list');
 
 //FUNCTIONS
-//form popups open/close functions
-function resetInputsErrors(popupType) {
-  const inputs = popupType.querySelectorAll('.popup__input-text');
-  const inputsErrors = popupType.querySelectorAll('.popup__input-error');
+//form-popups open/close functions
+function resetInputErrors(popupType) {
+  const inputList = Array.from(popupType.querySelectorAll('.popup__input-text')); //*сделали массив из всех инпутов внутри формы
 
-  inputs.forEach(item => {
-    item.classList.remove('popup__input-text_type_error');
-  }); //*убрали подчеркивания ошибок валидации
-
-  inputsErrors.forEach(item => {
-    item.classList.remove('popup__input-error_show');
-    item.textContent = '';
-  }); //*убрали тексты ошибок валидации
+  inputList.forEach(item => {
+    hideInputError(popupType, item);
+  }); //*прошлись по массиву и для каждого инпута скрыли ошибки
 }
 
 function escapeEditPopup(evt) {
   if (evt.key === 'Escape') {
-    closePopup(editPopupElement);
+    closePopup(editPopup);
   }
 }
 
 function escapeAddPopup(evt) {
   if (evt.key === 'Escape') {
-    closePopup(addPopupElement);
+    closePopup(addPopup);
   }
 }
 //*создали две именованные функции-обработчики для каждого попапа, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
@@ -100,60 +94,60 @@ function openPopup(popupType) {
 
   popupType.classList.add('popup_opened');
 
-  if (popupType === editPopupElement) {
-    editPopupInputNameElement.value = profileTitleElement.textContent;
-    editPopupInputAboutElement.value = profileSubtitleElement.textContent;
-  } else if (popupType === addPopupElement) {
-    addPopupInputNameElement.value = '';
-    addPopupInputLinkElement.value = '';
+  if (popupType === editPopup) {
+    editPopupNameInput.value = profileTitle.textContent;
+    editPopupAboutInput.value = profileSubtitle.textContent;
+  } else if (popupType === addPopup) {
+    addPopupNameInput.value = '';
+    addPopupLinkInput.value = '';
   }
 
-  if (popupType === editPopupElement) {
-    profileElement.addEventListener('keydown', escapeEditPopup);
-  } else if (popupType === addPopupElement) {
-    profileElement.addEventListener('keydown', escapeAddPopup);
+  if (popupType === editPopup) {
+    profile.addEventListener('keydown', escapeEditPopup);
+  } else if (popupType === addPopup) {
+    profile.addEventListener('keydown', escapeAddPopup);
   }
 
-  toggleButtonState(inputList, submitButtonElement);
+  toggleButtonState(inputList, submitButtonElement); //*поменяли состояние кнопки сабмит, в зависимости от валидности инпутов
 }
 
 function closePopup(popupType) {
-  resetInputsErrors(popupType);
+  resetInputErrors(popupType);
 
   popupType.classList.remove('popup_opened');
 
-  if (popupType === editPopupElement) {
-    profileElement.removeEventListener('keydown', escapeEditPopup);
-  } else if (popupType === addPopupElement) {
-    profileElement.removeEventListener('keydown', escapeAddPopup);
+  if (popupType === editPopup) {
+    profile.removeEventListener('keydown', escapeEditPopup);
+  } else if (popupType === addPopup) {
+    profile.removeEventListener('keydown', escapeAddPopup);
   }
 }
 
-//photo popup open/close functions
+//photo-popup open/close functions
 function openPhotoPopup(evt) {
-  const eventTargetClosestElement = evt.target.closest('.card');
+  const parentCard = evt.target.closest('.card'); //*карточка-родитель фотографии по которой произошел клик
 
   if (evt.target.classList.contains('card__photo')) {
-    photoPopupPhotoElement.src = evt.target.src;
-    photoPopupPhotoElement.alt = `${eventTargetClosestElement.querySelector('.card__title').textContent}.`;
-    photoPopupTitleElement.textContent = eventTargetClosestElement.querySelector('.card__title').textContent;
+    photoPopupPhoto.src = evt.target.src;
+    photoPopupPhoto.alt = `${parentCard.querySelector('.card__title').textContent}.`;
+    photoPopupTitle.textContent = parentCard.querySelector('.card__title').textContent;
 
-    photoPopupElement.classList.add('photo-popup_opened');
+    photoPopup.classList.add('photo-popup_opened');
   }
 }
 
 function closePhotoPopup() {
-  photoPopupElement.classList.remove('photo-popup_opened');
+  photoPopup.classList.remove('photo-popup_opened');
 }
 
-//edit popup submit function
+//edit-popup submit function
 function submitEditPopup(evt) {
   evt.preventDefault();
 
-  profileTitleElement.textContent = editPopupInputNameElement.value;
-  profileSubtitleElement.textContent = editPopupInputAboutElement.value;
+  profileTitle.textContent = editPopupNameInput.value;
+  profileSubtitle.textContent = editPopupAboutInput.value;
 
-  closePopup(editPopupElement);
+  closePopup(editPopup);
 }
 
 //add cards functions
@@ -183,8 +177,8 @@ function addNewCard(evt) {
 
   initialCards.unshift(
     {
-      name: addPopupInputNameElement.value,
-      link: addPopupInputLinkElement.value
+      name: addPopupNameInput.value,
+      link: addPopupLinkInput.value
     }
   ); //*добавили новый объект с информацией поля ввода в начало массива initialCards
 
@@ -192,12 +186,12 @@ function addNewCard(evt) {
 
   cardsList.prepend(newCard); //*добавили нового клона, с данными от пользователя, в начало разметки списка
 
-  addPopupFormElement.reset(); //*сбросили все поля формы
+  addPopupForm.reset(); //*сбросили все поля формы
 
-  closePopup(addPopupElement);
+  closePopup(addPopup);
 }
 
-//cards like function
+//card like function
 function toggleCardLike(evt) {
   if (evt.target.classList.contains('card__like')) {
     evt.target.classList.toggle('card__like_active');
@@ -214,11 +208,11 @@ function deleteCard(evt) {
 }
 
 //LISTENERS
-//form popups open/close listeners
-profileEditButtonElement.addEventListener('click', () => openPopup(editPopupElement));
-profileAddButtonElement.addEventListener('click', () => openPopup(addPopupElement));
+//form-popups open/close listeners
+profileEditButton.addEventListener('click', () => openPopup(editPopup));
+profileAddButton.addEventListener('click', () => openPopup(addPopup));
 
-profileElement.addEventListener('click', (evt) => {
+profile.addEventListener('click', (evt) => {
   const parentPopup = evt.target.closest('.popup'); //*попап-родитель элемента по которому произошел клик
 
   if (evt.target.classList.contains('popup')) { //*если клик произошел по родителю - закрыть его
@@ -228,16 +222,16 @@ profileElement.addEventListener('click', (evt) => {
   }
 });
 
-//photo popup close listener
-photoPopupElement.addEventListener('click', (evt) => {
+//photo-popup close listener
+photoPopup.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('photo-popup') || evt.target.classList.contains('photo-popup__close')) {
     closePhotoPopup();
   }
 });
 
-//form popups submit listeners
-editPopupElement.addEventListener('submit', submitEditPopup);
-addPopupElement.addEventListener('submit', addNewCard);
+//form-popups submit listeners
+editPopup.addEventListener('submit', submitEditPopup);
+addPopup.addEventListener('submit', addNewCard);
 
 //add cards listeners
 cardsList.addEventListener('click', toggleCardLike);
