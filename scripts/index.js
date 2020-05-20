@@ -71,7 +71,7 @@ function resetInputErrors(popupType) {
   const inputList = Array.from(popupType.querySelectorAll('.popup__input-text')); //*сделали массив из всех инпутов внутри формы
 
   inputList.forEach(item => {
-    hideInputError(popupType, item);
+    hideInputError(popupType, item, 'popup__input-text_type_error', 'popup__input-error_show');
   }); //*прошлись по массиву и для каждого инпута скрыли ошибки
 }
 

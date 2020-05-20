@@ -66,7 +66,13 @@ function setEventListeners(formElement, inputSelector, submitButtonSelector, inv
   });
 }
 
-function enableValidation(formSelector, inputSelector, submitButtonSelector, invalidButtonClass, inputErrorClass, errorClass) {
+function enableValidation({...object}) {
+  const formSelector = object.formSelector;
+  const inputSelector = object.inputSelector;
+  const submitButtonSelector = object.submitButtonSelector;
+  const invalidButtonClass = object.invalidButtonClass;
+  const inputErrorClass = object.inputErrorClass;
+  const errorClass = object.errorClass;
   const formList = Array.from(document.querySelectorAll(formSelector));
 
   formList.forEach((item) => {
