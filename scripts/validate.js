@@ -66,13 +66,7 @@ function setEventListeners(formElement, inputSelector, submitButtonSelector, inv
   });
 }
 
-function enableValidation({...object}) {
-  const formSelector = object.formSelector;
-  const inputSelector = object.inputSelector;
-  const submitButtonSelector = object.submitButtonSelector;
-  const invalidButtonClass = object.invalidButtonClass;
-  const inputErrorClass = object.inputErrorClass;
-  const errorClass = object.errorClass;
+function enableValidation({formSelector, inputSelector, submitButtonSelector, invalidButtonClass, inputErrorClass, errorClass}) {
   const formList = Array.from(document.querySelectorAll(formSelector));
 
   formList.forEach((item) => {
@@ -80,11 +74,4 @@ function enableValidation({...object}) {
   });
 }
 
-enableValidation({
-  formSelector: '.popup__container',
-  inputSelector: '.popup__input-text',
-  submitButtonSelector: '.popup__submit',
-  invalidButtonClass: 'popup__submit_invalid',
-  inputErrorClass: 'popup__input-text_type_error',
-  errorClass: 'popup__input-error_show'
-});
+enableValidation(enableValidationArgs);
