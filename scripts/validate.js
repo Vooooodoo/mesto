@@ -1,3 +1,5 @@
+//VARIABLES
+//form popups validation vars
 const enableValidationArgs = {
   formSelector: '.popup__container',
   inputSelector: '.popup__input-text',
@@ -12,8 +14,8 @@ const enableValidationArgs = {
 function showInputError(formElement, inputElement, errorMessage) {
   const inputErrorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
-  inputElement.classList.add('popup__input-text_type_error');
-  inputErrorElement.classList.add('popup__input-error_show');
+  inputElement.classList.add(inputErrorClass);
+  inputErrorElement.classList.add(errorClass);
 
   inputErrorElement.textContent = errorMessage; //*передали спэну, в качестве текста, сообщение об ошибке из параметра
 }
@@ -21,8 +23,8 @@ function showInputError(formElement, inputElement, errorMessage) {
 function hideInputError(formElement, inputElement) {
   const inputErrorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
-  inputElement.classList.remove('popup__input-text_type_error');
-  inputErrorElement.classList.remove('popup__input-error_show');
+  inputElement.classList.remove(inputErrorClass);
+  inputErrorElement.classList.remove(errorClass);
 
   inputErrorElement.textContent = '';
 }
@@ -43,15 +45,15 @@ function hasInvalidInput(inputList) {
 
 function toggleButtonState(inputList, submitButtonElement) {
   if (hasInvalidInput(inputList)) {
-    submitButtonElement.classList.add('popup__submit_invalid');
+    submitButtonElement.classList.add(invalidButtonClass);
   } else {
-    submitButtonElement.classList.remove('popup__submit_invalid');
+    submitButtonElement.classList.remove(invalidButtonClass);
   }
 }
 
 function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input-text'));
-  const submitButtonElement = formElement.querySelector('.popup__submit');
+  const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+  const submitButtonElement = formElement.querySelector(submitButtonSelector);
 
   toggleButtonState(inputList, submitButtonElement);
 
@@ -65,7 +67,7 @@ function setEventListeners(formElement) {
 }
 
 function enableValidation() {
-  const formList = Array.from(document.querySelectorAll('.popup__container'));
+  const formList = Array.from(document.querySelectorAll(formSelector));
 
   formList.forEach((item) => {
     setEventListeners(item);
