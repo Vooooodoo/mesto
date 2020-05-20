@@ -7,11 +7,11 @@ const enableValidationArgs = {
   invalidButtonClass: 'popup__submit_invalid',
   inputErrorClass: 'popup__input-text_type_error',
   errorClass: 'popup__input-error_show'
-}
+};
 
 //FUNCTIONS
 //form popups validation fuctions
-function showInputError(formElement, inputElement, errorMessage) {
+function showInputError(formElement, inputElement, errorMessage, inputErrorClass, errorClass) {
   const inputErrorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
   inputElement.classList.add(inputErrorClass);
@@ -20,7 +20,7 @@ function showInputError(formElement, inputElement, errorMessage) {
   inputErrorElement.textContent = errorMessage; //*передали спэну, в качестве текста, сообщение об ошибке из параметра
 }
 
-function hideInputError(formElement, inputElement) {
+function hideInputError(formElement, inputElement, inputErrorClass, errorClass) {
   const inputErrorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
   inputElement.classList.remove(inputErrorClass);
@@ -29,11 +29,11 @@ function hideInputError(formElement, inputElement) {
   inputErrorElement.textContent = '';
 }
 
-function isValid(formElement, inputElement) {
+function isValid(formElement, inputElement, inputErrorClass, errorClass) {
   if (!inputElement.validity.valid) { //*если инпут не проходит валидацию - предупреждать об ошибке
-    showInputError(formElement, inputElement, inputElement.validationMessage); //*вторым аргументом передали стоковое сообщение браузера об ошибке валидации
+    showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass); //*вторым аргументом передали стоковое сообщение браузера об ошибке валидации
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, inputErrorClass, errorClass);
   }
 }
 
@@ -43,7 +43,7 @@ function hasInvalidInput(inputList) {
   });
 }
 
-function toggleButtonState(inputList, submitButtonElement) {
+function toggleButtonState(inputList, submitButtonElement, invalidButtonClass) {
   if (hasInvalidInput(inputList)) {
     submitButtonElement.classList.add(invalidButtonClass);
   } else {
@@ -51,27 +51,34 @@ function toggleButtonState(inputList, submitButtonElement) {
   }
 }
 
-function setEventListeners(formElement) {
+function setEventListeners(formElement, inputSelector, submitButtonSelector, invalidButtonClass, inputErrorClass, errorClass) {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const submitButtonElement = formElement.querySelector(submitButtonSelector);
 
-  toggleButtonState(inputList, submitButtonElement);
+  toggleButtonState(inputList, submitButtonElement, invalidButtonClass);
 
   inputList.forEach((item) => {
     item.addEventListener('input', function () {
-      isValid(formElement, item);
+      isValid(formElement, item, inputErrorClass, errorClass);
 
-      toggleButtonState(inputList, submitButtonElement);
+      toggleButtonState(inputList, submitButtonElement, invalidButtonClass);
     });
   });
 }
 
-function enableValidation() {
+function enableValidation(formSelector, inputSelector, submitButtonSelector, invalidButtonClass, inputErrorClass, errorClass) {
   const formList = Array.from(document.querySelectorAll(formSelector));
 
   formList.forEach((item) => {
-    setEventListeners(item);
+    setEventListeners(item, inputSelector, submitButtonSelector, invalidButtonClass, inputErrorClass, errorClass);
   });
 }
 
-enableValidation();
+enableValidation({
+  formSelector: '.popup__container',
+  inputSelector: '.popup__input-text',
+  submitButtonSelector: '.popup__submit',
+  invalidButtonClass: 'popup__submit_invalid',
+  inputErrorClass: 'popup__input-text_type_error',
+  errorClass: 'popup__input-error_show'
+});
