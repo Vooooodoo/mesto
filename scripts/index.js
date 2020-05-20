@@ -88,12 +88,7 @@ function escapeAddPopup(evt) {
 }
 //*создали две именованные функции-обработчики для каждого попапа, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
 
-function openPopup(popupType) {
-  const submitButtonElement = popupType.querySelector('.popup__submit');
-
-  popupType.classList.add('popup_opened');
-  submitButtonElement.classList.add('popup__submit_invalid');
-
+function fillInputValues(popupType) {
   if (popupType === editPopup) {
     editPopupNameInput.value = profileTitle.textContent;
     editPopupAboutInput.value = profileSubtitle.textContent;
@@ -101,7 +96,9 @@ function openPopup(popupType) {
     addPopupNameInput.value = '';
     addPopupLinkInput.value = '';
   }
+}
 
+function addEscapeListener(popupType) {
   if (popupType === editPopup) {
     profile.addEventListener('keydown', escapeEditPopup);
   } else if (popupType === addPopup) {
@@ -109,16 +106,31 @@ function openPopup(popupType) {
   }
 }
 
-function closePopup(popupType) {
-  resetInputErrors(popupType);
+function openPopup(popupType) {
+  const submitButtonElement = popupType.querySelector('.popup__submit');
 
-  popupType.classList.remove('popup_opened');
+  popupType.classList.add('popup_opened');
+  submitButtonElement.classList.add('popup__submit_invalid');
 
+  fillInputValues(popupType);//*при открытии заполнили инпуты в соответствии с ТЗ
+
+  addEscapeListener(popupType);
+}
+
+function removeEscapeListener(popupType) {
   if (popupType === editPopup) {
     profile.removeEventListener('keydown', escapeEditPopup);
   } else if (popupType === addPopup) {
     profile.removeEventListener('keydown', escapeAddPopup);
   }
+}
+
+function closePopup(popupType) {
+  resetInputErrors(popupType); //*сбросили залипшие ошибки валидации
+
+  popupType.classList.remove('popup_opened');
+
+  removeEscapeListener(popupType);
 }
 
 //photo-popup open/close functions
