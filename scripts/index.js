@@ -12,9 +12,6 @@ const addPopupForm = document.forms.add;
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 
-const editPopupCloseButton = editPopup.querySelector('.popup__close');
-const addPopupCloseButton = addPopup.querySelector('.popup__close');
-
 //photo-popup open/close vars
 const photoPopup = document.querySelector('.photo-popup');
 const photoPopupCloseButton = document.querySelector('.photo-popup__close');
@@ -30,9 +27,6 @@ const addPopupLinkInput = addPopupForm.elements.link;
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
-
-const editPopupSubmitButton = editPopup.querySelector('.popup__submit');
-const addPopupSubmitButton = addPopup.querySelector('.popup__submit');
 
 //add cards vars
 const initialCards = [
