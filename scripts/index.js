@@ -28,37 +28,6 @@ const addPopupLinkInput = addPopupForm.elements.link;
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
-//add cards vars
-const initialCards = [
-  {
-    name: 'Кавказ',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Алтай',
-    link: 'https://images.unsplash.com/photo-1564324738343-a8aeafb375d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'
-  },
-  {
-    name: 'Урал',
-    link: 'https://images.unsplash.com/photo-1583425722128-4c2134bfff3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Крым',
-    link: 'https://images.unsplash.com/photo-1586767240180-f99b455c8ec5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://images.unsplash.com/photo-1571649425554-e94518844c37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80'
-  }
-];
-
-const cardTemplate = document.querySelector('#card-template').content;
-const cardsList = document.querySelector('.cards__list');
-
 //FUNCTIONS
 //form-popups open/close functions
 function resetInputErrors(popupType) {
@@ -155,27 +124,6 @@ function submitEditPopup(evt) {
 }
 
 //add cards functions
-function createCard(object) {
-  const cardElement = cardTemplate.cloneNode(true); //*создали пустого клона
-
-  cardElement.querySelector('.card__photo').src = object.link;
-  cardElement.querySelector('.card__photo').alt = `${object.name}.`;
-  cardElement.querySelector('.card__title').textContent = object.name;
-  //*вставили клону ссылку на фото и заголовок-альтернативный текст из объекта, передав его в качестве аргумента
-
-  return cardElement; //*вернули готового клона
-}
-
-function addDefaultCards() {
-  const cardElementArray = initialCards.map(item => {
-    return createCard(item);
-  }); //*создали массив cardElementArray и заполнили его готовыми клонами
-
-  cardsList.append(...cardElementArray); //*добавили готовые клоны в разметку, разложив массив cardElementArray
-}
-
-addDefaultCards();
-
 function addNewCard(evt) {
   evt.preventDefault();
 
