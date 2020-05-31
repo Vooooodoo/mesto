@@ -31,7 +31,7 @@ function hideInputError(formElement, inputElement, inputErrorClass, errorClass) 
 
 function isValid(formElement, inputElement, inputErrorClass, errorClass) {
   if (!inputElement.validity.valid) { //*если инпут не проходит валидацию - предупреждать об ошибке
-    showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass); //*вторым аргументом передали стоковое сообщение браузера об ошибке валидации
+    showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass); //*третьим аргументом передали стоковое сообщение браузера об ошибке валидации
   } else {
     hideInputError(formElement, inputElement, inputErrorClass, errorClass);
   }
