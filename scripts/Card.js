@@ -49,6 +49,8 @@ class Card {
 
     return this._element; //*вернули готовую карточку
   }
+
+
 }
 
 initialCards.forEach((item) => {

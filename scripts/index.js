@@ -126,6 +126,7 @@ function submitEditPopup(evt) {
 //add card function
 function addNewCard(evt) {
   evt.preventDefault();
+
   initialCards.unshift(
     {
       name: addPopupNameInput.value,
@@ -133,7 +134,7 @@ function addNewCard(evt) {
     }
   ); //*добавили новый объект с информацией поля ввода в начало массива initialCards
 
-  const card = new Card(initialCards[0]); //*cоздали новый экземпляр класса Card с данными из полей ввода
+  const card = new Card(initialCards[0], '#card-template'); //*cоздали новый экземпляр класса Card с данными из полей ввода
   const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
   cardsList.prepend(cardElement); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
