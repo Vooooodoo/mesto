@@ -26,13 +26,14 @@ const initialCards = [
   }
 ];
 class Card {
-  constructor(name, link) {
-    this._name = name;
-    this._link = link;
+  constructor(data, cardSelector) { //*передали данные в виде объекта и селектор шаблона(на случай, если надо будест создать карточку по другому шаблону)
+    this._name = data.name;
+    this._link = data.link;
+    this._cardSelector = cardSelector; //*записали селектор в приватное поле
   }
 
   _getTemplateClone() {
-    const cardTemplate = document.querySelector('#card-template').content; //*нашли шаблон карточки
+    const cardTemplate = document.querySelector(this._cardSelector).content; //*нашли шаблон карточки
     const cardElement = cardTemplate.cloneNode(true); //*создали пустого клона шаблона
 
     return cardElement;
@@ -51,7 +52,7 @@ class Card {
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link); //*cоздали новый экземпляр класса Card с данными из объекта в массиве
+  const card = new Card(item, '#card-template'); //*cоздали новый экземпляр класса Card с данными из объекта в массиве initialCards
   const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
   cardsList.append(cardElement); //*добавили готовую карточку в DOM
