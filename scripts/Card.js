@@ -12,38 +12,9 @@ class Card {
     return cardElement;
   }
 
-  createCard() {
-    this._element = this._getTemplateClone(); //*записали пустого клона в приватное поле _element, так у других элементов появится к нему доступ
-    this._setEventListeners();
-
-    this._element.querySelector('.card__photo').src = this._link;
-    this._element.querySelector('.card__photo').alt = `${this._name}.`;
-    this._element.querySelector('.card__title').textContent = this._name;
-    //*вставили клону ссылку на фото и заголовок-альтернативный текст
-
-
-    return this._element; //*вернули готовую карточку
-  }
-
   _toggleCardLike() {
     this._element.querySelector('.card__like').classList.toggle('card__like_active');
   }
-
-  _setEventListeners() {
-    this._element.querySelector('.card__like').addEventListener('click', () => {
-      this._toggleCardLike();
-    });
-
-    // this._element.querySelector('.card__trash').addEventListener('click', () => {
-    //   this._deleteCard();
-    // });
-
-    // this._element.querySelector('.card__text').addEventListener('click', () => {
-    //   this._handleMessageClick();
-    // });
-  }
-
-
 
   // _deleteCard() {
   //   this._element.querySelector('.card').remove();
@@ -60,6 +31,33 @@ class Card {
   //     photoPopup.classList.add('photo-popup_opened');
   //   }
   // }
+
+  _setEventListeners() {
+    this._element.querySelector('.card__like').addEventListener('click', () => {
+      this._toggleCardLike();
+    });
+
+    // this._element.querySelector('.card__trash').addEventListener('click', () => {
+    //   this._deleteCard();
+    // });
+
+    // this._element.querySelector('.card__text').addEventListener('click', () => {
+    //   this._handleMessageClick();
+    // });
+  }
+
+  createCard() {
+    this._element = this._getTemplateClone(); //*записали пустого клона в приватное поле _element, так у других элементов появится к нему доступ
+    this._setEventListeners();
+
+    this._element.querySelector('.card__photo').src = this._link;
+    this._element.querySelector('.card__photo').alt = `${this._name}.`;
+    this._element.querySelector('.card__title').textContent = this._name;
+    //*вставили клону ссылку на фото и заголовок-альтернативный текст
+
+
+    return this._element; //*вернули готовую карточку
+  }
 }
 
 export { Card };
