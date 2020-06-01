@@ -51,7 +51,7 @@ class Card {
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link); //*cоздали новый экземпляр класса Card
+  const card = new Card(item.name, item.link); //*cоздали новый экземпляр класса Card с данными из объекта в массиве
   const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
   cardsList.append(cardElement); //*добавили готовую карточку в DOM

@@ -123,20 +123,14 @@ function submitEditPopup(evt) {
   closePopup(editPopup);
 }
 
-//add cards functions
+//add card function
 function addNewCard(evt) {
   evt.preventDefault();
 
-  initialCards.unshift(
-    {
-      name: addPopupNameInput.value,
-      link: addPopupLinkInput.value
-    }
-  ); //*добавили новый объект с информацией поля ввода в начало массива initialCards
+  const card = new Card(addPopupNameInput.value, addPopupLinkInput.value); //*cоздали новый экземпляр класса Card с данными из полей ввода
+  const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
-  const newCard = createCard(initialCards[0]); //*создали нового клона, указав в качестве аргумента функции createCard, объект с информацией поля ввода
-
-  cardsList.prepend(newCard); //*добавили нового клона, с данными от пользователя, в начало разметки списка
+  cardsList.prepend(cardElement); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
 
   addPopupForm.reset(); //*сбросили все поля формы
 
