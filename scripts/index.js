@@ -173,22 +173,6 @@ function addNewCard(evt) {
   closePopup(addPopup);
 }
 
-//card like function
-// function toggleCardLike(evt) {
-//   if (evt.target.classList.contains('card__like')) {
-//     evt.target.classList.toggle('card__like_active');
-//   }
-// }
-
-//card delete function
-// function deleteCard(evt) {
-//   const cardsListItem = evt.target.closest('.card');
-
-//   if (evt.target.classList.contains('card__trash')) {
-//     cardsListItem.remove();
-//   }
-// }
-
 //LISTENERS
 //form-popups open/close listeners
 profileEditButton.addEventListener('click', () => openPopup(editPopup));

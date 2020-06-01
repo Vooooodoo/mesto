@@ -48,7 +48,7 @@ class Card {
 
   createCard() {
     this._element = this._getTemplateClone(); //*записали пустого клона в приватное поле _element, так у других элементов появится к нему доступ
-    this._setEventListeners();
+    this._setEventListeners(); //*добавили лисенеры на элементы клона
 
     this._element.querySelector('.card__photo').src = this._link;
     this._element.querySelector('.card__photo').alt = `${this._name}.`;
