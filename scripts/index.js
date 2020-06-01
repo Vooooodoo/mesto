@@ -28,6 +28,35 @@ const addPopupLinkInput = addPopupForm.elements.link;
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
+//render cards vars
+const cardsList = document.querySelector('.cards__list');
+const initialCards = [
+  {
+    name: 'Кавказ',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Алтай',
+    link: 'https://images.unsplash.com/photo-1564324738343-a8aeafb375d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'
+  },
+  {
+    name: 'Урал',
+    link: 'https://images.unsplash.com/photo-1583425722128-4c2134bfff3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Крым',
+    link: 'https://images.unsplash.com/photo-1586767240180-f99b455c8ec5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://images.unsplash.com/photo-1571649425554-e94518844c37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80'
+  }
+];
+
 //FUNCTIONS
 //form-popups open/close functions
 function resetInputErrors(popupType) {
@@ -97,17 +126,17 @@ function closePopup(popupType) {
 }
 
 //photo-popup open/close functions
-function openPhotoPopup(evt) {
-  const parentCard = evt.target.closest('.card'); //*карточка-родитель фотографии по которой произошел клик
+// function openPhotoPopup(evt) {
+//   const parentCard = evt.target.closest('.card'); //*карточка-родитель фотографии по которой произошел клик
 
-  if (evt.target.classList.contains('card__photo')) {
-    photoPopupPhoto.src = evt.target.src;
-    photoPopupPhoto.alt = `${parentCard.querySelector('.card__title').textContent}.`;
-    photoPopupTitle.textContent = parentCard.querySelector('.card__title').textContent;
+//   if (evt.target.classList.contains('card__photo')) {
+//     photoPopupPhoto.src = evt.target.src;
+//     photoPopupPhoto.alt = `${parentCard.querySelector('.card__title').textContent}.`;
+//     photoPopupTitle.textContent = parentCard.querySelector('.card__title').textContent;
 
-    photoPopup.classList.add('photo-popup_opened');
-  }
-}
+//     photoPopup.classList.add('photo-popup_opened');
+//   }
+// }
 
 function closePhotoPopup() {
   photoPopup.classList.remove('photo-popup_opened');
@@ -145,20 +174,20 @@ function addNewCard(evt) {
 }
 
 //card like function
-function toggleCardLike(evt) {
-  if (evt.target.classList.contains('card__like')) {
-    evt.target.classList.toggle('card__like_active');
-  }
-}
+// function toggleCardLike(evt) {
+//   if (evt.target.classList.contains('card__like')) {
+//     evt.target.classList.toggle('card__like_active');
+//   }
+// }
 
 //card delete function
-function deleteCard(evt) {
-  const cardsListItem = evt.target.closest('.card');
+// function deleteCard(evt) {
+//   const cardsListItem = evt.target.closest('.card');
 
-  if (evt.target.classList.contains('card__trash')) {
-    cardsListItem.remove();
-  }
-}
+//   if (evt.target.classList.contains('card__trash')) {
+//     cardsListItem.remove();
+//   }
+// }
 
 //LISTENERS
 //form-popups open/close listeners
@@ -186,8 +215,13 @@ photoPopup.addEventListener('click', (evt) => {
 editPopup.addEventListener('submit', submitEditPopup);
 addPopup.addEventListener('submit', addNewCard);
 
-//add cards listeners
-cardsList.addEventListener('click', toggleCardLike);
-cardsList.addEventListener('click', deleteCard);
-cardsList.addEventListener('click', openPhotoPopup);
-//*прикрепили лисенеры на родительский элемент списка и за счёт делегирования отслеживаем все дочерние по условию в функции-обработчике
+//RENDER
+//cards render
+initialCards.forEach((item) => {
+  const card = new Card(item, '#card-template'); //*cоздали новый экземпляр класса Card с данными из объекта в массиве initialCards
+  const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+
+  cardsList.append(cardElement); //*добавили готовую карточку в DOM
+});
+
+import { Card } from './Card.js';
