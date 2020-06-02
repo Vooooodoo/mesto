@@ -152,6 +152,17 @@ function submitEditPopup(evt) {
   closePopup(editPopup);
 }
 
+//render cards function
+function renderCards(array) {
+  array.forEach((item) => {
+    const card = new Card(item, '#card-template'); //*cоздали новый экземпляр класса Card с данными из объекта в массиве initialCards
+    const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+
+    cardsList.append(cardElement); //*добавили готовую карточку в DOM
+  });
+}
+renderCards(initialCards); //*передали функции рэндера карточек, в качестве аргумента, массив с данными
+
 //add card function
 function addNewCard(evt) {
   evt.preventDefault();
@@ -161,7 +172,7 @@ function addNewCard(evt) {
       name: addPopupNameInput.value,
       link: addPopupLinkInput.value
     }
-  ); //*добавили новый объект с информацией поля ввода в начало массива initialCards
+  ); //*добавили новый объект с данными поля ввода в начало массива initialCards
 
   const card = new Card(initialCards[0], '#card-template'); //*cоздали новый экземпляр класса Card с данными из полей ввода
   const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
@@ -186,7 +197,7 @@ profile.addEventListener('click', (evt) => {
   } else if (evt.target.classList.contains('popup__close')) { //*если клик произошел по дочернему кресту - закрыть родителя
     closePopup(parentPopup);
   }
-});
+}); //*повешали один лисенер на родителя и за счет делегирования отслеживаем событие на дочерних элементах
 
 //photo-popup close listener
 photoPopup.addEventListener('click', (evt) => {
@@ -199,13 +210,5 @@ photoPopup.addEventListener('click', (evt) => {
 editPopup.addEventListener('submit', submitEditPopup);
 addPopup.addEventListener('submit', addNewCard);
 
-//RENDER
-//cards render
-initialCards.forEach((item) => {
-  const card = new Card(item, '#card-template'); //*cоздали новый экземпляр класса Card с данными из объекта в массиве initialCards
-  const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
-
-  cardsList.append(cardElement); //*добавили готовую карточку в DOM
-});
-
+//MODULES
 import { Card } from './Card.js';
