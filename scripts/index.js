@@ -155,7 +155,7 @@ function submitEditPopup(evt) {
 //render cards function
 function renderCards(array) {
   array.forEach((item) => {
-    const card = new Card(item, '#card-template'); //*cоздали новый экземпляр класса Card с данными из объекта в массиве initialCards
+    const card = new Card(item, '#card-template'); //*cоздали новый объект-экземпляр класса Card с данными из объекта в массиве initialCards
     const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
     cardsList.append(cardElement); //*добавили готовую карточку в DOM
