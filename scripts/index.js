@@ -1,3 +1,6 @@
+//MODULES
+import { Card } from './Card.js';
+
 //VARIABLES
 //delegation var
 const profile = document.querySelector('.profile');
@@ -209,6 +212,3 @@ photoPopup.addEventListener('click', (evt) => {
 //form-popups submit listeners
 editPopup.addEventListener('submit', submitEditPopup);
 addPopup.addEventListener('submit', addNewCard);
-
-//MODULES
-import { Card } from './Card.js';

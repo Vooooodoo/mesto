@@ -1,4 +1,4 @@
-class Card {
+export class Card {
   constructor(data, cardSelector) { //*передали данные в виде объекта и селектор шаблона(на случай, если надо будест создать карточку по другому шаблону)
     this._name = data.name;
     this._link = data.link;
@@ -59,5 +59,3 @@ class Card {
     return this._element; //*вернули готовую карточку
   } //*публичный метод создания карточки, который можно вызвать во внешнем коде
 }
-
-export { Card };
