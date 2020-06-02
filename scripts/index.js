@@ -155,7 +155,7 @@ function submitEditPopup(evt) {
   closePopup(editPopup);
 }
 
-//render cards function
+//render default cards function
 function renderCards(array) {
   array.forEach((item) => {
     const card = new Card(item, '#card-template'); //*cоздали новый объект-экземпляр класса Card с данными из объекта в массиве initialCards
@@ -166,7 +166,7 @@ function renderCards(array) {
 }
 renderCards(initialCards); //*передали функции рэндера карточек, в качестве аргумента, массив с данными
 
-//add card function
+//add new card function
 function addNewCard(evt) {
   evt.preventDefault();
 
