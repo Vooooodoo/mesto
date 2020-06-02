@@ -12,9 +12,9 @@ export class Card {
     return cardElement;
   }
 
-  // _toggleCardLike() {
-  //   this._element.querySelector('.card__like').classList.toggle('card__like_active');
-  // }
+  _toggleCardLike() {
+    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+  }
 
   // _deleteCard() {
   //   this._element.querySelector('.card').remove();
@@ -32,33 +32,20 @@ export class Card {
   //   }
   // }
 
+
   _setEventListeners() {
-    this._element.querySelector('.card__like').addEventListener('click', (evt) => {
-      evt.target.classList.toggle('card__like_active');
+    this._element.querySelector('.card__like').addEventListener('click', () => {
+      this._toggleCardLike();
     });
 
-    this._element.querySelector('.card__trash').addEventListener('click', (evt) => {
-      evt.target.closest('.card').remove();
-    });
+    // this._element.querySelector('.card__trash').addEventListener('click', () => {
+    //   this._deleteCard();
+    // });
 
     // this._element.querySelector('.card__text').addEventListener('click', () => {
     //   this._handleMessageClick();
     // });
   }
-
-  // _setEventListeners() {
-  //   this._element.querySelector('.card__like').addEventListener('click', () => {
-  //     this._toggleCardLike();
-  //   });
-
-  //   this._element.querySelector('.card__trash').addEventListener('click', () => {
-  //     this._deleteCard();
-  //   });
-
-  //   this._element.querySelector('.card__text').addEventListener('click', () => {
-  //     this._handleMessageClick();
-  //   });
-  // }
 
   createCard() {
     this._element = this._getTemplateClone(); //*записали пустого клона в приватное поле _element, так у других элементов появится к нему доступ
