@@ -9,7 +9,7 @@ export class Card {
     const cardTemplate = document.querySelector(this._cardSelector).content; //*нашли шаблон карточки
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true); //*создали пустого клона элемента card внутри шаблона карточки
 
-    return cardElement;
+    this._element = cardElement; //*записали пустого клона в приватное поле _element, так у других элементов появится к нему доступ
   }
 
   _toggleCardLike() {
@@ -21,7 +21,7 @@ export class Card {
   }
 
   // function openPhotoPopup(evt) {
-  //   const parentCard = evt.target.closest('.card'); //*карточка-родитель фотографии по которой произошел клик
+  //   const parentCard = evt.target.closest('.card'); //*карточка-родитель фотографии, по которой произошел клик
 
   //   if (evt.target.classList.contains('card__photo')) {
   //     photoPopupPhoto.src = evt.target.src;
@@ -48,7 +48,7 @@ export class Card {
   }
 
   createCard() {
-    this._element = this._getTemplateClone(); //*записали пустого клона в приватное поле _element, так у других элементов появится к нему доступ
+    this._getTemplateClone(); //*создали пустого клона
     this._setEventListeners(); //*добавили лисенеры на элементы клона
 
     this._element.querySelector('.card__photo').src = this._link;
