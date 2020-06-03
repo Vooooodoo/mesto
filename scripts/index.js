@@ -1,5 +1,5 @@
 //MODULES
-import { Card } from './Card.js';
+import { Card, photoPopup } from './Card.js';
 
 //VARIABLES
 //delegation var
@@ -14,13 +14,6 @@ const addPopupForm = document.forms.add;
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
-
-//photo-popup open/close vars
-const photoPopup = document.querySelector('.photo-popup');
-const photoPopupCloseButton = document.querySelector('.photo-popup__close');
-
-const photoPopupPhoto = document.querySelector('.photo-popup__photo');
-const photoPopupTitle = document.querySelector('.photo-popup__title');
 
 //form-popups submit vars
 const editPopupNameInput = editPopupForm.elements.name;
@@ -128,19 +121,7 @@ function closePopup(popupType) {
   removeEscapeListener(popupType);
 }
 
-//photo-popup open/close functions
-// function openPhotoPopup(evt) {
-//   const parentCard = evt.target.closest('.card'); //*карточка-родитель фотографии по которой произошел клик
-
-//   if (evt.target.classList.contains('card__photo')) {
-//     photoPopupPhoto.src = evt.target.src;
-//     photoPopupPhoto.alt = `${parentCard.querySelector('.card__title').textContent}.`;
-//     photoPopupTitle.textContent = parentCard.querySelector('.card__title').textContent;
-
-//     photoPopup.classList.add('photo-popup_opened');
-//   }
-// }
-
+//photo-popup close function
 function closePhotoPopup() {
   photoPopup.classList.remove('photo-popup_opened');
 }

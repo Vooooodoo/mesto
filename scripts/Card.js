@@ -1,3 +1,10 @@
+//VARIABLES
+//photo-popup open vars
+export const photoPopup = document.querySelector('.photo-popup');
+const photoPopupPhoto = document.querySelector('.photo-popup__photo');
+const photoPopupTitle = document.querySelector('.photo-popup__title');
+
+//CLASS
 export class Card {
   constructor(data, cardSelector) { //*передали данные в виде объекта и селектор шаблона(на случай, если надо будест создать карточку по другому шаблону)
     this._name = data.name;
@@ -20,18 +27,13 @@ export class Card {
     this._element.remove();
   }
 
-  // function openPhotoPopup(evt) {
-  //   const parentCard = evt.target.closest('.card'); //*карточка-родитель фотографии, по которой произошел клик
+  _openPhotoPopup() {
+    photoPopupPhoto.src = this._element.querySelector('.card__photo').src;
+    photoPopupPhoto.alt = `${this._element.querySelector('.card__title').textContent}.`;
+    photoPopupTitle.textContent = this._element.querySelector('.card__title').textContent;
 
-  //   if (evt.target.classList.contains('card__photo')) {
-  //     photoPopupPhoto.src = evt.target.src;
-  //     photoPopupPhoto.alt = `${parentCard.querySelector('.card__title').textContent}.`;
-  //     photoPopupTitle.textContent = parentCard.querySelector('.card__title').textContent;
-
-  //     photoPopup.classList.add('photo-popup_opened');
-  //   }
-  // }
-
+    photoPopup.classList.add('photo-popup_opened');
+  }
 
   _setEventListeners() {
     this._element.querySelector('.card__like').addEventListener('click', () => {
@@ -42,9 +44,9 @@ export class Card {
       this._deleteCard();
     });
 
-    // this._element.querySelector('.card__text').addEventListener('click', () => {
-    //   this._handleMessageClick();
-    // });
+    this._element.querySelector('.card__photo').addEventListener('click', () => {
+      this._openPhotoPopup();
+    });
   }
 
   createCard() {
