@@ -7,7 +7,7 @@ export class Card {
 
   _getTemplateClone() {
     const cardTemplate = document.querySelector(this._cardSelector).content; //*нашли шаблон карточки
-    const cardElement = cardTemplate.cloneNode(true); //*создали пустого клона шаблона
+    const cardElement = cardTemplate.querySelector('.card').cloneNode(true); //*создали пустого клона элемента card внутри шаблона карточки
 
     return cardElement;
   }
@@ -16,9 +16,9 @@ export class Card {
     this._element.querySelector('.card__like').classList.toggle('card__like_active');
   }
 
-  // _deleteCard() {
-  //   this._element.querySelector('.card').remove();
-  // }
+  _deleteCard() {
+    this._element.remove();
+  }
 
   // function openPhotoPopup(evt) {
   //   const parentCard = evt.target.closest('.card'); //*карточка-родитель фотографии по которой произошел клик
@@ -38,9 +38,9 @@ export class Card {
       this._toggleCardLike();
     });
 
-    // this._element.querySelector('.card__trash').addEventListener('click', () => {
-    //   this._deleteCard();
-    // });
+    this._element.querySelector('.card__trash').addEventListener('click', () => {
+      this._deleteCard();
+    });
 
     // this._element.querySelector('.card__text').addEventListener('click', () => {
     //   this._handleMessageClick();
