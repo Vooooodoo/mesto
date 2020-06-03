@@ -1,5 +1,6 @@
 //MODULES
 import { Card, photoPopup } from './Card.js';
+import { FormValidator } from './FormValidator.js';
 
 //VARIABLES
 //delegation var
@@ -53,15 +54,24 @@ const initialCards = [
   }
 ];
 
+//form popups validation vars
+const enableValidationArgs = {
+  inputSelector: '.popup__input-text',
+  submitButtonSelector: '.popup__submit',
+  invalidButtonClass: 'popup__submit_invalid',
+  inputErrorClass: 'popup__input-text_type_error',
+  errorClass: 'popup__input-error_show'
+};
+
 //FUNCTIONS
 //form-popups open/close functions
-function resetInputErrors(popupType) {
-  const inputList = Array.from(popupType.querySelectorAll('.popup__input-text')); //*сделали массив из всех инпутов внутри формы
+// function resetInputErrors(popupType) {
+//   const inputList = Array.from(popupType.querySelectorAll('.popup__input-text')); //*сделали массив из всех инпутов внутри формы
 
-  inputList.forEach(item => {
-    hideInputError(popupType, item, 'popup__input-text_type_error', 'popup__input-error_show');
-  }); //*прошлись по массиву и для каждого инпута скрыли ошибки
-}
+//   inputList.forEach(item => {
+//     hideInputError(popupType, item, 'popup__input-text_type_error', 'popup__input-error_show');
+//   }); //*прошлись по массиву и для каждого инпута скрыли ошибки
+// }
 
 function escapeEditPopup(evt) {
   if (evt.key === 'Escape') {
@@ -114,7 +124,7 @@ function removeEscapeListener(popupType) {
 }
 
 function closePopup(popupType) {
-  resetInputErrors(popupType); //*сбросили залипшие ошибки валидации
+  // resetInputErrors(popupType); //*сбросили залипшие ошибки валидации
 
   popupType.classList.remove('popup_opened');
 
@@ -148,7 +158,7 @@ function renderCards(array) {
 
 renderCards(initialCards); //*передали функции рэндера карточек, в качестве аргумента, массив с данными
 
-//add new card function
+//new card add function
 function addNewCard(evt) {
   evt.preventDefault();
 
@@ -168,6 +178,10 @@ function addNewCard(evt) {
 
   closePopup(addPopup);
 }
+
+//form popups validation method
+const form = new FormValidator(enableValidationArgs, '#edit-popup');
+form.enableValidation();
 
 //LISTENERS
 //form-popups open/close listeners
