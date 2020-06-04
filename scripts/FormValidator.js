@@ -7,7 +7,6 @@ export class FormValidator {
     this._inputErrorClass = data.inputErrorClass;
     this._errorClass = data.errorClass;
     this._formSelector = formSelector;
-    this._element = document.querySelector(this._formSelector);
   }
 
   _showInputError() {
@@ -73,6 +72,7 @@ export class FormValidator {
   }
 
   enableValidation() {
+    this._element = document.querySelector(this._formSelector);
     this._setEventListeners();
   }
 }
