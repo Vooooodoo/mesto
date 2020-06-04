@@ -40,12 +40,34 @@ export class FormValidator {
     }
   }
 
+  _hasInvalidInput() {
+    const inputList = Array.from(this._element.querySelectorAll(this._inputSelector));
+
+    return inputList.some((item) => {
+      return !item.validity.valid;
+    });
+  }
+
+  _toggleButtonState() {
+    const submitButtonElement = this._element.querySelector(this._submitButtonSelector);
+
+    if (this._hasInvalidInput()) {
+      submitButtonElement.classList.add(this._invalidButtonClass);
+    } else {
+      submitButtonElement.classList.remove(this._invalidButtonClass);
+    }
+  }
+
   _setEventListeners() {
     const inputList = Array.from(this._element.querySelectorAll(this._inputSelector));
+
+    this._toggleButtonState();
 
     inputList.forEach((item) => {
       item.addEventListener('input', () => {
         this._isValid();
+
+        this._toggleButtonState();
       });
     });
   }
