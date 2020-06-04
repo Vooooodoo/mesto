@@ -180,8 +180,11 @@ function addNewCard(evt) {
 }
 
 //form popups validation method
-const form = new FormValidator(enableValidationArgs, '#edit-popup');
-form.enableValidation();
+const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
+editForm.enableValidation();
+
+const addForm = new FormValidator(enableValidationArgs, '#add-popup');
+addForm.enableValidation();
 
 //LISTENERS
 //form-popups open/close listeners

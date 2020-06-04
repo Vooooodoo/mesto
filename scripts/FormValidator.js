@@ -7,12 +7,10 @@ export class FormValidator {
     this._inputErrorClass = data.inputErrorClass;
     this._errorClass = data.errorClass;
     this._formSelector = formSelector;
+    this._element = document.querySelector(this._formSelector);
   }
 
   _showInputError() {
-    const formElement = document.querySelector(this._formSelector);
-    this._element = formElement;
-
     const inputElement = this._element.querySelector(this._inputSelector);
     const inputErrorElement = this._element.querySelector(`#${inputElement.id}-error`);
 
@@ -54,6 +52,5 @@ export class FormValidator {
 
   enableValidation() {
     this._setEventListeners();
-    console.log('hello!');
   }
 }

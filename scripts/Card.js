@@ -28,9 +28,9 @@ export class Card {
   }
 
   _openPhotoPopup() {
-    photoPopupPhoto.src = this._element.querySelector('.card__photo').src;
-    photoPopupPhoto.alt = `${this._element.querySelector('.card__title').textContent}.`;
-    photoPopupTitle.textContent = this._element.querySelector('.card__title').textContent;
+    photoPopupPhoto.src = this._link;
+    photoPopupPhoto.alt = `${this._name}.`;
+    photoPopupTitle.textContent = this._name;
 
     photoPopup.classList.add('photo-popup_opened');
   }
