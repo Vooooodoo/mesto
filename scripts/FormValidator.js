@@ -34,7 +34,7 @@ export class FormValidator {
   _hasInvalidInput() {
     return this._inputList.some((item) => {
       return !item.validity.valid;
-    });
+    }); //*прошлись по массиву инпутов внутри формы и проверили какждый на валидность, если найдется хоть один невалидный - метод вернет true
   }
 
   _toggleButtonState() {
@@ -63,6 +63,7 @@ export class FormValidator {
     this._inputErrorElement = this._element.querySelector(`#${this._inputElement.id}-error`);
     this._inputList = Array.from(this._element.querySelectorAll(this._inputSelector));
     this._submitButtonElement = this._element.querySelector(this._submitButtonSelector);
+    //*записали необходимые элементы в приватные поля, так у других методов появивится к ним доступ - DRY
 
     this._setEventListeners();
   }
