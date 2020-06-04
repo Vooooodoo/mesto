@@ -9,25 +9,29 @@ export class FormValidator {
     this._formSelector = formSelector;
   }
 
-  _showInputError() {
-    this._inputElement.classList.add(this._inputErrorClass);
-    this._inputErrorElement.classList.add(this._errorClass);
+  _showInputError(inputElement) {
+    const inputErrorElement = this._element.querySelector(`#${inputElement.id}-error`);
 
-    this._inputErrorElement.textContent = this._inputElement.validationMessage; //*передали спэну, в качестве текста, стоковое сообщение браузера об ошибке валидации
+    inputElement.classList.add(this._inputErrorClass);
+    inputErrorElement.classList.add(this._errorClass);
+
+    inputErrorElement.textContent = inputElement.validationMessage; //*передали спэну, в качестве текста, стоковое сообщение браузера об ошибке валидации
   }
 
-  _hideInputError() {
-    this._inputElement.classList.remove(this._inputErrorClass);
-    this._inputErrorElement.classList.remove(this._errorClass);
+  _hideInputError(inputElement) {
+    const inputErrorElement = this._element.querySelector(`#${inputElement.id}-error`);
 
-    this._inputErrorElement.textContent = '';
+    inputElement.classList.remove(this._inputErrorClass);
+    inputErrorElement.classList.remove(this._errorClass);
+
+    inputErrorElement.textContent = '';
   }
 
-  _isValid() {
-    if (!this._inputElement.validity.valid) { //*если инпут не проходит валидацию - предупреждать об ошибке
-      this._showInputError();
+  _isValid(inputElement) {
+    if (!inputElement.validity.valid) { //*если инпут не проходит валидацию - предупреждать об ошибке
+      this._showInputError(inputElement);
     } else {
-      this._hideInputError();
+      this._hideInputError(inputElement);
     }
   }
 
@@ -50,7 +54,7 @@ export class FormValidator {
 
     this._inputList.forEach((item) => {
       item.addEventListener('input', () => {
-        this._isValid();
+        this._isValid(item);
 
         this._toggleButtonState();
       });
