@@ -33,7 +33,7 @@ export class FormValidator {
     } else {
       this._hideInputError(inputElement);
     }
-  }
+  } //*в качестве аргумента нужно передать конкрентный инпут в филдсэте
 
   _hasInvalidInput() {
     return this._inputList.some((item) => {
@@ -58,13 +58,11 @@ export class FormValidator {
 
         this._toggleButtonState();
       });
-    });
+    }); //*прошлись по массиву инпутов и каждому повешали лисенер с индивидуальным обработчиком
   }
 
   enableValidation() {
     this._element = document.querySelector(this._formSelector);
-    this._inputElement = this._element.querySelector(this._inputSelector);
-    this._inputErrorElement = this._element.querySelector(`#${this._inputElement.id}-error`);
     this._inputList = Array.from(this._element.querySelectorAll(this._inputSelector));
     this._submitButtonElement = this._element.querySelector(this._submitButtonSelector);
     //*записали необходимые элементы в приватные поля, так у других методов появивится к ним доступ - DRY

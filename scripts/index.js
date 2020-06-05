@@ -65,13 +65,18 @@ const enableValidationArgs = {
 
 //FUNCTIONS
 //form-popups open/close functions
-// function resetInputErrors(popupType) {
-//   const inputList = Array.from(popupType.querySelectorAll('.popup__input-text')); //*сделали массив из всех инпутов внутри формы
+function resetInputErrors(popupType) {
+  const inputList = Array.from(popupType.querySelectorAll('.popup__input-text')); //*сделали массив из всех инпутов внутри формы
 
-//   inputList.forEach(item => {
-//     hideInputError(popupType, item, 'popup__input-text_type_error', 'popup__input-error_show');
-//   }); //*прошлись по массиву и для каждого инпута скрыли ошибки
-// }
+  inputList.forEach(item => {
+    const inputErrorElement = document.querySelector(`#${item.id}-error`);
+
+    item.classList.remove('popup__input-text_type_error');
+    inputErrorElement.classList.remove('popup__input-error_show');
+
+    inputErrorElement.textContent = '';
+  }); //*прошлись по массиву и для каждого инпута скрыли ошибки
+}
 
 function escapeEditPopup(evt) {
   if (evt.key === 'Escape') {
@@ -124,7 +129,7 @@ function removeEscapeListener(popupType) {
 }
 
 function closePopup(popupType) {
-  // resetInputErrors(popupType); //*сбросили залипшие ошибки валидации
+  resetInputErrors(popupType); //*сбросили залипшие ошибки валидации
 
   popupType.classList.remove('popup_opened');
 
