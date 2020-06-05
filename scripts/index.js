@@ -63,6 +63,9 @@ const enableValidationArgs = {
   errorClass: 'popup__input-error_show'
 };
 
+const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
+const addForm = new FormValidator(enableValidationArgs, '#add-popup');
+
 //FUNCTIONS
 //form-popups open/close functions
 function resetInputErrors(popupType) {
@@ -185,10 +188,7 @@ function addNewCard(evt) {
 }
 
 //form popups validation method
-const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
 editForm.enableValidation();
-
-const addForm = new FormValidator(enableValidationArgs, '#add-popup');
 addForm.enableValidation();
 
 //LISTENERS
