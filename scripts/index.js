@@ -54,7 +54,7 @@ const initialCards = [
   }
 ];
 
-//form popups validation vars
+//form-popups validation vars
 const enableValidationArgs = {
   inputSelector: '.popup__input-text',
   submitButtonSelector: '.popup__submit',
@@ -187,7 +187,7 @@ function addNewCard(evt) {
   closePopup(addPopup);
 }
 
-//form popups validation method
+//form-popups validation method
 editForm.enableValidation();
 addForm.enableValidation();
 

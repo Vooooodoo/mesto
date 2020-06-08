@@ -38,7 +38,7 @@ export class FormValidator {
   _hasInvalidInput() {
     return this._inputList.some((item) => {
       return !item.validity.valid;
-    }); //*прошлись по массиву инпутов внутри формы и проверили какждый на валидность, если найдется хоть один невалидный - метод вернет true
+    }); //*прошлись по массиву инпутов внутри формы и проверили каждый на валидность, если найдется хоть один невалидный - метод вернет true
   }
 
   _toggleButtonState() {
