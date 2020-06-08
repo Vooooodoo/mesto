@@ -154,18 +154,6 @@ function submitEditPopup(evt) {
   closePopup(editPopup);
 }
 
-//default cards render function
-function renderCards(array) {
-  array.forEach((item) => {
-    const card = new Card(item, '#card-template'); //*cоздали новый объект-экземпляр класса Card с данными из объекта в массиве initialCards
-    const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
-
-    cardsList.append(cardElement); //*добавили готовую карточку в DOM
-  });
-}
-
-renderCards(initialCards); //*передали функции рэндера карточек, в качестве аргумента, массив с данными
-
 //new card add function
 function addNewCard(evt) {
   evt.preventDefault();
@@ -216,3 +204,12 @@ photoPopup.addEventListener('click', (evt) => {
 //form-popups submit listeners
 editPopup.addEventListener('submit', submitEditPopup);
 addPopup.addEventListener('submit', addNewCard);
+
+//RENDER
+//default cards render
+initialCards.forEach((item) => {
+  const card = new Card(item, '#card-template'); //*cоздали новый объект-экземпляр класса Card с данными из объекта в массиве initialCards
+  const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+
+  cardsList.append(cardElement); //*добавили готовую карточку в DOM
+});
