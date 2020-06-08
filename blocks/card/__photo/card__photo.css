@@ -1,4 +1,6 @@
 .card__photo {
+  display: flex;
+  background-color: #545454;
   width: 100%;
   height: calc(282 / 282 * (100vw - (100vw - 936px) - 90px) / 3);
   object-fit: cover;
