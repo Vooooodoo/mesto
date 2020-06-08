@@ -154,7 +154,11 @@ function submitEditPopup(evt) {
   closePopup(editPopup);
 }
 
-//new card add function
+//new card add functions
+function prependNewCard(card, container) {
+  container.prepend(card);
+}
+
 function addNewCard(evt) {
   evt.preventDefault();
 
@@ -166,7 +170,7 @@ function addNewCard(evt) {
   const card = new Card(newCardData, '#card-template'); //*cоздали новый экземпляр класса Card с данными из полей ввода
   const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
-  cardsList.prepend(cardElement); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
+  prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
 
   addPopupForm.reset(); //*сбросили все поля формы
 
