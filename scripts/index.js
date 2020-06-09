@@ -195,7 +195,7 @@ profileEditButton.addEventListener('click', () => {
 profileAddButton.addEventListener('click', () => {
   openPopup(addPopup);
   disableSubmitButton(addPopup);
-  fillInputValues(addPopup); //*при открытии заполнили инпуты в соответствии с ТЗ
+  fillInputValues(addPopup);
   addEscapeListener(addPopup);
 });
 
@@ -207,7 +207,7 @@ profile.addEventListener('click', (evt) => {
     closePopup(evt.target);
     removeEscapeListener(evt.target);
   } else if (evt.target.classList.contains('popup__close')) { //*если клик произошел по дочернему кресту - закрыть родителя
-    resetInputErrors(parentPopup); //*сбросили залипшие ошибки валидации
+    resetInputErrors(parentPopup);
     closePopup(parentPopup);
     removeEscapeListener(parentPopup);
   }
