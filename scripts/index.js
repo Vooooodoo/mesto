@@ -112,15 +112,14 @@ function addEscapeListener(popupType) {
   }
 }
 
-function openPopup(popupType) {
+function disableSubmitButton(popupType) {
   const submitButtonElement = popupType.querySelector('.popup__submit');
 
-  popupType.classList.add('popup_opened');
   submitButtonElement.classList.add('popup__submit_invalid');
+}
 
-  fillInputValues(popupType);//*при открытии заполнили инпуты в соответствии с ТЗ
-
-  addEscapeListener(popupType);
+function openPopup(popupType) {
+  popupType.classList.add('popup_opened');
 }
 
 function removeEscapeListener(popupType) {
@@ -183,8 +182,18 @@ addForm.enableValidation();
 
 //LISTENERS
 //form-popups open/close listeners
-profileEditButton.addEventListener('click', () => openPopup(editPopup));
-profileAddButton.addEventListener('click', () => openPopup(addPopup));
+profileEditButton.addEventListener('click', () => {
+  openPopup(editPopup);
+  disableSubmitButton(editPopup);
+  fillInputValues(editPopup); //*при открытии заполнили инпуты в соответствии с ТЗ
+  addEscapeListener(editPopup);
+});
+profileAddButton.addEventListener('click', () => {
+  openPopup(addPopup);
+  disableSubmitButton(addPopup);
+  fillInputValues(addPopup); //*при открытии заполнили инпуты в соответствии с ТЗ
+  addEscapeListener(addPopup);
+});
 
 profile.addEventListener('click', (evt) => {
   const parentPopup = evt.target.closest('.popup'); //*попап-родитель элемента по которому произошел клик
