@@ -135,12 +135,11 @@ function removeEscapeListener(popupType) {
 }
 
 function closePopup(popupType) {
-  popupType.classList.remove('popup_opened');
-}
-
-//photo-popup close function
-function closePhotoPopup() {
-  photoPopup.classList.remove('photo-popup_opened');
+  if (popupType === photoPopup) {
+    popupType.classList.remove('photo-popup_opened');
+  } else {
+    popupType.classList.remove('popup_opened');
+  }
 }
 
 //edit-popup submit function
@@ -216,7 +215,7 @@ profile.addEventListener('click', (evt) => {
 //photo-popup close listener
 photoPopup.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('photo-popup') || evt.target.classList.contains('photo-popup__close')) {
-    closePhotoPopup();
+    closePopup(photoPopup);
   }
 });
 
