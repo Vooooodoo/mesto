@@ -91,7 +91,7 @@ function escapeEditPopup(evt) {
 
 function escapeAddPopup(evt) {
   if (evt.key === 'Escape') {
-    resetInputErrors(addPopup); //*сбросили залипшие ошибки валидации
+    resetInputErrors(addPopup);
     closePopup(addPopup);
     removeEscapeListener(addPopup);
   }
@@ -150,7 +150,9 @@ function submitEditPopup(evt) {
   profileTitle.textContent = editPopupNameInput.value;
   profileSubtitle.textContent = editPopupAboutInput.value;
 
+  resetInputErrors(editPopup);
   closePopup(editPopup);
+  removeEscapeListener(editPopup);
 }
 
 //new card add functions
@@ -173,7 +175,9 @@ function addNewCard(evt) {
 
   addPopupForm.reset(); //*сбросили все поля формы
 
+  resetInputErrors(addPopup);
   closePopup(addPopup);
+  removeEscapeListener(addPopup);
 }
 
 //form-popups validation method
