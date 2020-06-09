@@ -83,13 +83,17 @@ function resetInputErrors(popupType) {
 
 function escapeEditPopup(evt) {
   if (evt.key === 'Escape') {
+    resetInputErrors(editPopup); //*сбросили залипшие ошибки валидации
     closePopup(editPopup);
+    removeEscapeListener(editPopup);
   }
 }
 
 function escapeAddPopup(evt) {
   if (evt.key === 'Escape') {
+    resetInputErrors(addPopup); //*сбросили залипшие ошибки валидации
     closePopup(addPopup);
+    removeEscapeListener(addPopup);
   }
 }
 //*создали две именованные функции-обработчики для каждого попапа, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
@@ -131,11 +135,7 @@ function removeEscapeListener(popupType) {
 }
 
 function closePopup(popupType) {
-  resetInputErrors(popupType); //*сбросили залипшие ошибки валидации
-
   popupType.classList.remove('popup_opened');
-
-  removeEscapeListener(popupType);
 }
 
 //photo-popup close function
@@ -199,9 +199,13 @@ profile.addEventListener('click', (evt) => {
   const parentPopup = evt.target.closest('.popup'); //*попап-родитель элемента по которому произошел клик
 
   if (evt.target.classList.contains('popup')) { //*если клик произошел по родителю - закрыть его
+    resetInputErrors(evt.target); //*сбросили залипшие ошибки валидации
     closePopup(evt.target);
+    removeEscapeListener(evt.target);
   } else if (evt.target.classList.contains('popup__close')) { //*если клик произошел по дочернему кресту - закрыть родителя
+    resetInputErrors(parentPopup); //*сбросили залипшие ошибки валидации
     closePopup(parentPopup);
+    removeEscapeListener(parentPopup);
   }
 }); //*повешали один лисенер на родителя и за счет делегирования отслеживаем событие на дочерних элементах
 
