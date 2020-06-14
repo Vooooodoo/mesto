@@ -25,7 +25,14 @@ module.exports = {
       }, //добавили правило, чтобы подставить правильные пути файлов в HTML
       {
         test: /\.css$/,
-        loader: [MiniCssExtractPlugin.loader, 'css-loader']
+        loader: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 }
+          },
+          'postcss-loader'
+        ]
       } //добавили правило для обработки css-файлов
     ]
   },
