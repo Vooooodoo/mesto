@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "Service for travelers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vooooodoo/mesto.git"
+  },
+  "author": "Roman Andrukhanenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vooooodoo/mesto/issues"
+  },
+  "homepage": "https://github.com/Vooooodoo/mesto#readme"
+}
