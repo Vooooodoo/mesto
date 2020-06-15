@@ -1,3 +1,5 @@
+//*класс FormValidator настраивает валидацию полей формы
+
 //CLASS
 export class FormValidator {
   constructor(data, formSelector) {

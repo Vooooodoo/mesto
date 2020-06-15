@@ -1,3 +1,5 @@
+//*класс Card создает карточку с текстом и ссылкой на изображение
+
 //VARIABLES
 //photo-popup open vars
 export const photoPopup = document.querySelector('.photo-popup');
