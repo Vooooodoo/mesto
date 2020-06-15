@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); //подключили
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //подключили плагин для объединения БЭМ css-файлов в один
 
 module.exports = {
-  entry: { main: './src/scripts/index.js' }, //указали точку входа - первое место куда заглянет webpack при сборке
+  entry: { main: './src/pages/index.js' }, //указали точку входа - первое место куда заглянет webpack при сборке
   output: {
     path: path.resolve(__dirname, 'dist'), //переписали точку выхода - итоговый файл, куда webpack сложит весь js-код (использовали утилиту path)
     filename: 'main.js'

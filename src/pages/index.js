@@ -1,9 +1,9 @@
 //FILES FOR WEBPACK
-import '../pages/index.css'; //добавили импорт главного файла стилей
+import './index.css'; //добавили импорт главного файла стилей
 
 //MODULES
-import { Card, photoPopup } from './Card.js';
-import { FormValidator } from './FormValidator.js';
+import { Card, photoPopup } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
 
 //VARIABLES
 //delegation var

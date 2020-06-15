@@ -4,8 +4,8 @@
   "description": "Service for travelers",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && webpack",
-    "dev": "webpack-dev-server --open --watch"
+    "build": "rm -rf dist && webpack --mode production",
+    "dev": "webpack-dev-server --mode development --open --watch"
   },
   "repository": {
     "type": "git",
