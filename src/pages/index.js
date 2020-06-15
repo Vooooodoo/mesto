@@ -4,6 +4,7 @@ import './index.css'; //добавили импорт главного файл�
 //MODULES
 import { Card, photoPopup } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
+import { Section } from '../components/Section.js';
 
 //VARIABLES
 //delegation var
@@ -228,9 +229,16 @@ addPopup.addEventListener('submit', addNewCard);
 
 //RENDER
 //default cards render
-initialCards.forEach((item) => {
-  const card = new Card(item, '#card-template'); //*cоздали новый объект-экземпляр класса Card с данными из объекта в массиве initialCards
-  const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+const section = new Section({
+    data: initialCards, //*массив объектов с данными будущей карточки
+    renderer: (cardData) => { //*в качестве аргумента передали объект с данными карточки - из массива initialCards
+      const card = new Card(cardData, '#card-template'); //*cоздали новый объект-экземпляр класса Card
+      const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
-  cardsList.append(cardElement); //*добавили готовую карточку в DOM
-});
+      section.setItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
+    },
+  },
+  '.cards__list'
+);
+
+section.renderItems(); //*из экземпляра класса Section - создали и добавили в DOM карточки мест
