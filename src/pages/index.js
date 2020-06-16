@@ -241,4 +241,4 @@ const section = new Section({
   '.cards__list'
 );
 
-section.renderItems(); //*из экземпляра класса Section - создали и добавили в DOM карточки мест
+section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки мест
