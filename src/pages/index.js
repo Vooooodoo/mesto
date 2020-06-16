@@ -5,6 +5,7 @@ import './index.css'; //добавили импорт главного файл�
 import { Card, photoPopup } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
+import { Popup } from '../components/Popup.js';
 
 //VARIABLES
 //delegation var
@@ -85,21 +86,21 @@ function resetInputErrors(popupType) {
   }); //*прошлись по массиву и для каждого инпута скрыли ошибки
 }
 
-function escapeEditPopup(evt) {
-  if (evt.key === 'Escape') {
-    resetInputErrors(editPopup); //*сбросили залипшие ошибки валидации
-    closePopup(editPopup);
-    removeEscapeListener(editPopup);
-  }
-}
+// function escapeEditPopup(evt) {
+//   if (evt.key === 'Escape') {
+//     resetInputErrors(editPopup); //*сбросили залипшие ошибки валидации
+//     closePopup(editPopup);
+//     removeEscapeListener(editPopup);
+//   }
+// }
 
-function escapeAddPopup(evt) {
-  if (evt.key === 'Escape') {
-    resetInputErrors(addPopup);
-    closePopup(addPopup);
-    removeEscapeListener(addPopup);
-  }
-}
+// function escapeAddPopup(evt) {
+//   if (evt.key === 'Escape') {
+//     resetInputErrors(addPopup);
+//     closePopup(addPopup);
+//     removeEscapeListener(addPopup);
+//   }
+// }
 //*создали две именованные функции-обработчики для каждого попапа, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
 
 function fillInputValues(popupType) {
@@ -126,9 +127,9 @@ function disableSubmitButton(popupType) {
   submitButtonElement.classList.add('popup__submit_invalid');
 }
 
-function openPopup(popupType) {
-  popupType.classList.add('popup_opened');
-}
+// function openPopup(popupType) {
+//   popupType.classList.add('popup_opened');
+// }
 
 function removeEscapeListener(popupType) {
   if (popupType === editPopup) {
@@ -138,13 +139,13 @@ function removeEscapeListener(popupType) {
   }
 }
 
-function closePopup(popupType) {
-  if (popupType === photoPopup) {
-    popupType.classList.remove('photo-popup_opened');
-  } else {
-    popupType.classList.remove('popup_opened');
-  }
-}
+// function closePopup(popupType) {
+//   if (popupType === photoPopup) {
+//     popupType.classList.remove('photo-popup_opened');
+//   } else {
+//     popupType.classList.remove('popup_opened');
+//   }
+// }
 
 //edit-popup submit function
 function submitEditPopup(evt) {
