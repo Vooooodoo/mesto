@@ -6,6 +6,8 @@ import { Card, photoPopup } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { Popup } from '../components/Popup.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
 
 //VARIABLES
 //delegation var
@@ -17,6 +19,7 @@ const addPopup = document.querySelector('#add-popup');
 
 const editPopupForm = document.forms.edit;
 const addPopupForm = document.forms.add;
+console.log(editPopup.querySelector('.popup__container')); //!remove this string
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
@@ -88,17 +91,17 @@ function resetInputErrors(popupType) {
 
 // function escapeEditPopup(evt) {
 //   if (evt.key === 'Escape') {
-//     resetInputErrors(editPopup); //*сбросили залипшие ошибки валидации
+//todo     resetInputErrors(editPopup); //*сбросили залипшие ошибки валидации
 //     closePopup(editPopup);
-//     removeEscapeListener(editPopup);
+//todo     removeEscapeListener(editPopup);
 //   }
 // }
 
 // function escapeAddPopup(evt) {
 //   if (evt.key === 'Escape') {
-//     resetInputErrors(addPopup);
+//todo     resetInputErrors(addPopup);
 //     closePopup(addPopup);
-//     removeEscapeListener(addPopup);
+//todo     removeEscapeListener(addPopup);
 //   }
 // }
 //*создали две именованные функции-обработчики для каждого попапа, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
@@ -190,12 +193,17 @@ addForm.enableValidation();
 
 //LISTENERS
 //form-popups open/close listeners
+
+
+
+
 profileEditButton.addEventListener('click', () => {
   openPopup(editPopup);
   disableSubmitButton(editPopup);
   fillInputValues(editPopup); //*при открытии заполнили инпуты в соответствии с ТЗ
   addEscapeListener(editPopup);
 });
+
 profileAddButton.addEventListener('click', () => {
   openPopup(addPopup);
   disableSubmitButton(addPopup);
@@ -203,30 +211,30 @@ profileAddButton.addEventListener('click', () => {
   addEscapeListener(addPopup);
 });
 
-profile.addEventListener('click', (evt) => {
-  const parentPopup = evt.target.closest('.popup'); //*попап-родитель элемента по которому произошел клик
+// profile.addEventListener('click', (evt) => {
+//   const parentPopup = evt.target.closest('.popup'); //*попап-родитель элемента по которому произошел клик
 
-  if (evt.target.classList.contains('popup')) { //*если клик произошел по родителю - закрыть его
-    resetInputErrors(evt.target); //*сбросили залипшие ошибки валидации
-    closePopup(evt.target);
-    removeEscapeListener(evt.target);
-  } else if (evt.target.classList.contains('popup__close')) { //*если клик произошел по дочернему кресту - закрыть родителя
-    resetInputErrors(parentPopup);
-    closePopup(parentPopup);
-    removeEscapeListener(parentPopup);
-  }
-}); //*повешали один лисенер на родителя и за счет делегирования отслеживаем событие на дочерних элементах
+//todo   if (evt.target.classList.contains('popup')) { //*если клик произошел по родителю - закрыть его
+//todo     resetInputErrors(evt.target); //*сбросили залипшие ошибки валидации
+//     closePopup(evt.target);
+//todo     removeEscapeListener(evt.target);
+//   } else if (evt.target.classList.contains('popup__close')) { //*если клик произошел по дочернему кресту - закрыть родителя
+//todo     resetInputErrors(parentPopup);
+//     closePopup(parentPopup);
+//todo     removeEscapeListener(parentPopup);
+//   }
+// }); //*повешали один лисенер на родителя и за счет делегирования отслеживаем событие на дочерних элементах
 
 //photo-popup close listener
-photoPopup.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('photo-popup') || evt.target.classList.contains('photo-popup__close')) {
-    closePopup(photoPopup);
-  }
-});
+// photoPopup.addEventListener('click', (evt) => {
+//todo   if (evt.target.classList.contains('photo-popup') || evt.target.classList.contains('photo-popup__close')) {
+//     closePopup(photoPopup);
+//   }
+// });
 
 //form-popups submit listeners
-editPopup.addEventListener('submit', submitEditPopup);
-addPopup.addEventListener('submit', addNewCard);
+// editPopup.addEventListener('submit', submitEditPopup);
+// addPopup.addEventListener('submit', addNewCard);
 
 //RENDER
 //default cards render
