@@ -8,6 +8,7 @@ import { Section } from '../components/Section.js';
 import { Popup } from '../components/Popup.js'; //*todo удалить этот импорт, похоже он не пригодится
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { UserInfo } from '../components/UserInfo';
 
 //VARIABLES
 //delegation var
@@ -19,7 +20,6 @@ const addPopup = document.querySelector('#add-popup');
 
 const editPopupForm = document.forms.edit;
 const addPopupForm = document.forms.add;
-console.log(editPopup.querySelector('.popup__container')); //todo remove this string
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
@@ -193,13 +193,16 @@ addForm.enableValidation();
 
 //LISTENERS
 //form-popups open/close listeners
+const profileUserInfo = new UserInfo({
+  nameSelector: '.profile__title',
+  aboutSelector: '.profile__subtitle'
+});
+
 const editPopupTestInstance = new PopupWithForm('#edit-popup', { //todo поменять название экземпляра
   submitHandler: (evt) => {
     evt.preventDefault();
 
-    profileSubtitle.textContent = editPopupAboutInput.value;
-    profileTitle.textContent = editPopupNameInput.value;
-
+    profileUserInfo.setUserInfo();
     editPopupTestInstance.close();
   }
 });

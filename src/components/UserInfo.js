@@ -6,25 +6,22 @@ export class UserInfo {
     this._aboutSelector = document.querySelector(aboutSelector);
   }
 
-  open() {
-    this._popup.classList.add('popup_opened');
-  }
-
-  close() {
-    this._popup.classList.remove('popup_opened');
-  }
-
-  _handleEscClose(evt) {
-    if (evt.key === 'Escape') {
-      this.close();
+  getUserInfo() {
+    const userInfo = {
+      name: this._nameSelector.textcontent,
+      about: this._aboutSelector.textcontent
     }
+
+    return userInfo;
   }
 
-  setEventListeners() {
-    const popupCloseButton = this._popup.querySelector('.popup__close');
+  setUserInfo() {
+    const nameInput = document.forms.edit.elements.name;
+    const aboutInput = document.forms.edit.elements.about;
 
-    popupCloseButton.addEventListener('click', () => {
-      this.close();
-    });
+    this.getUserInfo().name = nameInput.value;
+    this.getUserInfo().about = aboutInput.value;
+
+    console.log(this.getUserInfo());
   }
 }
