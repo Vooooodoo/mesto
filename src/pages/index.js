@@ -5,7 +5,7 @@ import './index.css'; //добавили импорт главного файл�
 import { Card, photoPopup } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
-import { Popup } from '../components/Popup.js';
+import { Popup } from '../components/Popup.js'; //*todo удалить этот импорт, похоже он не пригодится
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 
@@ -19,7 +19,7 @@ const addPopup = document.querySelector('#add-popup');
 
 const editPopupForm = document.forms.edit;
 const addPopupForm = document.forms.add;
-console.log(editPopup.querySelector('.popup__container')); //!remove this string
+console.log(editPopup.querySelector('.popup__container')); //todo remove this string
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
@@ -167,25 +167,25 @@ function prependNewCard(card, container) {
   container.prepend(card);
 }
 
-function addNewCard(evt) {
-  evt.preventDefault();
+// function addNewCard(evt) {
+//   evt.preventDefault();
 
-  const newCardData = {
-    name: addPopupNameInput.value,
-    link: addPopupLinkInput.value
-  } //*создали новый объект с данными полей ввода формы
+//   const newCardData = {
+//     name: addPopupNameInput.value,
+//     link: addPopupLinkInput.value
+//   } //*создали новый объект с данными полей ввода формы
 
-  const card = new Card(newCardData, '#card-template'); //*cоздали новый экземпляр класса Card с данными из полей ввода
-  const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+//   const card = new Card(newCardData, '#card-template'); //*cоздали новый экземпляр класса Card с данными из полей ввода
+//   const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
-  prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
+//   prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
 
-  addPopupForm.reset(); //*сбросили все поля формы
+//   addPopupForm.reset(); //*сбросили все поля формы
 
-  resetInputErrors(addPopup);
-  closePopup(addPopup);
-  removeEscapeListener(addPopup);
-}
+//   resetInputErrors(addPopup);
+//   closePopup(addPopup);
+//   removeEscapeListener(addPopup);
+// }
 
 //form-popups validation method
 editForm.enableValidation();
@@ -193,23 +193,62 @@ addForm.enableValidation();
 
 //LISTENERS
 //form-popups open/close listeners
+const editPopupTestInstance = new PopupWithForm('#edit-popup', { //todo поменять название экземпляра
+  submitHandler: (evt) => {
+    evt.preventDefault();
 
+    profileSubtitle.textContent = editPopupAboutInput.value;
+    profileTitle.textContent = editPopupNameInput.value;
 
-
+    editPopupTestInstance.close();
+  }
+});
 
 profileEditButton.addEventListener('click', () => {
-  openPopup(editPopup);
-  disableSubmitButton(editPopup);
-  fillInputValues(editPopup); //*при открытии заполнили инпуты в соответствии с ТЗ
-  addEscapeListener(editPopup);
+  editPopupTestInstance.open();
+});
+
+editPopupTestInstance.setEventListeners();
+
+// profileEditButton.addEventListener('click', () => {
+//   openPopup(editPopup);
+//   disableSubmitButton(editPopup);
+//   fillInputValues(editPopup); //*при открытии заполнили инпуты в соответствии с ТЗ
+//   addEscapeListener(editPopup);
+// });
+
+const addPopupTestInstance = new PopupWithForm('#add-popup', { //todo поменять название экземпляра
+  submitHandler: (evt) => {
+    evt.preventDefault();
+
+    const newCardData = {
+      name: addPopupNameInput.value,
+      link: addPopupLinkInput.value
+    } //*создали новый объект с данными полей ввода формы
+
+    const card = new Card(newCardData, '#card-template'); //*cоздали новый экземпляр класса Card с данными из полей ввода
+    const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+
+    prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
+
+    addPopupTestInstance.close();
+    // resetInputErrors(addPopup);
+    // removeEscapeListener(addPopup);
+  }
 });
 
 profileAddButton.addEventListener('click', () => {
-  openPopup(addPopup);
-  disableSubmitButton(addPopup);
-  fillInputValues(addPopup);
-  addEscapeListener(addPopup);
+  addPopupTestInstance.open();
 });
+
+addPopupTestInstance.setEventListeners();
+
+// profileAddButton.addEventListener('click', () => {
+//   openPopup(addPopup);
+//   disableSubmitButton(addPopup);
+//   fillInputValues(addPopup);
+//   addEscapeListener(addPopup);
+// });
 
 // profile.addEventListener('click', (evt) => {
 //   const parentPopup = evt.target.closest('.popup'); //*попап-родитель элемента по которому произошел клик
@@ -247,7 +286,7 @@ const section = new Section({
       section.setItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
     },
   },
-  '.cards__list'
+  '.cards__list' //*передали селектор контейнера для карточек
 );
 
 section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки мест
