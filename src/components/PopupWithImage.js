@@ -2,6 +2,7 @@
 
 import { Popup } from './Popup.js';
 
+//CLASS
 export class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
@@ -17,5 +18,7 @@ export class PopupWithImage extends Popup {
     //todo разобраться как правильно передать данные
 
     super.open();
+
+    console.log('Hello!');
   }
 }

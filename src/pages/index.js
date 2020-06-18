@@ -2,7 +2,7 @@
 import './index.css'; //добавили импорт главного файла стилей
 
 //MODULES
-import { Card, photoPopup } from '../components/Card.js';
+import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { Popup } from '../components/Popup.js'; //*todo удалить этот импорт, похоже он не пригодится
@@ -73,6 +73,8 @@ const enableValidationArgs = {
 
 const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
 const addForm = new FormValidator(enableValidationArgs, '#add-popup');
+
+const photoPopup = document.querySelector('.photo-popup');
 
 //FUNCTIONS
 //form-popups open/close functions

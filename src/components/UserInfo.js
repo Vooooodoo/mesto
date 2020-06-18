@@ -1,5 +1,6 @@
 //*класс UserInfo отвечает за управление отображением информации о пользователе на странице
 
+//CLASS
 export class UserInfo {
   constructor({ nameSelector, aboutSelector }) {
     this._nameSelector = document.querySelector(nameSelector); //*элемент с именем пользователя

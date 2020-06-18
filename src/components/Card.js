@@ -1,18 +1,12 @@
 //*класс Card создает карточку с текстом и ссылкой на изображение
 
-//VARIABLES
-//photo-popup open vars
-export const photoPopup = document.querySelector('.photo-popup');
-// const photoPopupPhoto = document.querySelector('.photo-popup__photo');
-// const photoPopupTitle = document.querySelector('.photo-popup__title');
-
 //CLASS
 export class Card {
   constructor(data, cardSelector, { handleCardClick }) { //*передали данные в виде объекта и селектор шаблона(на случай, если надо будест создать карточку по другому шаблону)
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector; //*записали селектор в приватное поле
-    this._handleCardClick = handleCardClick; //*колбэк-функция, которая вызывается при клике на фото карточки
+    this._handleCardClick = handleCardClick; //*колбэк-функция, которая вызывается при клике на фото карточки, описывается при создании экземпляра класса Card
   }
 
   _getTemplateClone() {
@@ -30,14 +24,6 @@ export class Card {
     this._element.remove();
   }
 
-  // _openPhotoPopup() {
-  //   photoPopupPhoto.src = this._link;
-  //   photoPopupPhoto.alt = `${this._name}.`;
-  //   photoPopupTitle.textContent = this._name;
-
-  //   photoPopup.classList.add('photo-popup_opened');
-  // }
-
   _setEventListeners() {
     this._element.querySelector('.card__like').addEventListener('click', () => {
       this._toggleCardLike();
@@ -47,9 +33,7 @@ export class Card {
       this._deleteCard();
     });
 
-    // this._element.querySelector('.card__photo').addEventListener('click', () => {
-    //   this._openPhotoPopup();
-    // });
+    this._element.querySelector('.card__photo').addEventListener('click', this._handleCardClick); //*функция-обработчик описывается при создании экземпляра класса
   }
 
   createCard() {
