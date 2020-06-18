@@ -8,17 +8,16 @@ export class PopupWithImage extends Popup {
     super(popupSelector);
   }
 
-  open() {
+  open(evt) {
     const photoPopupPhoto = this._popup.querySelector('.photo-popup__photo');
     const photoPopupTitle = this._popup.querySelector('.photo-popup__title');
 
-    photoPopupPhoto.src = this._link;
-    photoPopupPhoto.alt = `${this._name}.`;
-    photoPopupTitle.textContent = this._name;
-    //todo разобраться как правильно передать данные
+    photoPopupPhoto.src = evt.target.src;
+    photoPopupPhoto.alt = evt.target.alt;
+    photoPopupTitle.textContent = evt.target.alt.slice(0, -1);
 
     super.open();
 
-    console.log('Hello!');
+    console.log(evt.target.alt.slice(0, -1));
   }
 }

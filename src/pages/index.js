@@ -6,8 +6,8 @@ import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { Popup } from '../components/Popup.js'; //*todo удалить этот импорт, похоже он не пригодится
-import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
 
 //VARIABLES
@@ -73,8 +73,6 @@ const enableValidationArgs = {
 
 const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
 const addForm = new FormValidator(enableValidationArgs, '#add-popup');
-
-const photoPopup = document.querySelector('.photo-popup');
 
 //FUNCTIONS
 //form-popups open/close functions
@@ -234,8 +232,8 @@ const addPopupTestInstance = new PopupWithForm('#add-popup', { //todo помен
     } //*создали новый объект с данными полей ввода формы
 
     const card = new Card(newCardData, '#card-template', {
-      handleCardClick: () => {
-        photoPopupTestInstance.open();
+      handleCardClick: (evt) => {
+        photoPopupTestInstance.open(evt);
       }
     }); //*cоздали новый экземпляр класса Card с данными из полей ввода
     const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
@@ -292,8 +290,8 @@ const section = new Section({
     data: initialCards, //*массив объектов с данными будущей карточки
     renderer: (cardData) => { //*в качестве аргумента передали объект с данными карточки - из массива initialCards
       const card = new Card(cardData, '#card-template', {
-        handleCardClick: () => {
-          photoPopupTestInstance.open();
+        handleCardClick: (evt) => {
+          photoPopupTestInstance.open(evt);
         }
       }); //*cоздали новый объект-экземпляр класса Card
       const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
