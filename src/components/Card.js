@@ -8,10 +8,11 @@ export const photoPopup = document.querySelector('.photo-popup');
 
 //CLASS
 export class Card {
-  constructor(data, cardSelector) { //*передали данные в виде объекта и селектор шаблона(на случай, если надо будест создать карточку по другому шаблону)
+  constructor(data, cardSelector, { handleCardClick }) { //*передали данные в виде объекта и селектор шаблона(на случай, если надо будест создать карточку по другому шаблону)
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector; //*записали селектор в приватное поле
+    this._handleCardClick = handleCardClick; //*колбэк-функция, которая вызывается при клике на фото карточки
   }
 
   _getTemplateClone() {

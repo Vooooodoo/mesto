@@ -220,6 +220,8 @@ editPopupTestInstance.setEventListeners();
 //   addEscapeListener(editPopup);
 // });
 
+const photoPopupTestInstance = new PopupWithImage('#photo-popup'); //todo поменять название экземпляра
+
 const addPopupTestInstance = new PopupWithForm('#add-popup', { //todo поменять название экземпляра
   handleSubmit: (evt) => {
     evt.preventDefault();
@@ -229,7 +231,11 @@ const addPopupTestInstance = new PopupWithForm('#add-popup', { //todo помен
       link: addPopupLinkInput.value
     } //*создали новый объект с данными полей ввода формы
 
-    const card = new Card(newCardData, '#card-template'); //*cоздали новый экземпляр класса Card с данными из полей ввода
+    const card = new Card(newCardData, '#card-template', {
+      handleCardClick: () => {
+        photoPopupTestInstance.open();
+      }
+    }); //*cоздали новый экземпляр класса Card с данными из полей ввода
     const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
     prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
@@ -283,7 +289,11 @@ addPopupTestInstance.setEventListeners();
 const section = new Section({
     data: initialCards, //*массив объектов с данными будущей карточки
     renderer: (cardData) => { //*в качестве аргумента передали объект с данными карточки - из массива initialCards
-      const card = new Card(cardData, '#card-template'); //*cоздали новый объект-экземпляр класса Card
+      const card = new Card(cardData, '#card-template', {
+        handleCardClick: () => {
+          photoPopupTestInstance.open();
+        }
+      }); //*cоздали новый объект-экземпляр класса Card
       const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
       section.setItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
