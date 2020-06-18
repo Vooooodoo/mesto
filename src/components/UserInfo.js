@@ -8,8 +8,8 @@ export class UserInfo {
 
   getUserInfo() {
     const userInfo = {
-      name: this._nameSelector.textcontent,
-      about: this._aboutSelector.textcontent
+      name: this._nameSelector.textContent,
+      about: this._aboutSelector.textContent
     }
 
     return userInfo;
@@ -22,6 +22,6 @@ export class UserInfo {
     this.getUserInfo().name = nameInput.value;
     this.getUserInfo().about = aboutInput.value;
 
-    console.log(this.getUserInfo());
+    console.log(nameInput.value);
   }
 }

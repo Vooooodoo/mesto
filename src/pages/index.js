@@ -8,7 +8,7 @@ import { Section } from '../components/Section.js';
 import { Popup } from '../components/Popup.js'; //*todo удалить этот импорт, похоже он не пригодится
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
-import { UserInfo } from '../components/UserInfo';
+import { UserInfo } from '../components/UserInfo.js';
 
 //VARIABLES
 //delegation var
