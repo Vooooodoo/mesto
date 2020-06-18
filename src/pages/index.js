@@ -89,23 +89,6 @@ function resetInputErrors(popupType) {
   }); //*прошлись по массиву и для каждого инпута скрыли ошибки
 }
 
-// function escapeEditPopup(evt) {
-//   if (evt.key === 'Escape') {
-//todo     resetInputErrors(editPopup); //*сбросили залипшие ошибки валидации
-//     closePopup(editPopup);
-//todo     removeEscapeListener(editPopup);
-//   }
-// }
-
-// function escapeAddPopup(evt) {
-//   if (evt.key === 'Escape') {
-//todo     resetInputErrors(addPopup);
-//     closePopup(addPopup);
-//todo     removeEscapeListener(addPopup);
-//   }
-// }
-//*создали две именованные функции-обработчики для каждого попапа, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
-
 function fillInputValues(popupType) {
   if (popupType === editPopup) {
     editPopupNameInput.value = profileTitle.textContent;
@@ -124,16 +107,6 @@ function addEscapeListener(popupType) {
   }
 }
 
-function disableSubmitButton(popupType) {
-  const submitButtonElement = popupType.querySelector('.popup__submit');
-
-  submitButtonElement.classList.add('popup__submit_invalid');
-}
-
-// function openPopup(popupType) {
-//   popupType.classList.add('popup_opened');
-// }
-
 function removeEscapeListener(popupType) {
   if (popupType === editPopup) {
     profile.removeEventListener('keydown', escapeEditPopup);
@@ -142,50 +115,16 @@ function removeEscapeListener(popupType) {
   }
 }
 
-// function closePopup(popupType) {
-//   if (popupType === photoPopup) {
-//     popupType.classList.remove('photo-popup_opened');
-//   } else {
-//     popupType.classList.remove('popup_opened');
-//   }
-// }
+function disableSubmitButton(popupType) {
+  const submitButtonElement = popupType.querySelector('.popup__submit');
 
-//edit-popup submit function
-function submitEditPopup(evt) {
-  evt.preventDefault();
-
-  profileTitle.textContent = editPopupNameInput.value;
-  profileSubtitle.textContent = editPopupAboutInput.value;
-
-  resetInputErrors(editPopup);
-  closePopup(editPopup);
-  removeEscapeListener(editPopup);
+  submitButtonElement.classList.add('popup__submit_invalid');
 }
 
 //new card add functions
 function prependNewCard(card, container) {
   container.prepend(card);
 }
-
-// function addNewCard(evt) {
-//   evt.preventDefault();
-
-//   const newCardData = {
-//     name: addPopupNameInput.value,
-//     link: addPopupLinkInput.value
-//   } //*создали новый объект с данными полей ввода формы
-
-//   const card = new Card(newCardData, '#card-template'); //*cоздали новый экземпляр класса Card с данными из полей ввода
-//   const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
-
-//   prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
-
-//   addPopupForm.reset(); //*сбросили все поля формы
-
-//   resetInputErrors(addPopup);
-//   closePopup(addPopup);
-//   removeEscapeListener(addPopup);
-// }
 
 //form-popups validation method
 editForm.enableValidation();
@@ -203,22 +142,21 @@ const editPopupTestInstance = new PopupWithForm('#edit-popup', { //todo поме
     evt.preventDefault();
 
     profileUserInfo.setUserInfo();
+    // resetInputErrors(editPopup);
     editPopupTestInstance.close();
+    // removeEscapeListener(editPopup);
   }
 });
 
 profileEditButton.addEventListener('click', () => {
   editPopupTestInstance.open();
+  // disableSubmitButton(editPopup);
+  // fillInputValues(editPopup); //*при открытии заполнили инпуты в соответствии с ТЗ
+  // addEscapeListener(editPopup);
 });
 
 editPopupTestInstance.setEventListeners();
 
-// profileEditButton.addEventListener('click', () => {
-//   openPopup(editPopup);
-//   disableSubmitButton(editPopup);
-//   fillInputValues(editPopup); //*при открытии заполнили инпуты в соответствии с ТЗ
-//   addEscapeListener(editPopup);
-// });
 
 const photoPopupTestInstance = new PopupWithImage('#photo-popup'); //todo поменять название экземпляра
 
@@ -248,16 +186,13 @@ const addPopupTestInstance = new PopupWithForm('#add-popup', { //todo помен
 
 profileAddButton.addEventListener('click', () => {
   addPopupTestInstance.open();
+  // disableSubmitButton(addPopup);
+  // fillInputValues(addPopup);
+  // addEscapeListener(addPopup);
 });
 
 addPopupTestInstance.setEventListeners();
 
-// profileAddButton.addEventListener('click', () => {
-//   openPopup(addPopup);
-//   disableSubmitButton(addPopup);
-//   fillInputValues(addPopup);
-//   addEscapeListener(addPopup);
-// });
 
 // profile.addEventListener('click', (evt) => {
 //   const parentPopup = evt.target.closest('.popup'); //*попап-родитель элемента по которому произошел клик
@@ -279,10 +214,6 @@ addPopupTestInstance.setEventListeners();
 //     closePopup(photoPopup);
 //   }
 // });
-
-//form-popups submit listeners
-// editPopup.addEventListener('submit', submitEditPopup);
-// addPopup.addEventListener('submit', addNewCard);
 
 //RENDER
 //default cards render

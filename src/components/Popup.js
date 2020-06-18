@@ -8,7 +8,11 @@ export class Popup {
 
   open() {
     this._popup.classList.add('popup_opened');
-  }
+
+    document.addEventListener('keydown', (evt) => {
+      this._handleEscClose(evt);
+    }); //todo придумать как снести этот лисенер при закрытии попапа
+  } //todo надо как то создасть именованную функцию-обработчик, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
 
   close() {
     this._popup.classList.remove('popup_opened');
@@ -17,6 +21,8 @@ export class Popup {
   _handleEscClose(evt) {
     if (evt.key === 'Escape') {
       this.close();
+      // resetInputErrors(editPopup); //*сбросили залипшие ошибки валидации
+      // removeEscapeListener(editPopup);
     }
   }
 
