@@ -199,7 +199,7 @@ const profileUserInfo = new UserInfo({
 });
 
 const editPopupTestInstance = new PopupWithForm('#edit-popup', { //todo поменять название экземпляра
-  submitHandler: (evt) => {
+  handleSubmit: (evt) => {
     evt.preventDefault();
 
     profileUserInfo.setUserInfo();
@@ -221,7 +221,7 @@ editPopupTestInstance.setEventListeners();
 // });
 
 const addPopupTestInstance = new PopupWithForm('#add-popup', { //todo поменять название экземпляра
-  submitHandler: (evt) => {
+  handleSubmit: (evt) => {
     evt.preventDefault();
 
     const newCardData = {
