@@ -89,36 +89,15 @@ function resetInputErrors(popupType) {
   }); //*прошлись по массиву и для каждого инпута скрыли ошибки
 }
 
-function fillInputValues(popupType) {
-  if (popupType === editPopup) {
-    editPopupNameInput.value = profileTitle.textContent;
-    editPopupAboutInput.value = profileSubtitle.textContent;
-  } else if (popupType === addPopup) {
-    addPopupNameInput.value = '';
-    addPopupLinkInput.value = '';
-  }
-}
-
-function addEscapeListener(popupType) {
-  if (popupType === editPopup) {
-    profile.addEventListener('keydown', escapeEditPopup);
-  } else if (popupType === addPopup) {
-    profile.addEventListener('keydown', escapeAddPopup);
-  }
-}
-
-function removeEscapeListener(popupType) {
-  if (popupType === editPopup) {
-    profile.removeEventListener('keydown', escapeEditPopup);
-  } else if (popupType === addPopup) {
-    profile.removeEventListener('keydown', escapeAddPopup);
-  }
-}
-
 function disableSubmitButton(popupType) {
   const submitButtonElement = popupType.querySelector('.popup__submit');
 
   submitButtonElement.classList.add('popup__submit_invalid');
+}
+
+function fillUserInfo() {
+  editPopupNameInput.value = profileUserInfo.getUserInfo().name;
+  editPopupAboutInput.value = profileUserInfo.getUserInfo().about;
 }
 
 //new card add functions
@@ -126,6 +105,7 @@ function prependNewCard(card, container) {
   container.prepend(card);
 }
 
+//METHODS
 //form-popups validation method
 editForm.enableValidation();
 addForm.enableValidation();
@@ -150,8 +130,8 @@ const editPopupTestInstance = new PopupWithForm('#edit-popup', { //todo поме
 
 profileEditButton.addEventListener('click', () => {
   editPopupTestInstance.open();
+  fillUserInfo(); //*при открытии заполнили инпуты в соответствии с ТЗ
   // disableSubmitButton(editPopup);
-  // fillInputValues(editPopup); //*при открытии заполнили инпуты в соответствии с ТЗ
   // addEscapeListener(editPopup);
 });
 
@@ -186,8 +166,9 @@ const addPopupTestInstance = new PopupWithForm('#add-popup', { //todo помен
 
 profileAddButton.addEventListener('click', () => {
   addPopupTestInstance.open();
+  // addPopupNameInput.value = '';
+  // addPopupLinkInput.value = '';
   // disableSubmitButton(addPopup);
-  // fillInputValues(addPopup);
   // addEscapeListener(addPopup);
 });
 
@@ -227,7 +208,7 @@ const section = new Section({
       }); //*cоздали новый объект-экземпляр класса Card
       const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
-      section.setItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
+      section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
     },
   },
   '.cards__list' //*передали селектор контейнера для карточек

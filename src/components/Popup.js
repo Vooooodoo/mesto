@@ -16,6 +16,7 @@ export class Popup {
 
   close() {
     this._popup.classList.remove('popup_opened');
+    // document.removeEventListener('keydown', escapeAddPopup); //*если именованная функция как в этом примере, то снесет лисенер, придумаеть как это сделать
   }
 
   _handleEscClose(evt) {

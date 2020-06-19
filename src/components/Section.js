@@ -14,7 +14,7 @@ export class Section {
     });
   } //*метод рэндера элементов
 
-  setItem(element) {
+  addItem(element) {
     this._container.append(element);
   } //*метод добавления элементов в DOM
 }
