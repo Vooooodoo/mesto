@@ -5,33 +5,35 @@ import './index.css'; //добавили импорт главного файл�
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
-import { Popup } from '../components/Popup.js'; //*todo удалить этот импорт, похоже он не пригодится
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
 
 //VARIABLES
-//delegation var
-const profile = document.querySelector('.profile');
-
-//form-popups open/close vars
-const editPopup = document.querySelector('#edit-popup');
-const addPopup = document.querySelector('#add-popup');
-
+//form-popus open/close vars
 const editPopupForm = document.forms.edit;
 const addPopupForm = document.forms.add;
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 
+//form-popups validation vars
+const enableValidationArgs = {
+  inputSelector: '.popup__input-text',
+  submitButtonSelector: '.popup__submit',
+  invalidButtonClass: 'popup__submit_invalid',
+  inputErrorClass: 'popup__input-text_type_error',
+  errorClass: 'popup__input-error_show'
+};
+
+const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
+const addForm = new FormValidator(enableValidationArgs, '#add-popup');
+
 //form-popups submit vars
 const editPopupNameInput = editPopupForm.elements.name;
 const editPopupAboutInput = editPopupForm.elements.about;
 const addPopupNameInput = addPopupForm.elements.name;
 const addPopupLinkInput = addPopupForm.elements.link;
-
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
 
 //render cards vars
 const cardsList = document.querySelector('.cards__list');
@@ -62,18 +64,6 @@ const initialCards = [
   }
 ];
 
-//form-popups validation vars
-const enableValidationArgs = {
-  inputSelector: '.popup__input-text',
-  submitButtonSelector: '.popup__submit',
-  invalidButtonClass: 'popup__submit_invalid',
-  inputErrorClass: 'popup__input-text_type_error',
-  errorClass: 'popup__input-error_show'
-};
-
-const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
-const addForm = new FormValidator(enableValidationArgs, '#add-popup');
-
 //FUNCTIONS
 //form-popups open/close functions
 function resetInputErrors(popupType) {
@@ -100,7 +90,7 @@ function fillUserInfo() {
   editPopupAboutInput.value = profileUserInfo.getUserInfo().about;
 }
 
-//new card add functions
+//new card add function
 function prependNewCard(card, container) {
   container.prepend(card);
 }
@@ -110,6 +100,12 @@ function prependNewCard(card, container) {
 editForm.enableValidation();
 addForm.enableValidation();
 
+
+
+
+
+
+
 //LISTENERS
 //form-popups open/close listeners
 const profileUserInfo = new UserInfo({
@@ -117,30 +113,30 @@ const profileUserInfo = new UserInfo({
   aboutSelector: '.profile__subtitle'
 });
 
-const editPopupTestInstance = new PopupWithForm('#edit-popup', { //todo поменять название экземпляра
+const editPopup = new PopupWithForm('#edit-popup', { //todo поменять название экземпляра
   handleSubmit: (evt) => {
     evt.preventDefault();
 
     profileUserInfo.setUserInfo();
     // resetInputErrors(editPopup);
-    editPopupTestInstance.close();
+    editPopup.close();
     // removeEscapeListener(editPopup);
   }
 });
 
 profileEditButton.addEventListener('click', () => {
-  editPopupTestInstance.open();
+  editPopup.open();
   fillUserInfo(); //*при открытии заполнили инпуты в соответствии с ТЗ
   // disableSubmitButton(editPopup);
   // addEscapeListener(editPopup);
 });
 
-editPopupTestInstance.setEventListeners();
+editPopup.setEventListeners();
 
 
 const photoPopupTestInstance = new PopupWithImage('#photo-popup'); //todo поменять название экземпляра
 
-const addPopupTestInstance = new PopupWithForm('#add-popup', { //todo поменять название экземпляра
+const addPopup = new PopupWithForm('#add-popup', { //todo поменять название экземпляра
   handleSubmit: (evt) => {
     evt.preventDefault();
 
@@ -158,40 +154,38 @@ const addPopupTestInstance = new PopupWithForm('#add-popup', { //todo помен
 
     prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
 
-    addPopupTestInstance.close();
+    addPopup.close();
     // resetInputErrors(addPopup);
     // removeEscapeListener(addPopup);
   }
 });
 
 profileAddButton.addEventListener('click', () => {
-  addPopupTestInstance.open();
-  // addPopupNameInput.value = '';
-  // addPopupLinkInput.value = '';
+  addPopup.open();
   // disableSubmitButton(addPopup);
   // addEscapeListener(addPopup);
 });
 
-addPopupTestInstance.setEventListeners();
+addPopup.setEventListeners();
 
 
 // profile.addEventListener('click', (evt) => {
 //   const parentPopup = evt.target.closest('.popup'); //*попап-родитель элемента по которому произошел клик
 
-//todo   if (evt.target.classList.contains('popup')) { //*если клик произошел по родителю - закрыть его
-//todo     resetInputErrors(evt.target); //*сбросили залипшие ошибки валидации
+//   if (evt.target.classList.contains('popup')) { //*если клик произошел по родителю - закрыть его
+//     resetInputErrors(evt.target); //*сбросили залипшие ошибки валидации
 //     closePopup(evt.target);
-//todo     removeEscapeListener(evt.target);
+//     removeEscapeListener(evt.target);
 //   } else if (evt.target.classList.contains('popup__close')) { //*если клик произошел по дочернему кресту - закрыть родителя
-//todo     resetInputErrors(parentPopup);
+//     resetInputErrors(parentPopup);
 //     closePopup(parentPopup);
-//todo     removeEscapeListener(parentPopup);
+//     removeEscapeListener(parentPopup);
 //   }
 // }); //*повешали один лисенер на родителя и за счет делегирования отслеживаем событие на дочерних элементах
 
 //photo-popup close listener
 // photoPopup.addEventListener('click', (evt) => {
-//todo   if (evt.target.classList.contains('photo-popup') || evt.target.classList.contains('photo-popup__close')) {
+//   if (evt.target.classList.contains('photo-popup') || evt.target.classList.contains('photo-popup__close')) {
 //     closePopup(photoPopup);
 //   }
 // });
