@@ -26,9 +26,6 @@ const enableValidationArgs = {
   errorClass: 'popup__input-error_show'
 };
 
-const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
-const addForm = new FormValidator(enableValidationArgs, '#add-popup');
-
 //form-popups submit vars
 const editPopupNameInput = editPopupForm.elements.name;
 const editPopupAboutInput = editPopupForm.elements.about;
@@ -64,6 +61,73 @@ const initialCards = [
   }
 ];
 
+//INSTANCES
+//UserInfo
+const profileUserInfo = new UserInfo({
+  nameSelector: '.profile__title',
+  aboutSelector: '.profile__subtitle'
+});
+
+//PopupWithForm
+const editPopup = new PopupWithForm('#edit-popup', {
+  handleSubmit: (evt) => {
+    evt.preventDefault();
+
+    profileUserInfo.setUserInfo();
+    // resetInputErrors(editPopup);
+    editPopup.close();
+    // removeEscapeListener(editPopup);
+  }
+});
+
+const addPopup = new PopupWithForm('#add-popup', {
+  handleSubmit: (evt) => {
+    evt.preventDefault();
+
+    const newCardData = {
+      name: addPopupNameInput.value,
+      link: addPopupLinkInput.value
+    } //*создали новый объект с данными полей ввода формы
+
+    const card = new Card(newCardData, '#card-template', {
+      handleCardClick: (evt) => {
+        photoPopup.open(evt);
+      }
+    }); //*cоздали новый экземпляр класса Card с данными из полей ввода
+    const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+
+    prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
+
+    addPopup.close();
+    // resetInputErrors(addPopup);
+    // removeEscapeListener(addPopup);
+  }
+});
+
+//PopupWithImage
+const photoPopup = new PopupWithImage('#photo-popup');
+
+//FormValidator
+const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
+const addForm = new FormValidator(enableValidationArgs, '#add-popup');
+
+//Section
+const section = new Section({
+  data: initialCards, //*массив объектов с данными будущей карточки
+  renderer: (cardData) => { //*в качестве аргумента передали объект с данными карточки - из массива initialCards
+    const card = new Card(cardData, '#card-template', {
+      handleCardClick: (evt) => {
+        photoPopup.open(evt);
+      }
+    }); //*cоздали новый объект-экземпляр класса Card
+    const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+
+    section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
+  },
+},
+'.cards__list' //*передали селектор контейнера для карточек
+);
+
 //FUNCTIONS
 //form-popups open/close functions
 function resetInputErrors(popupType) {
@@ -96,34 +160,15 @@ function prependNewCard(card, container) {
 }
 
 //METHODS
+//default cards render
+section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки мест
+
 //form-popups validation method
 editForm.enableValidation();
 addForm.enableValidation();
 
-
-
-
-
-
-
 //LISTENERS
 //form-popups open/close listeners
-const profileUserInfo = new UserInfo({
-  nameSelector: '.profile__title',
-  aboutSelector: '.profile__subtitle'
-});
-
-const editPopup = new PopupWithForm('#edit-popup', { //todo поменять название экземпляра
-  handleSubmit: (evt) => {
-    evt.preventDefault();
-
-    profileUserInfo.setUserInfo();
-    // resetInputErrors(editPopup);
-    editPopup.close();
-    // removeEscapeListener(editPopup);
-  }
-});
-
 profileEditButton.addEventListener('click', () => {
   editPopup.open();
   fillUserInfo(); //*при открытии заполнили инпуты в соответствии с ТЗ
@@ -133,33 +178,6 @@ profileEditButton.addEventListener('click', () => {
 
 editPopup.setEventListeners();
 
-
-const photoPopupTestInstance = new PopupWithImage('#photo-popup'); //todo поменять название экземпляра
-
-const addPopup = new PopupWithForm('#add-popup', { //todo поменять название экземпляра
-  handleSubmit: (evt) => {
-    evt.preventDefault();
-
-    const newCardData = {
-      name: addPopupNameInput.value,
-      link: addPopupLinkInput.value
-    } //*создали новый объект с данными полей ввода формы
-
-    const card = new Card(newCardData, '#card-template', {
-      handleCardClick: (evt) => {
-        photoPopupTestInstance.open(evt);
-      }
-    }); //*cоздали новый экземпляр класса Card с данными из полей ввода
-    const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
-
-    prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
-
-    addPopup.close();
-    // resetInputErrors(addPopup);
-    // removeEscapeListener(addPopup);
-  }
-});
-
 profileAddButton.addEventListener('click', () => {
   addPopup.open();
   // disableSubmitButton(addPopup);
@@ -167,6 +185,10 @@ profileAddButton.addEventListener('click', () => {
 });
 
 addPopup.setEventListeners();
+
+
+
+
 
 
 // profile.addEventListener('click', (evt) => {
@@ -189,23 +211,3 @@ addPopup.setEventListeners();
 //     closePopup(photoPopup);
 //   }
 // });
-
-//RENDER
-//default cards render
-const section = new Section({
-    data: initialCards, //*массив объектов с данными будущей карточки
-    renderer: (cardData) => { //*в качестве аргумента передали объект с данными карточки - из массива initialCards
-      const card = new Card(cardData, '#card-template', {
-        handleCardClick: (evt) => {
-          photoPopupTestInstance.open(evt);
-        }
-      }); //*cоздали новый объект-экземпляр класса Card
-      const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
-
-      section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
-    },
-  },
-  '.cards__list' //*передали селектор контейнера для карточек
-);
-
-section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки мест

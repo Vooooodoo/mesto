@@ -8,11 +8,7 @@ export class Popup {
 
   open() {
     this._popup.classList.add('popup_opened');
-
-    document.addEventListener('keydown', (evt) => {
-      this._handleEscClose(evt);
-    }); //todo придумать как снести этот лисенер при закрытии попапа
-  } //todo надо как то создасть именованную функцию-обработчик, чтобы была возможность снять лисенер (через функциональное выражение его снять не получится)
+  }
 
   close() {
     this._popup.classList.remove('popup_opened');
@@ -33,5 +29,10 @@ export class Popup {
     popupCloseButton.addEventListener('click', () => {
       this.close();
     });
+
+    document.addEventListener('keydown', (evt) => {
+      this._handleEscClose(evt);
+    }); //todo изначально в ТЗ надо было этот лисенер добавлять при открытии попапа и сносить при закрытии
+    //todo надо как то создасть именованную функцию-обработчик, чтобы была возможность снести лисенер (через функциональное выражение его снести не получится)
   }
 }
