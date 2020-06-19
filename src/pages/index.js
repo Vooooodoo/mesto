@@ -150,8 +150,7 @@ addForm.enableValidation();
 //form-popups open/close listeners
 profileEditButton.addEventListener('click', () => {
   editPopup.open();
-  editPopup.disableSubmitButton(); //*деактивировали кнопку сабимат
-  editPopup.resetInputErrors(); //*сбросили залипшие ошибки валидации
+  editPopup.disableSubmitButton(); //*деактивировали кнопку сабмита
   fillUserInfo(); //*при открытии заполнили инпуты в соответствии с ТЗ
   // addEscapeListener(editPopup);
 });
@@ -161,7 +160,6 @@ editPopup.setEventListeners();
 profileAddButton.addEventListener('click', () => {
   addPopup.open();
   addPopup.disableSubmitButton();
-  addPopup.resetInputErrors();
   // addEscapeListener(addPopup);
 });
 
