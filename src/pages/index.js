@@ -74,7 +74,6 @@ const editPopup = new PopupWithForm('#edit-popup', {
     evt.preventDefault();
 
     profileUserInfo.setUserInfo();
-    // resetInputErrors(editPopup);
     editPopup.close();
     // removeEscapeListener(editPopup);
   }
@@ -99,7 +98,6 @@ const addPopup = new PopupWithForm('#add-popup', {
     prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
 
     addPopup.close();
-    // resetInputErrors(addPopup);
     // removeEscapeListener(addPopup);
   }
 });
@@ -130,19 +128,6 @@ const section = new Section({
 
 //FUNCTIONS
 //form-popups open/close functions
-function resetInputErrors(popupType) {
-  const inputList = Array.from(popupType.querySelectorAll('.popup__input-text')); //*сделали массив из всех инпутов внутри формы
-
-  inputList.forEach(item => {
-    const inputErrorElement = document.querySelector(`#${item.id}-error`);
-
-    item.classList.remove('popup__input-text_type_error');
-    inputErrorElement.classList.remove('popup__input-error_show');
-
-    inputErrorElement.textContent = '';
-  }); //*прошлись по массиву и для каждого инпута скрыли ошибки
-}
-
 function fillUserInfo() {
   editPopupNameInput.value = profileUserInfo.getUserInfo().name;
   editPopupAboutInput.value = profileUserInfo.getUserInfo().about;
@@ -165,8 +150,9 @@ addForm.enableValidation();
 //form-popups open/close listeners
 profileEditButton.addEventListener('click', () => {
   editPopup.open();
-  editPopup.disableSubmitButton();
-  fillUserInfo(); //*при открытии заполнили инпуты в соответствии с ТЗ
+  editPopup.disableSubmitButton(); //*деактивировали кнопку сабимат
+  editPopup.resetInputErrors(); //*сбросили залипшие ошибки валидации
+  fillUserInfo(); //*заполнили инпуты в соответствии с ТЗ
   // addEscapeListener(editPopup);
 });
 
@@ -175,6 +161,7 @@ editPopup.setEventListeners();
 profileAddButton.addEventListener('click', () => {
   addPopup.open();
   addPopup.disableSubmitButton();
+  addPopup.resetInputErrors();
   // addEscapeListener(addPopup);
 });
 

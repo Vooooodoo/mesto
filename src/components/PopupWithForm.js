@@ -18,9 +18,22 @@ export class PopupWithForm extends Popup { //*расширили родител�
   }
 
   disableSubmitButton() {
-    const submitButton = this._popup.querySelector('.popup__submit');
+    const submitButtonElement = this._popup.querySelector('.popup__submit');
 
-    submitButton.classList.add('popup__submit_invalid');
+    submitButtonElement.classList.add('popup__submit_invalid');
+  }
+
+  resetInputErrors() {
+    const inputList = Array.from( this._popup.querySelectorAll('.popup__input-text')); //*сделали массив из всех инпутов внутри формы
+
+    inputList.forEach(item => {
+      const inputErrorElement = document.querySelector(`#${item.id}-error`);
+
+      item.classList.remove('popup__input-text_type_error');
+      inputErrorElement.classList.remove('popup__input-error_show');
+
+      inputErrorElement.textContent = '';
+    }); //*прошлись по массиву и для каждого инпута скрыли ошибки
   }
 
   close() {
