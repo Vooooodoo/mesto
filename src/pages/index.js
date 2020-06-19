@@ -152,7 +152,7 @@ profileEditButton.addEventListener('click', () => {
   editPopup.open();
   editPopup.disableSubmitButton(); //*деактивировали кнопку сабимат
   editPopup.resetInputErrors(); //*сбросили залипшие ошибки валидации
-  fillUserInfo(); //*заполнили инпуты в соответствии с ТЗ
+  fillUserInfo(); //*при открытии заполнили инпуты в соответствии с ТЗ
   // addEscapeListener(editPopup);
 });
 
