@@ -143,12 +143,6 @@ function resetInputErrors(popupType) {
   }); //*прошлись по массиву и для каждого инпута скрыли ошибки
 }
 
-function disableSubmitButton(popupType) {
-  const submitButtonElement = popupType.querySelector('.popup__submit');
-
-  submitButtonElement.classList.add('popup__submit_invalid');
-}
-
 function fillUserInfo() {
   editPopupNameInput.value = profileUserInfo.getUserInfo().name;
   editPopupAboutInput.value = profileUserInfo.getUserInfo().about;
@@ -171,8 +165,8 @@ addForm.enableValidation();
 //form-popups open/close listeners
 profileEditButton.addEventListener('click', () => {
   editPopup.open();
+  editPopup.disableSubmitButton();
   fillUserInfo(); //*при открытии заполнили инпуты в соответствии с ТЗ
-  // disableSubmitButton(editPopup);
   // addEscapeListener(editPopup);
 });
 
@@ -180,7 +174,7 @@ editPopup.setEventListeners();
 
 profileAddButton.addEventListener('click', () => {
   addPopup.open();
-  // disableSubmitButton(addPopup);
+  addPopup.disableSubmitButton();
   // addEscapeListener(addPopup);
 });
 

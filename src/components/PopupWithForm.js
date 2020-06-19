@@ -17,6 +17,12 @@ export class PopupWithForm extends Popup { //*расширили родител�
     });
   }
 
+  disableSubmitButton() {
+    const submitButton = this._popup.querySelector('.popup__submit');
+
+    submitButton.classList.add('popup__submit_invalid');
+  }
+
   close() {
     const form = this._popup.querySelector('.popup__container');
 
