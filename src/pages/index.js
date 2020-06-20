@@ -1,5 +1,5 @@
 //FILES FOR WEBPACK
-import './index.css'; //добавили импорт главного файла стилей
+import './index.css'; //*добавили импорт главного файла стилей
 
 //MODULES
 import { Card } from '../components/Card.js';
@@ -12,7 +12,6 @@ import { UserInfo } from '../components/UserInfo.js';
 //VARIABLES
 //form-popus open/close vars
 const editPopupForm = document.forms.edit;
-const addPopupForm = document.forms.add;
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
@@ -71,7 +70,6 @@ const editPopup = new PopupWithForm('#edit-popup', {
   handleSubmit: () => {
     profileUserInfo.setUserInfo();
     editPopup.close();
-    // removeEscapeListener(editPopup);
   }
 });
 
@@ -81,13 +79,12 @@ const addPopup = new PopupWithForm('#add-popup', {
       handleCardClick: (evt) => {
         photoPopup.open(evt);
       }
-    }); //*cоздали новый экземпляр класса Card с данными из полей ввода, которые получены с помощью приватного метода _getInputValues() класса PopupWithForm
+    }); //*cоздали новый объект-экземпляр класса Card с данными из полей ввода, которые получены с помощью приватного метода _getInputValues() класса PopupWithForm
     const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
     prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
 
     addPopup.close();
-    // removeEscapeListener(addPopup);
   }
 });
 
@@ -106,13 +103,13 @@ const section = new Section({
       handleCardClick: (evt) => {
         photoPopup.open(evt);
       }
-    }); //*cоздали новый объект-экземпляр класса Card
-    const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+    });
+    const cardElement = card.createCard();
 
     section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
   },
 },
-'.cards__list' //*передали селектор контейнера для карточек
+'.cards__list' //*передали селектор контейнера для карточек в качестве аргумента
 );
 
 //FUNCTIONS
@@ -129,7 +126,7 @@ function prependNewCard(card, container) {
 
 //METHODS
 //default cards render
-section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки мест
+section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки всех мест
 
 //form-popups validation method
 editForm.enableValidation();
@@ -141,7 +138,6 @@ profileEditButton.addEventListener('click', () => {
   editPopup.open();
   editPopup.disableSubmitButton(); //*деактивировали кнопку сабмита
   fillUserInfo(); //*при открытии заполнили инпуты в соответствии с ТЗ
-  // addEscapeListener(editPopup);
 });
 
 editPopup.setEventListeners();
@@ -149,7 +145,6 @@ editPopup.setEventListeners();
 profileAddButton.addEventListener('click', () => {
   addPopup.open();
   addPopup.disableSubmitButton();
-  // addEscapeListener(addPopup);
 });
 
 addPopup.setEventListeners();

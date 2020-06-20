@@ -2,7 +2,7 @@
 
 //CLASS
 export class Card {
-  constructor(data, cardSelector, { handleCardClick }) { //*передали данные в виде объекта, селектор шаблона(на случай, если надо будест создать карточку по другому шаблону) и хэндлер клика по фото карточки
+  constructor(data, cardSelector, { handleCardClick }) { //*передали данные в виде объекта, селектор шаблона(на случай, если надо будет создать карточку по другому шаблону) и хэндлер клика по фото карточки
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector; //*записали селектор в приватное поле
