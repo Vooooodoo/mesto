@@ -10,18 +10,19 @@ export class PopupWithForm extends Popup { //*расширили родител�
   } //*расширили конструктор за счёт добавления нового свойства this._handleSubmit
 
   _getInputValues() {
-    const inputList = Array.from(this._popup.querySelectorAll('.popup__input-text')); //*сделали массив из всех инпутов внутри формы
-    const inputValues = [];
+    this._inputList = this._popup.querySelectorAll('.popup__input-text'); //*нашли все инпуты внутри формы
 
-    inputList.forEach((item) => {
-      inputValues.push(item.value);
-    });
+    this._formValues = {}; //*создали пустой объект
 
-    return inputValues;
+    this._inputList.forEach(item => {
+      this._formValues[item.name] = item.value;
+    }); //*добавили в пустой объект значения всех инпутов
+
+    return this._formValues; //*вернули объект со значениями
   }
 
   _resetInputErrors() {
-    const inputList = Array.from( this._popup.querySelectorAll('.popup__input-text')); //*сделали массив из всех инпутов внутри формы
+    const inputList = Array.from( this._popup.querySelectorAll('.popup__input-text')); //*сделали массив из всех
 
     inputList.forEach(item => {
       const inputErrorElement = document.querySelector(`#${item.id}-error`);
@@ -50,6 +51,10 @@ export class PopupWithForm extends Popup { //*расширили родител�
   setEventListeners() {
     super.setEventListeners(); //*добавили лисенер на кнопку закрытия попапа, используя родительский метод setEventListeners()
 
-    this._popup.addEventListener('submit', this._handleSubmit); //*добавили лисенер на кнопку сабмита
+    this._popup.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+
+      this._handleSubmit(this._getInputValues());
+    }); //*добавили лисенер на кнопку сабмита
   }
 }

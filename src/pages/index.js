@@ -70,9 +70,7 @@ const profileUserInfo = new UserInfo({
 
 //PopupWithForm
 const editPopup = new PopupWithForm('#edit-popup', {
-  handleSubmit: (evt) => {
-    evt.preventDefault();
-
+  handleSubmit: () => {
     profileUserInfo.setUserInfo();
     editPopup.close();
     // removeEscapeListener(editPopup);
@@ -80,9 +78,7 @@ const editPopup = new PopupWithForm('#edit-popup', {
 });
 
 const addPopup = new PopupWithForm('#add-popup', {
-  handleSubmit: (evt) => {
-    evt.preventDefault();
-
+  handleSubmit: () => {
     const newCardData = {
       name: addPopupNameInput.value,
       link: addPopupLinkInput.value
@@ -112,7 +108,7 @@ const addForm = new FormValidator(enableValidationArgs, '#add-popup');
 //Section
 const section = new Section({
   data: initialCards, //*массив объектов с данными будущей карточки
-  renderer: (cardData) => { //*в качестве аргумента передали объект с данными карточки - из массива initialCards
+  renderer: (cardData) => { //*объект, который мы передали при вызове функции this._renderer в классе Section, оказался на месте параметра cardData
     const card = new Card(cardData, '#card-template', {
       handleCardClick: (evt) => {
         photoPopup.open(evt);
