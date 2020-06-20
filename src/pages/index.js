@@ -164,29 +164,3 @@ profileAddButton.addEventListener('click', () => {
 });
 
 addPopup.setEventListeners();
-
-
-
-
-
-
-// profile.addEventListener('click', (evt) => {
-//   const parentPopup = evt.target.closest('.popup'); //*попап-родитель элемента по которому произошел клик
-
-//   if (evt.target.classList.contains('popup')) { //*если клик произошел по родителю - закрыть его
-//     resetInputErrors(evt.target); //*сбросили залипшие ошибки валидации
-//     closePopup(evt.target);
-//     removeEscapeListener(evt.target);
-//   } else if (evt.target.classList.contains('popup__close')) { //*если клик произошел по дочернему кресту - закрыть родителя
-//     resetInputErrors(parentPopup);
-//     closePopup(parentPopup);
-//     removeEscapeListener(parentPopup);
-//   }
-// }); //*повешали один лисенер на родителя и за счет делегирования отслеживаем событие на дочерних элементах
-
-//photo-popup close listener
-// photoPopup.addEventListener('click', (evt) => {
-//   if (evt.target.classList.contains('photo-popup') || evt.target.classList.contains('photo-popup__close')) {
-//     closePopup(photoPopup);
-//   }
-// });

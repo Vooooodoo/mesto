@@ -11,10 +11,13 @@ export class PopupWithForm extends Popup { //*расширили родител�
 
   _getInputValues() {
     const inputList = Array.from(this._popup.querySelectorAll('.popup__input-text')); //*сделали массив из всех инпутов внутри формы
+    const inputValues = [];
 
     inputList.forEach((item) => {
-      item.value = '';
+      inputValues.push(item.value);
     });
+
+    return inputValues;
   }
 
   _resetInputErrors() {
@@ -37,11 +40,13 @@ export class PopupWithForm extends Popup { //*расширили родител�
   }
 
   close() {
-    const form = this._popup.querySelector('.popup__container');
+    const form = this._popup.querySelector('.popup__container'); //*можно просто метод reser() на форму заюзать, чтобы поля сбросить но не по ТЗ походу
 
-    // super.close();  //*метод close() родительского класса
+    super.close();  //*метод close() родительского класса
     this._resetInputErrors(); //*сбросили залипшие ошибки валидации
-    this._getInputValues(); //*cбросили поля формы
+    // this._getInputValues().forEach(item => {
+    //   console.log(typeof(item));
+    // }); //*cбросили поля формы
   } //*перегрузили родительский метод close() за счёт полиморфизма, теперь у одноименного метода класса PopupWithForm своя реализация и расширенная функциональность
 
   setEventListeners() {

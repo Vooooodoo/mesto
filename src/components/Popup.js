@@ -8,6 +8,11 @@ export class Popup {
 
   open() {
     this._popup.classList.add('popup_opened');
+
+    document.addEventListener('keydown', (evt) => {
+      this._handleEscClose(evt);
+    }); //todo изначально в ТЗ надо было этот лисенер добавлять при открытии попапа и сносить при закрытии
+    //todo надо как то создасть именованную функцию-обработчик, чтобы была возможность снести лисенер (через функциональное выражение его снести не получится)
   }
 
   close() {
@@ -18,21 +23,14 @@ export class Popup {
   _handleEscClose(evt) {
     if (evt.key === 'Escape') {
       this.close();
-      // resetInputErrors(editPopup); //*сбросили залипшие ошибки валидации
-      // removeEscapeListener(editPopup);
     }
   }
 
   setEventListeners() {
-    const popupCloseButton = this._popup.querySelector('.popup__close');
-
-    popupCloseButton.addEventListener('click', () => {
-      this.close();
-    });
-
-    document.addEventListener('keydown', (evt) => {
-      this._handleEscClose(evt);
-    }); //todo изначально в ТЗ надо было этот лисенер добавлять при открытии попапа и сносить при закрытии
-    //todo надо как то создасть именованную функцию-обработчик, чтобы была возможность снести лисенер (через функциональное выражение его снести не получится)
+    this._popup.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) { //*если клик произошел по оверлею или иконке закрытия - закрыть попап
+        this.close();
+      }
+    }); //*повешали один лисенер на родителя и за счет делегирования отслеживаем событие на дочерних элементах
   }
 }
