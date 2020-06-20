@@ -16,7 +16,7 @@ export class PopupWithForm extends Popup { //*расширили родител�
 
     this._inputList.forEach(item => {
       this._formValues[item.name] = item.value;
-    }); //*добавили в пустой объект значения всех инпутов
+    }); //*добавили в пустой объект значения всех инпутов, ключами будут значения атрибутов name
 
     return this._formValues; //*вернули объект со значениями
   }
@@ -54,7 +54,7 @@ export class PopupWithForm extends Popup { //*расширили родител�
     this._popup.addEventListener('submit', (evt) => {
       evt.preventDefault();
 
-      this._handleSubmit(this._getInputValues());
+      this._handleSubmit(this._getInputValues()); //*результат работы _getInputValues окажется на месте параметра formData при описании обработчика в index.js
     }); //*добавили лисенер на кнопку сабмита
   }
 }

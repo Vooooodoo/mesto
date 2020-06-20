@@ -29,8 +29,6 @@ const enableValidationArgs = {
 //form-popups submit vars
 const editPopupNameInput = editPopupForm.elements.name;
 const editPopupAboutInput = editPopupForm.elements.about;
-const addPopupNameInput = addPopupForm.elements.name;
-const addPopupLinkInput = addPopupForm.elements.link;
 
 //render cards vars
 const cardsList = document.querySelector('.cards__list');
@@ -78,17 +76,12 @@ const editPopup = new PopupWithForm('#edit-popup', {
 });
 
 const addPopup = new PopupWithForm('#add-popup', {
-  handleSubmit: () => {
-    const newCardData = {
-      name: addPopupNameInput.value,
-      link: addPopupLinkInput.value
-    } //*создали новый объект с данными полей ввода формы
-
-    const card = new Card(newCardData, '#card-template', {
+  handleSubmit: (formData) => {
+    const card = new Card(formData, '#card-template', {
       handleCardClick: (evt) => {
         photoPopup.open(evt);
       }
-    }); //*cоздали новый экземпляр класса Card с данными из полей ввода
+    }); //*cоздали новый экземпляр класса Card с данными из полей ввода, которые получены с помощью приватного метода _getInputValues() класса PopupWithForm
     const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
     prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
