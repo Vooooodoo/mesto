@@ -1,7 +1,8 @@
+@import url(./_type/popup__close_type_form-popup.css);
+@import url(./_type/popup__close_type_photo-popup.css);
+
 .popup__close {
   position: absolute;
-  top: -28.3px;
-  right: -28.3px;
   width: 28.3px;
   height: 28.3px;
   padding: 0;
@@ -27,8 +28,6 @@
 	.popup__close {
     width: 21.3px;
     height: 21.3px;
-    top: -21.3px;
-    right: -21.3px;
     background-size: 37px;
   }
 }

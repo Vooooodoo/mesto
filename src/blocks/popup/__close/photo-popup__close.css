@@ -1,7 +1,5 @@
 .photo-popup__close {
   position: absolute;
-  top: -10px;
-  right: -35px;
   width: 28.3px;
   height: 28.3px;
   padding: 0;
@@ -27,8 +25,6 @@
 	.photo-popup__close {
     width: 21.3px;
     height: 21.3px;
-    top: -2px;
-    right: -27px;
     background-size: 37px;
   }
 }
