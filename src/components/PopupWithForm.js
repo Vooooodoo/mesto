@@ -42,7 +42,7 @@ export class PopupWithForm extends Popup { //*расширили родител�
   }
 
   close() {
-    const form = this._popup.querySelector('.popup__container');
+    const form = this._popup.querySelector('.popup__form-container');
 
     super.close();  //*метод close() родительского класса
     this._resetInputErrors(); //*сбросили залипшие ошибки валидации

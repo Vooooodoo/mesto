@@ -17,7 +17,5 @@ export class PopupWithImage extends Popup {
     photoPopupTitle.textContent = evt.target.alt.slice(0, -1);
 
     super.open();
-
-    console.log(evt.target.alt.slice(0, -1));
   }
 }
