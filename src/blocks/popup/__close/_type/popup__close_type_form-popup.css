@@ -4,8 +4,8 @@
 }
 
 @media all and (max-width: 400px) {
-	.popup__close_type_from-popup {
-    top: -21.3px;
-    right: -21.3px;
+	.popup__close_type_form-popup {
+    top: -20.3px;
+    right: -20.3px;
   }
 }
