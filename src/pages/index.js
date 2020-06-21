@@ -133,7 +133,7 @@ editForm.enableValidation();
 addForm.enableValidation();
 
 //LISTENERS
-//form-popups open/close listeners
+//edit-popup open/close listeners
 profileEditButton.addEventListener('click', () => {
   editPopup.open();
   editPopup.disableSubmitButton(); //*деактивировали кнопку сабмита
@@ -142,9 +142,13 @@ profileEditButton.addEventListener('click', () => {
 
 editPopup.setEventListeners();
 
+//add-popup open/close listeners
 profileAddButton.addEventListener('click', () => {
   addPopup.open();
   addPopup.disableSubmitButton();
 });
 
 addPopup.setEventListeners();
+
+//photo-popup close listeners
+photoPopup.setEventListeners();
