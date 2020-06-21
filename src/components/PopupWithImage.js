@@ -14,7 +14,7 @@ export class PopupWithImage extends Popup {
 
     photoPopupPhoto.src = evt.target.src;
     photoPopupPhoto.alt = evt.target.alt;
-    photoPopupTitle.textContent = evt.target.alt.slice(0, -1);
+    photoPopupTitle.textContent = evt.target.alt.slice(0, -1); //*удалили последний символ у alt текста
 
     super.open();
   }

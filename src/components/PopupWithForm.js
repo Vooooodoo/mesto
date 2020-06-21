@@ -6,7 +6,7 @@ import { Popup } from './Popup.js';
 export class PopupWithForm extends Popup { //*расширили родительский класс Popup новым функционалом за счёт наследования
   constructor(popupSelector, { handleSubmit }) {
     super(popupSelector); //*ключевое слово, которое возвращает объект с унаследованными свойствами и методами родительского класса
-    this._handleSubmit = handleSubmit; //*колбэк-функция, которая вызывается при сабмите формы (функция-обработчик сабмита формы)
+    this._handleSubmit = handleSubmit; //*колбэк-функция, которая вызывается при сабмите формы (обработчик сабмита формы)
   } //*расширили конструктор за счёт добавления нового свойства this._handleSubmit
 
   _getInputValues() {
@@ -22,7 +22,7 @@ export class PopupWithForm extends Popup { //*расширили родител�
   }
 
   _resetInputErrors() {
-    const inputList = Array.from( this._popup.querySelectorAll('.popup__input-text')); //*сделали массив из всех
+    const inputList = Array.from( this._popup.querySelectorAll('.popup__input-text')); //*сделали массив из всех инупутов
 
     inputList.forEach(item => {
       const inputErrorElement = document.querySelector(`#${item.id}-error`);
