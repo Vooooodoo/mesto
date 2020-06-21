@@ -9,8 +9,8 @@ export class PopupWithImage extends Popup {
   }
 
   open(evt) {
-    const photoPopupPhoto = this._popup.querySelector('.photo-popup__photo');
-    const photoPopupTitle = this._popup.querySelector('.photo-popup__title');
+    const photoPopupPhoto = this._popup.querySelector('.popup__photo');
+    const photoPopupTitle = this._popup.querySelector('.popup__photo-title');
 
     photoPopupPhoto.src = evt.target.src;
     photoPopupPhoto.alt = evt.target.alt;
