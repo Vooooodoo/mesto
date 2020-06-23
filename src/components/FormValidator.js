@@ -63,6 +63,12 @@ export class FormValidator {
     }); //*прошлись по массиву инпутов и каждому повешали лисенер с индивидуальным обработчиком
   }
 
+  resetInputErrors() {
+    this._inputList.forEach(item => {
+      this._hideInputError(item);
+    }); //*прошлись по массиву и для каждого инпута скрыли ошибки
+  }
+
   disableSubmitButton() {
     this._submitButtonElement.classList.add('popup__submit_invalid');
     this._submitButtonElement.disabled = true;

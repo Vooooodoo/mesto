@@ -105,6 +105,7 @@ addForm.enableValidation();
 //edit-popup open/close listeners
 profileEditButton.addEventListener('click', () => {
   editPopup.open();
+  editForm.resetInputErrors(); //*сбросили залипшие ошибки валидации
   editForm.disableSubmitButton(); //*деактивировали кнопку сабмита
   fillUserInfo(); //*при открытии заполнили инпуты в соответствии с ТЗ
 });
@@ -114,6 +115,7 @@ editPopup.setEventListeners();
 //add-popup open/close listeners
 profileAddButton.addEventListener('click', () => {
   addPopup.open();
+  addForm.resetInputErrors();
   addForm.disableSubmitButton();
 });
 
