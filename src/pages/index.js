@@ -73,7 +73,7 @@ const section = new Section({
 );
 
 //FUNCTIONS
-//form-popups open/close functions
+//form-popups open/close function
 function fillUserInfo() {
   editPopupNameInput.value = profileUserInfo.getUserInfo().name;
   editPopupAboutInput.value = profileUserInfo.getUserInfo().about;
