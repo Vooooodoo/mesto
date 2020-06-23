@@ -35,13 +35,6 @@ export class PopupWithForm extends Popup { //*расширили родител�
     }); //*прошлись по массиву и для каждого инпута скрыли ошибки
   }
 
-  disableSubmitButton() {
-    const submitButtonElement = this._popup.querySelector('.popup__submit');
-
-    submitButtonElement.classList.add('popup__submit_invalid');
-    submitButtonElement.disabled = true;
-  }
-
   close() {
     super.close();  //*метод close() родительского класса
     this._resetInputErrors(); //*сбросили залипшие ошибки валидации

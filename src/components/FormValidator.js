@@ -63,6 +63,11 @@ export class FormValidator {
     }); //*прошлись по массиву инпутов и каждому повешали лисенер с индивидуальным обработчиком
   }
 
+  disableSubmitButton() {
+    this._submitButtonElement.classList.add('popup__submit_invalid');
+    this._submitButtonElement.disabled = true;
+  }
+
   enableValidation() {
     this._element = document.querySelector(this._formSelector);
     this._inputList = Array.from(this._element.querySelectorAll(this._inputSelector));
