@@ -13,11 +13,18 @@ export class Card {
     const cardTemplate = document.querySelector(this._cardSelector).content; //*нашли шаблон карточки
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true); //*создали пустого клона элемента card внутри шаблона карточки
 
-    this._element = cardElement; //*записали пустого клона в приватное поле _element, так у других элементов появится к нему доступ
+    this._element = cardElement; //*записали пустого клона в приватное поле _element, так у других элементов появился к нему доступ
   }
 
+  _getComponents() {
+    this._cardLike = this._element.querySelector('.card__like');
+    this._cardTrash = this._element.querySelector('.card__trash');
+    this._cardPhoto = this._element.querySelector('.card__photo');
+    this._cardTitle = this._element.querySelector('.card__title');
+  } //*нашли один раз элементы карточки и записали их в приватные поля, так у всех методов этого класса появился к ним доступ
+
   _toggleCardLike() {
-    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+    this._cardLike.classList.toggle('card__like_active');
   }
 
   _deleteCard() {
@@ -25,24 +32,25 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.card__like').addEventListener('click', () => {
+    this._cardLike.addEventListener('click', () => {
       this._toggleCardLike();
     });
 
-    this._element.querySelector('.card__trash').addEventListener('click', () => {
+    this._cardTrash.addEventListener('click', () => {
       this._deleteCard();
     });
 
-    this._element.querySelector('.card__photo').addEventListener('click', this._handleCardClick); //*функция-обработчик описывается при создании экземпляра класса
+    this._cardPhoto.addEventListener('click', this._handleCardClick); //*функция-обработчик описывается при создании экземпляра класса
   }
 
   createCard() {
     this._getTemplateClone(); //*создали пустого клона
+    this._getComponents(); //*нашли элементы клона
     this._setEventListeners(); //*добавили лисенеры на элементы клона
 
-    this._element.querySelector('.card__photo').src = this._link;
-    this._element.querySelector('.card__photo').alt = `${this._name}.`;
-    this._element.querySelector('.card__title').textContent = this._name;
+    this._cardPhoto.src = this._link;
+    this._cardPhoto.alt = `${this._name}.`;
+    this._cardTitle.textContent = this._name;
     //*вставили клону ссылку на фото и заголовок-альтернативный текст
 
 
