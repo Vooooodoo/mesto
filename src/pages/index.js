@@ -45,8 +45,8 @@ const editPopup = new PopupWithForm('#edit-popup', {
 const addPopup = new PopupWithForm('#add-popup', {
   handleSubmit: (formData) => {
     const card = new Card(formData, '#card-template', {
-      handleCardClick: (evt) => {
-        photoPopup.open(evt);
+      handleCardClick: (name, link) => {
+        photoPopup.open(name, link);
       }
     }); //*cоздали новый объект-экземпляр класса Card с данными из полей ввода, которые получены с помощью приватного метода _getInputValues() класса PopupWithForm
     const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
@@ -69,9 +69,9 @@ const section = new Section({
   data: initialCards, //*массив объектов с данными будущей карточки
   renderer: (cardData) => { //*объект, который мы передали при вызове функции this._renderer в классе Section, оказался на месте параметра cardData
     const card = new Card(cardData, '#card-template', {
-      handleCardClick: (evt) => {
-        photoPopup.open(evt);
-      }
+      handleCardClick: (name, link) => {
+        photoPopup.open(name, link);
+      } //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
     });
     const cardElement = card.createCard();
 

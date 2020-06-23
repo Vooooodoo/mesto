@@ -40,7 +40,9 @@ export class Card {
       this._deleteCard();
     });
 
-    this._cardPhoto.addEventListener('click', this._handleCardClick); //*функция-обработчик описывается при создании экземпляра класса
+    this._cardPhoto.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link); //*функция-обработчик описывается при создании экземпляра класса
+    });
   }
 
   createCard() {

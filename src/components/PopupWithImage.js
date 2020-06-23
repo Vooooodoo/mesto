@@ -8,13 +8,13 @@ export class PopupWithImage extends Popup {
     super(popupSelector);
   }
 
-  open(evt) {
+  open(name, link) { //*добавили два параметра, аргументы получим из класса Card, при вызове этого метода в index.js, как тела колбэк-функции handleCardClick
     const photoPopupPhoto = this._popup.querySelector('.popup__photo');
     const photoPopupTitle = this._popup.querySelector('.popup__photo-title');
 
-    photoPopupPhoto.src = evt.target.src;
-    photoPopupPhoto.alt = evt.target.alt;
-    photoPopupTitle.textContent = evt.target.alt.slice(0, -1); //*удалили последний символ у alt текста
+    photoPopupPhoto.src = link;
+    photoPopupPhoto.alt = `${name}.`;
+    photoPopupTitle.textContent = name;
 
     super.open();
   }
