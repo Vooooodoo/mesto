@@ -16,11 +16,8 @@ export class UserInfo {
     return userInfo; //*вернули объект с данными пользователя
   }
 
-  setUserInfo() {
-    const nameInput = document.forms.edit.elements.name;
-    const aboutInput = document.forms.edit.elements.about;
-
-    this._nameSelector.textContent = nameInput.value;
-    this._aboutSelector.textContent = aboutInput.value;
-  } //*публичный метод, который принимает из формы новые данные пользователя и добавляет их на страницу
+  setUserInfo(formData) {
+    this._nameSelector.textContent = formData.name;
+    this._aboutSelector.textContent = formData.about;
+  } //*публичный метод, который принимает из формы новые данные пользователя и добавляет их на страницу, параметр formData связан с обработчиком handleSubmit класса PopupWithForm
 }
