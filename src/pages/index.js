@@ -9,14 +9,23 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
 import {
-  profileEditButton,
-  profileAddButton,
   enableValidationArgs,
-  editPopupNameInput,
-  editPopupAboutInput,
-  cardsList,
   initialCards
 } from '../utils/constants.js';
+
+//DOM-ELEMENTS
+//form-popus open/close elements
+const editPopupForm = document.forms.edit;
+
+const profileEditButton = document.querySelector('.profile__edit-button');
+const profileAddButton = document.querySelector('.profile__add-button');
+
+//form-popups submit elements
+const editPopupNameInput = editPopupForm.elements.name;
+const editPopupAboutInput = editPopupForm.elements.about;
+
+//render cards element
+const cardsList = document.querySelector('.cards__list');
 
 //INSTANCES
 //UserInfo
