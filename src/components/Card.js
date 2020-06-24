@@ -16,7 +16,7 @@ export class Card {
     this._element = cardElement; //*записали пустого клона в приватное поле _element, так у других элементов появился к нему доступ
   }
 
-  _getComponents() {
+  _setComponents() {
     this._cardLike = this._element.querySelector('.card__like');
     this._cardTrash = this._element.querySelector('.card__trash');
     this._cardPhoto = this._element.querySelector('.card__photo');
@@ -47,7 +47,7 @@ export class Card {
 
   createCard() {
     this._getTemplateClone(); //*создали пустого клона
-    this._getComponents(); //*нашли элементы клона
+    this._setComponents(); //*нашли элементы клона
     this._setEventListeners(); //*добавили лисенеры на элементы клона
 
     this._cardPhoto.src = this._link;
