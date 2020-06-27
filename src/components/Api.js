@@ -1,15 +1,15 @@
 export class Api {
-  constructor({ baseUrl }) {
+  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
+    this._headers = headers;
   }
 
   _fetch(url, options) {
     if (options.body) {
-      options.headers = {
-        'Content-Type': 'application/json'
-      },
       options.body = JSON.stringify(options.body)
     }
+
+    options.headers = this._headers;
 
     return fetch(this._baseUrl + url, options) //*метод fetch создаёт запрос на сервер и возвращает его ответ, вторым аргументом передали объект опций
       .then((res) => {
@@ -29,12 +29,9 @@ export class Api {
       }); //*если что-то пошло не так, — например, отвалился интернет — сработает catch
   }
 
-  test() {
-    this._fetch('/users/me', {
+  get() {
+    this._fetch('/cards', {
       method: 'GET',
-      headers: {
-        authorization: 'da3ea697-f11c-42f5-89fc-193a981f7278' //*личный авторизационный токен
-      }
     });
   }
 

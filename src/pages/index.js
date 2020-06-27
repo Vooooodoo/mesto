@@ -1,3 +1,5 @@
+//!вернуть флаг --watch в тело скрипта в файле package.json
+
 //FILES FOR WEBPACK
 import './index.css'; //*добавили импорт главного файла стилей
 
@@ -129,7 +131,11 @@ photoPopup.setEventListeners();
 
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-12'
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-12',
+  headers: {
+    authorization: 'da3ea697-f11c-42f5-89fc-193a981f7278',
+    'Content-Type': 'application/json'
+  }
 });
 
-api.test();
+api.get();
