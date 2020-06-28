@@ -16,8 +16,8 @@ export class UserInfo {
     return userInfo; //*вернули объект с данными пользователя
   }
 
-  setUserInfo(formData) {
-    this._nameSelector.textContent = formData.name;
-    this._aboutSelector.textContent = formData.about;
-  } //*публичный метод, который принимает из формы новые данные пользователя и добавляет их на страницу, параметр formData связан с обработчиком handleSubmit класса PopupWithForm
+  setUserInfo(data) {
+    this._nameSelector.textContent = data.name;
+    this._aboutSelector.textContent = data.about;
+  } //*публичный метод, который принимает данные пользователя и добавляет их на страницу, параметр data связан с обработчиком handleSubmit класса PopupWithForm
 }

@@ -1,4 +1,5 @@
-//!вернуть флаг --watch в тело скрипта в файле package.json
+//todo вернуть флаг --watch в тело скрипта в файле package.json
+//todo удалить константу initialCards из constants.js
 
 //FILES FOR WEBPACK
 import './index.css'; //*добавили импорт главного файла стилей
@@ -12,8 +13,7 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
 import {
-  enableValidationArgs,
-  initialCards
+  enableValidationArgs
 } from '../utils/constants.js';
 
 //DOM-ELEMENTS
@@ -76,28 +76,6 @@ const api = new Api({
   }
 });
 
-//Section
-api.get('/cards')
-  .then((result) => { //*eсли запрос выполнен успешно, сработает обработчик then с описанием последующих действий
-    const section = new Section({
-        data: result, //*result - это массив, полученный с сервера, в котором хранятся объекты с данными карточек
-        renderer: (cardData) => { //*объект, который мы передали при вызове функции this._renderer в классе Section, оказался на месте параметра cardData
-          const card = new Card(cardData, '#card-template', {
-            handleCardClick: (name, link) => {
-              photoPopup.open(name, link);
-            } //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
-          });
-          const cardElement = card.createCard();
-
-          section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
-        },
-      },
-      '.cards__list' //*передали селектор контейнера для карточек в качестве аргумента
-    );
-
-    section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки всех мест
-  })
-
 //FUNCTIONS
 //form-popups open/close function
 function fillUserInfo() {
@@ -114,6 +92,33 @@ function prependNewCard(card, container) {
 //form-popups validation method
 editForm.enableValidation();
 addForm.enableValidation();
+
+//API methods
+api.get('/users/me')
+  .then((result) => { //*eсли запрос выполнен успешно, сработает обработчик then с описанием последующих действий
+    profileUserInfo.setUserInfo(result); //*result - это объект с данными пользователя
+  })
+
+api.get('/cards')
+.then((result) => {
+  const section = new Section({
+      data: result, //*result - это массив, полученный с сервера, в котором хранятся объекты с данными карточек
+      renderer: (cardData) => { //*объект, который мы передали при вызове функции this._renderer в классе Section, оказался на месте параметра cardData
+        const card = new Card(cardData, '#card-template', {
+          handleCardClick: (name, link) => {
+            photoPopup.open(name, link);
+          } //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
+        });
+        const cardElement = card.createCard();
+
+        section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
+      },
+    },
+    '.cards__list' //*передали селектор контейнера для карточек в качестве аргумента
+  );
+
+  section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки всех мест
+})
 
 //LISTENERS
 //edit-popup open/close listeners

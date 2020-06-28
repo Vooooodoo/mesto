@@ -1,3 +1,6 @@
+//*класс Api необходим для работы с API и запросов к серверу
+
+//CLASS
 export class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -32,25 +35,4 @@ export class Api {
   }
 
 
-  getInitialCards() {
-    const initialCards = [];
-
-    this._fetch('/cards', {
-      method: 'GET',
-    })
-    .then((result) => {
-      result.forEach((item) => { //*result - это массив, полученный с сервера, в котором хранятся объекты с данными карточек
-        const cards = {
-          name: item.name,
-          link: item.link
-        }
-
-        initialCards.push(cards);
-      });
-    }) //*eсли запрос выполнен успешно, сработает обработчик then
-
-    return initialCards;
-  }
-
-  // другие методы работы с API
 }
