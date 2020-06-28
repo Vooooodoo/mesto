@@ -76,44 +76,27 @@ const api = new Api({
   }
 });
 
-const init = [];
-
-api.get('/cards')
-  .then((result) => { //*eсли запрос выполнен успешно, сработает обработчик then
-    result.forEach((item) => { //*result - это массив, полученный с сервера, в котором хранятся объекты с данными карточек
-      const cards = {
-        name: item.name,
-        link: item.link
-      }
-
-      init.push(cards);
-    });
-  })
-
-  console.log(init);
-
 //Section
-const section = new Section({
-  data: init, //*массив объектов с данными будущей карточки
-  renderer: (cardData) => { //*объект, который мы передали при вызове функции this._renderer в классе Section, оказался на месте параметра cardData
-    const card = new Card(cardData, '#card-template', {
-      handleCardClick: (name, link) => {
-        photoPopup.open(name, link);
-      } //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
-    });
-    const cardElement = card.createCard();
+api.get('/cards')
+  .then((result) => { //*eсли запрос выполнен успешно, сработает обработчик then с описанием последующих действий
+    const section = new Section({
+        data: result, //*result - это массив, полученный с сервера, в котором хранятся объекты с данными карточек
+        renderer: (cardData) => { //*объект, который мы передали при вызове функции this._renderer в классе Section, оказался на месте параметра cardData
+          const card = new Card(cardData, '#card-template', {
+            handleCardClick: (name, link) => {
+              photoPopup.open(name, link);
+            } //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
+          });
+          const cardElement = card.createCard();
 
-    section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
-  },
-},
-'.cards__list' //*передали селектор контейнера для карточек в качестве аргумента
-);
+          section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
+        },
+      },
+      '.cards__list' //*передали селектор контейнера для карточек в качестве аргумента
+    );
 
-
-
-
-
-
+    section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки всех мест
+  })
 
 //FUNCTIONS
 //form-popups open/close function
@@ -128,9 +111,6 @@ function prependNewCard(card, container) {
 }
 
 //METHODS
-//default cards render
-section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки всех мест
-
 //form-popups validation method
 editForm.enableValidation();
 addForm.enableValidation();
