@@ -45,7 +45,7 @@ const editPopup = new PopupWithForm('#edit-popup', {
     api.patch('/users/me', {
       name: profileUserInfo.getUserInfo().name,
       about: profileUserInfo.getUserInfo().about
-    }) //*обновили информацию на сервере
+    }); //*обновили информацию на сервере
 
     editPopup.close();
   }
@@ -103,7 +103,7 @@ addForm.enableValidation();
 api.get('/users/me')
   .then((result) => { //*eсли запрос выполнен успешно, сработает обработчик then с описанием последующих действий
     profileUserInfo.setUserInfo(result); //*result - это объект на сервере с информацией о пользователе
-  }) //*получили с сервера информацию и добавили её на страницу
+  }); //*получили с сервера информацию и добавили её на страницу
 
 api.get('/cards')
   .then((result) => {
@@ -124,7 +124,7 @@ api.get('/cards')
     );
 
     section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки всех мест
-  })
+  });
 
 //LISTENERS
 //edit-popup open/close listeners
