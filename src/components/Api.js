@@ -9,7 +9,7 @@ export class Api {
 
   _fetch(url, options) {
     if (options.body) {
-      options.body = JSON.stringify(options.body)
+      options.body = JSON.stringify(options.body);
     }
 
     options.headers = this._headers;
@@ -32,7 +32,12 @@ export class Api {
     return this._fetch(url, {
       method: 'GET',
     });
-  }
+  } //*метод для получения данных с сервера
 
-
+  patch(url, body) {
+    return this._fetch(url, {
+      method: 'PATCH',
+      body
+    });
+  } //*метод для обновления сущностей, уже существующих на сервере, например информации о пользователе
 }
