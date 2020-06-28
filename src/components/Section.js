@@ -12,7 +12,7 @@ export class Section {
     for (let i = 0; i <= 5; i++) {
       this._renderer(this._initialArray[i])
     }
-  } //*метод рэндера элементов
+  } //*метод рэндера первых шести элементов в массиве
 
   addItem(element) {
     this._container.append(element);
