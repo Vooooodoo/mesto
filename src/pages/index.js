@@ -67,9 +67,34 @@ const photoPopup = new PopupWithImage('#photo-popup');
 const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
 const addForm = new FormValidator(enableValidationArgs, '#add-popup');
 
+//Api
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-12',
+  headers: {
+    authorization: 'da3ea697-f11c-42f5-89fc-193a981f7278',
+    'Content-Type': 'application/json'
+  }
+});
+
+const init = [];
+
+api.get('/cards')
+  .then((result) => { //*eсли запрос выполнен успешно, сработает обработчик then
+    result.forEach((item) => { //*result - это массив, полученный с сервера, в котором хранятся объекты с данными карточек
+      const cards = {
+        name: item.name,
+        link: item.link
+      }
+
+      init.push(cards);
+    });
+  })
+
+  console.log(init);
+
 //Section
 const section = new Section({
-  data: initialCards, //*массив объектов с данными будущей карточки
+  data: init, //*массив объектов с данными будущей карточки
   renderer: (cardData) => { //*объект, который мы передали при вызове функции this._renderer в классе Section, оказался на месте параметра cardData
     const card = new Card(cardData, '#card-template', {
       handleCardClick: (name, link) => {
@@ -83,6 +108,12 @@ const section = new Section({
 },
 '.cards__list' //*передали селектор контейнера для карточек в качестве аргумента
 );
+
+
+
+
+
+
 
 //FUNCTIONS
 //form-popups open/close function
@@ -126,16 +157,3 @@ addPopup.setEventListeners();
 
 //photo-popup close listeners
 photoPopup.setEventListeners();
-
-
-
-
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-12',
-  headers: {
-    authorization: 'da3ea697-f11c-42f5-89fc-193a981f7278',
-    'Content-Type': 'application/json'
-  }
-});
-
-api.get();
