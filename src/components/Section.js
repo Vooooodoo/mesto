@@ -9,9 +9,9 @@ export class Section {
   }
 
   renderItems() {
-    this._initialArray.forEach((item) => {
-      this._renderer(item);
-    });
+    for (let i = 0; i <= 5; i++) {
+      this._renderer(this._initialArray[i])
+    }
   } //*метод рэндера элементов
 
   addItem(element) {
