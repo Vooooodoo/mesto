@@ -1,5 +1,4 @@
 //todo вернуть флаг --watch в тело скрипта в файле package.json
-//todo удалить константу initialCards из constants.js
 
 //FILES FOR WEBPACK
 import './index.css'; //*добавили импорт главного файла стилей
