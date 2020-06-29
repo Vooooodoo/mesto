@@ -39,13 +39,14 @@ const profileUserInfo = new UserInfo({
 
 //PopupWithForm
 const editPopup = new PopupWithForm('#edit-popup', {
-  handleSubmit: (formData) => {
-    profileUserInfo.setUserInfo(formData); //*добавили на страницу информацию о пользователе, полученную из формы
-
+  handleSubmit: (formData) => { //*formData - объект с данными формы
     api.patch('/users/me', {
-      name: profileUserInfo.getUserInfo().name,
-      about: profileUserInfo.getUserInfo().about
-    }); //*обновили информацию на сервере
+      name: formData.name,
+      about: formData.about
+    }) //*обновили на сервере информацию о пользователе, полученную из формы
+      .then((result) => { //*eсли запрос выполнен успешно, сработает обработчик then с описанием последующих действий
+        profileUserInfo.setUserInfo(result); //*result - это объект на сервере с информацией о пользователе
+      }); //*получили обратно информацию с сервера и добавили её на страницу
 
     editPopup.close();
   }
