@@ -39,7 +39,7 @@ const profileUserInfo = new UserInfo({
 
 //PopupWithForm
 const editPopup = new PopupWithForm('#edit-popup', {
-  handleSubmit: (formData) => { //*formData - объект с данными формы
+  handleSubmit: (formData) => { //*formData - объект с данными формы, которые получены с помощью приватного метода _getInputValues() класса PopupWithForm
     api.patch('/users/me', {
       name: formData.name,
       about: formData.about
@@ -54,14 +54,20 @@ const editPopup = new PopupWithForm('#edit-popup', {
 
 const addPopup = new PopupWithForm('#add-popup', {
   handleSubmit: (formData) => {
-    const card = new Card(formData, '#card-template', {
-      handleCardClick: (name, link) => {
-        photoPopup.open(name, link);
-      }
-    }); //*cоздали новый объект-экземпляр класса Card с данными из полей ввода, которые получены с помощью приватного метода _getInputValues() класса PopupWithForm
-    const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+    api.post('/cards', {
+      name: formData.name,
+      link: formData.link
+    })
+      .then((result) => {
+        const card = new Card(result, '#card-template', {
+          handleCardClick: (name, link) => {
+            photoPopup.open(name, link);
+          }
+        }); //*cоздали новый объект-экземпляр класса Card с данными с соответствующего объекта на сервере
+        const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
-    prependNewCard(cardElement, cardsList); //*добавили новую карточку, с данными от пользователя, в начало разметки списка
+        prependNewCard(cardElement, cardsList); //*добавили новую карточку, в начало разметки списка
+      });
 
     addPopup.close();
   }
