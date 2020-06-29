@@ -5,6 +5,7 @@ export class Card {
   constructor(data, cardSelector, { handleCardClick }) { //*передали данные в виде объекта, селектор шаблона(на случай, если надо будет создать карточку по другому шаблону) и хэндлер клика по фото карточки
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes;
     this._cardSelector = cardSelector; //*записали селектор в приватное поле
     this._handleCardClick = handleCardClick; //*колбэк-функция, которая вызывается при клике на фото карточки, описывается при создании экземпляра класса Card
   }
@@ -21,6 +22,7 @@ export class Card {
     this._cardTrash = this._element.querySelector('.card__trash');
     this._cardPhoto = this._element.querySelector('.card__photo');
     this._cardTitle = this._element.querySelector('.card__title');
+    this._cardLikeQuantity = this._element.querySelector('.card__like-quantity');
   } //*нашли один раз элементы карточки и записали их в приватные поля, так у всех методов этого класса появился к ним доступ
 
   _toggleCardLike() {
@@ -53,6 +55,7 @@ export class Card {
     this._cardPhoto.src = this._link;
     this._cardPhoto.alt = `${this._name}.`;
     this._cardTitle.textContent = this._name;
+    this._cardLikeQuantity.textContent = this._likes.length;
     //*вставили клону ссылку на фото и заголовок-альтернативный текст
 
 
