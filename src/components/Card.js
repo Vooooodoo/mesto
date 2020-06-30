@@ -41,6 +41,8 @@ export class Card {
 
     this._cardTrash.addEventListener('click', () => {
       this._handleCardTrashClick();
+
+      this._deleteCard();
     });
 
     this._cardPhoto.addEventListener('click', () => {

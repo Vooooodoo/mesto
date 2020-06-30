@@ -140,10 +140,11 @@ api.get('/cards')
             }, //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
 
             handleCardTrashClick: () => {
-              cardDeletePopup.open();
+              // cardDeletePopup.open();
+              api.delete(`/cards/${cardData._id}`)
 
 
-              console.log(cardData._id);
+
             }
           });
           const cardElement = card.createCard();
