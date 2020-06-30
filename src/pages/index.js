@@ -8,6 +8,7 @@ import './index.css'; //*добавили импорт главного файл
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
+import { Popup } from '../components/Popup.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
@@ -37,6 +38,9 @@ const profileUserInfo = new UserInfo({
   aboutSelector: '.profile__subtitle'
 });
 
+//Popup
+const cardDeletePopup = new Popup('#card-delete-popup');
+
 //PopupWithForm
 const editPopup = new PopupWithForm('#edit-popup', {
   handleSubmit: (formData) => { //*formData - объект с данными формы, которые получены с помощью приватного метода _getInputValues() класса PopupWithForm
@@ -62,6 +66,10 @@ const addPopup = new PopupWithForm('#add-popup', {
         const card = new Card(result, '#card-template', {
           handleCardClick: (name, link) => {
             photoPopup.open(name, link);
+          },
+
+          handleCardTrashClick: () => {
+            cardDeletePopup.open();
           }
         }); //*cоздали новый объект-экземпляр класса Card с данными с соответствующего объекта на сервере
         const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу

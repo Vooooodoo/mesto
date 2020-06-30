@@ -2,12 +2,13 @@
 
 //CLASS
 export class Card {
-  constructor(data, cardSelector, { handleCardClick }) { //*передали данные в виде объекта, селектор шаблона(на случай, если надо будет создать карточку по другому шаблону) и хэндлер клика по фото карточки
+  constructor(data, cardSelector, { handleCardClick, handleCardTrashClick }) { //*передали данные в виде объекта, селектор шаблона(на случай, если надо будет создать карточку по другому шаблону) и хэндлеры клика пол элементам карточки
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._cardSelector = cardSelector; //*записали селектор в приватное поле
     this._handleCardClick = handleCardClick; //*колбэк-функция, которая вызывается при клике на фото карточки, описывается при создании экземпляра класса Card
+    this._handleCardTrashClick = handleCardTrashClick;
   }
 
   _getTemplateClone() {
@@ -39,7 +40,7 @@ export class Card {
     });
 
     this._cardTrash.addEventListener('click', () => {
-      this._deleteCard();
+      this._handleCardTrashClick;
     });
 
     this._cardPhoto.addEventListener('click', () => {
