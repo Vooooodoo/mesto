@@ -48,4 +48,10 @@ export class Api {
       body
     });
   } //*метод для для отправки данных на сервер
+
+  delete(url) {
+    return this._fetch(url, {
+      method: 'DELETE',
+    });
+  } //*метод для для отправки данных на сервер
 }

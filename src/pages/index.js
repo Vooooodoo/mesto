@@ -8,9 +8,9 @@ import './index.css'; //*добавили импорт главного файл
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
-import { Popup } from '../components/Popup.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithConfirm } from '../components/PopupWithConfirm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
 import {
@@ -39,7 +39,13 @@ const profileUserInfo = new UserInfo({
 });
 
 //Popup
-const cardDeletePopup = new Popup('#card-delete-popup');
+const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', {
+  handleSubmit: () => {
+    cardDeletePopup.close();
+
+
+  }
+});
 
 //PopupWithForm
 const editPopup = new PopupWithForm('#edit-popup', {
