@@ -40,7 +40,7 @@ export class Card {
     });
 
     this._cardTrash.addEventListener('click', () => {
-      this._handleCardTrashClick;
+      this._handleCardTrashClick();
     });
 
     this._cardPhoto.addEventListener('click', () => {

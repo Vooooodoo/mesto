@@ -130,7 +130,11 @@ api.get('/cards')
           const card = new Card(cardData, '#card-template', {
             handleCardClick: (name, link) => {
               photoPopup.open(name, link);
-            } //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
+            }, //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
+
+            handleCardTrashClick: () => {
+              cardDeletePopup.open();
+            }
           });
           const cardElement = card.createCard();
           const cardTrash = cardElement.querySelector('.card__trash');
