@@ -1,3 +1,6 @@
+@import url(./_hide/card__trash_hide.css);
+@import url(./_show/card__trash_show.css);
+
 .card__trash {
   position: absolute;
   top: 18px;
