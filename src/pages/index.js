@@ -142,7 +142,9 @@ api.get('/cards')
             handleCardTrashClick: () => {
               // cardDeletePopup.open();
               api.delete(`/cards/${cardData._id}`)
-
+                .then((result) => {
+                  console.log(result);
+                });
 
 
             }
