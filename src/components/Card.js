@@ -43,7 +43,7 @@ export class Card {
     });
 
     this._cardPhoto.addEventListener('click', () => {
-      this._handleCardClick(this._name, this._link); //*функция-обработчик описывается при создании экземпляра класса
+      this._handleCardClick(this._name, this._link); //*функция-обработчик описывается при создании экземпляра класса в index.js, аргументы this._name и this._link окажутся на месте параметров name и link
     });
   }
 
