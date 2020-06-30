@@ -175,3 +175,6 @@ addPopup.setEventListeners();
 
 //photo-popup close listeners
 photoPopup.setEventListeners();
+
+//card-delete-popup close listeners
+cardDeletePopup.setEventListeners();
