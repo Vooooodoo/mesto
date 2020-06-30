@@ -9,7 +9,7 @@ export class Section {
   }
 
   renderItems() {
-    for (let i = 0; i <= 5; i++) {
+    for (let i = 0; i <= 29; i++) {
       this._renderer(this._initialArray[i])
     }
   } //*метод рэндера первых шести элементов в массиве
