@@ -66,7 +66,7 @@ const addPopup = new PopupWithForm('#add-popup', {
         const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
         const cardTrash = cardElement.querySelector('.card__trash');
 
-        cardTrash.classList.add('card__trash_show'); //todo когда карточка будет тянуться с сервака, иконки карзины не будет, зачинить!!!
+        cardTrash.classList.add('card__trash_show'); //*сделали так, чтобы иконка удаления была только на созданных нами карточках
         prependNewCard(cardElement, cardsList); //*добавили новую карточку, в начало разметки списка
       });
 
@@ -124,6 +124,12 @@ api.get('/cards')
             } //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
           });
           const cardElement = card.createCard();
+          const cardTrash = cardElement.querySelector('.card__trash');
+
+          if (cardData.owner._id === 'b19d14969ea2cb4e8b131ced') {
+            cardTrash.classList.add('card__trash_show');
+          } //*при рэндере карточек с сервера, сделали так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
+            //todo скорей всего не оптимальное решение, так как айдишник у другого пользователя моим сервисом будет отличаться...
 
           section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
         },
