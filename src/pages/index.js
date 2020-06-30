@@ -126,7 +126,7 @@ api.get('/cards')
           const cardElement = card.createCard();
           const cardTrash = cardElement.querySelector('.card__trash');
 
-          if (cardData.owner._id === 'b19d14969ea2cb4e8b131ced') {
+          if (cardData.owner._id === 'b19d14969ea2cb4e8b131ced') { //*наш уникальный идентификатор
             cardTrash.classList.add('card__trash_show');
           } //*при рэндере карточек с сервера, сделали так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
             //todo скорей всего не оптимальное решение, так как айдишник у другого пользователя моим сервисом будет отличаться...
