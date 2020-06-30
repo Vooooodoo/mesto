@@ -41,9 +41,10 @@ const profileUserInfo = new UserInfo({
 //Popup
 const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', {
   handleSubmit: () => {
+
+
+
     cardDeletePopup.close();
-
-
   }
 });
 
@@ -140,6 +141,9 @@ api.get('/cards')
 
             handleCardTrashClick: () => {
               cardDeletePopup.open();
+
+
+              console.log(cardData._id);
             }
           });
           const cardElement = card.createCard();
