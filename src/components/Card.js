@@ -56,7 +56,7 @@ export class Card {
     this._cardPhoto.alt = `${this._name}.`;
     this._cardTitle.textContent = this._name;
     this._cardLikeQuantity.textContent = this._likes.length;
-    //*вставили клону ссылку на фото и заголовок-альтернативный текст
+    //*вставили клону ссылку на фото, заголовок-альтернативный текст и количество лайков
 
 
     return this._element; //*вернули готовую карточку

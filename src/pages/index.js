@@ -64,7 +64,9 @@ const addPopup = new PopupWithForm('#add-popup', {
           }
         }); //*cоздали новый объект-экземпляр класса Card с данными с соответствующего объекта на сервере
         const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+        const cardTrash = cardElement.querySelector('.card__trash');
 
+        cardTrash.classList.add('card__trash_show'); //todo когда карточка будет тянуться с сервака, иконки карзины не будет, зачинить!!!
         prependNewCard(cardElement, cardsList); //*добавили новую карточку, в начало разметки списка
       });
 
