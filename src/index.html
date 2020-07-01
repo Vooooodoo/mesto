@@ -16,11 +16,9 @@
 
       <main class="content">
         <section class="profile">
-          <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="">
-          <div class="profile__info">
-            <h1 class="profile__title"></h1>
-            <button class="profile__edit-button" type="button" aria-label="Редактировать профиль."></button>
-            <p class="profile__subtitle"></p>
+          <div class="profile__container">
+            <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="">
+            <button class="profile__avatar-button" type="button" aria-label="Обновить аватар."></button>
           </div>
           <!-- попап с формой обновления аватара -->
           <div id="avatar-popup" class="popup popup_closed">
@@ -36,6 +34,12 @@
 
               <button class="popup__close popup__close_type_form-popup" type="button" aria-label="Закрыть форму обновления аватара."></button>
             </form>
+          </div>
+
+          <div class="profile__info">
+            <h1 class="profile__title"></h1>
+            <button class="profile__edit-button" type="button" aria-label="Редактировать профиль."></button>
+            <p class="profile__subtitle"></p>
           </div>
           <!-- попап с формой редактирования профиля -->
           <div id="edit-popup" class="popup popup_closed">
