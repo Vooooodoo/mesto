@@ -2,12 +2,12 @@
 
 //CLASS
 export class Card {
-  constructor(data, cardSelector, { handleCardClick, handleCardTrashClick, handleCardLikeClick }) { //*передали данные в виде объекта, селектор шаблона(на случай, если надо будет создать карточку по другому шаблону) и хэндлеры клика пол элементам карточки
+  constructor(data, cardSelector, { handleCardPhotoClick, handleCardTrashClick, handleCardLikeClick }) { //*передали данные в виде объекта, селектор шаблона(на случай, если надо будет создать карточку по другому шаблону) и хэндлеры клика пол элементам карточки
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._cardSelector = cardSelector; //*записали селектор в приватное поле
-    this._handleCardClick = handleCardClick; //*колбэк-функция, которая вызывается при клике на фото карточки, описывается при создании экземпляра класса Card
+    this._handleCardPhotoClick = handleCardPhotoClick; //*колбэк-функция, которая вызывается при клике на фото карточки, описывается при создании экземпляра класса Card
     this._handleCardTrashClick = handleCardTrashClick;
     this._handleCardLikeClick = handleCardLikeClick;
   }
@@ -46,7 +46,7 @@ export class Card {
     });
 
     this._cardPhoto.addEventListener('click', () => {
-      this._handleCardClick(this._name, this._link); //*функция-обработчик описывается при создании экземпляра класса в index.js, аргументы this._name и this._link окажутся на месте параметров name и link
+      this._handleCardPhotoClick(this._name, this._link); //*функция-обработчик описывается при создании экземпляра класса в index.js, аргументы this._name и this._link окажутся на месте параметров name и link
     });
   }
 

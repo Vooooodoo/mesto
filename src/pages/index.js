@@ -16,9 +16,8 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithConfirm } from '../components/PopupWithConfirm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
-import {
-  enableValidationArgs
-} from '../utils/constants.js';
+
+import { enableValidationArgs } from '../utils/constants.js';
 
 //DOM-ELEMENTS
 //form-popus open/close elements
@@ -73,7 +72,7 @@ const addPopup = new PopupWithForm('#add-popup', {
     })
       .then((result) => {
         const card = new Card(result, '#card-template', {
-          handleCardClick: (name, link) => {
+          handleCardPhotoClick: (name, link) => {
             photoPopup.open(name, link);
           },
 
@@ -154,7 +153,7 @@ api.get('/cards')
         data: result, //*result - это массив, полученный с сервера, в котором хранятся объекты с данными карточек
         renderer: (cardData) => { //*объект, который мы передали при вызове функции this._renderer в классе Section, оказался на месте параметра cardData
           const card = new Card(cardData, '#card-template', {
-            handleCardClick: (name, link) => {
+            handleCardPhotoClick: (name, link) => {
               photoPopup.open(name, link);
             }, //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
 
