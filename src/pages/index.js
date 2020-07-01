@@ -1,5 +1,7 @@
 //todo вернуть флаг --watch в тело скрипта в файле package.json
 //todo вернуть начальный рэндер в 6 карточек
+//todo проверить чтобы одинаковая логика была при создании новой карточки и при рэндере секции с сервера
+
 
 //FILES FOR WEBPACK
 import './index.css'; //*добавили импорт главного файла стилей
@@ -118,6 +120,7 @@ function prependNewCard(card, container) {
   container.prepend(card);
 }
 
+
 //METHODS
 //form-popups validation method
 editForm.enableValidation();
@@ -150,16 +153,28 @@ api.get('/cards')
                   const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
 
                   cardLikeQuantity.textContent = result.likes.length;
+
+
                 });
+
+
             }
           });
+
           const cardElement = card.createCard();
           const cardTrash = cardElement.querySelector('.card__trash');
+          const cardLike = cardElement.querySelector('.card__like');
 
           if (cardData.owner._id === 'b19d14969ea2cb4e8b131ced') { //*наш уникальный идентификатор
             cardTrash.classList.add('card__trash_show');
           } //*при рэндере карточек с сервера, сделали так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
             //todo скорей всего не оптимальное решение, так как айдишник у другого пользователя моим сервисом будет отличаться...
+
+          cardData.likes.forEach(item => {
+            if (item._id === 'b19d14969ea2cb4e8b131ced') {
+              cardLike.classList.add('card__like_active');
+            }
+          }); //*прошлись по массиву пользователей, которые поставили лайки и активировали сердечко, если в массиве есть наш лайк
 
           section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
         },
