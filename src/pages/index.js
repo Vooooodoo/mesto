@@ -43,10 +43,8 @@ const profileUserInfo = new UserInfo({
 //Popup
 const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', {
   handleSubmit: () => {
-
-
-
     cardDeletePopup.close();
+    //todo допилить логику
   }
 });
 
@@ -79,6 +77,7 @@ const addPopup = new PopupWithForm('#add-popup', {
 
           handleCardTrashClick: () => {
             cardDeletePopup.open();
+            //todo допилить логику
           }
         }); //*cоздали новый объект-экземпляр класса Card с данными с соответствующего объекта на сервере
         const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
@@ -120,13 +119,12 @@ function prependNewCard(card, container) {
   container.prepend(card);
 }
 
-
 //METHODS
 //form-popups validation method
 editForm.enableValidation();
 addForm.enableValidation();
 
-//API methods
+//api methods
 api.get('/users/me')
   .then((result) => { //*eсли запрос выполнен успешно, сработает обработчик then с описанием последующих действий
     profileUserInfo.setUserInfo(result); //*result - это объект на сервере с информацией о пользователе
@@ -145,19 +143,25 @@ api.get('/cards')
             handleCardTrashClick: () => {
               // cardDeletePopup.open();
               api.delete(`/cards/${cardData._id}`)
+              //todo допилить логику
             },
 
             handleCardLikeClick: () => {
-              api.put(`/cards/likes/${cardData._id}`)
+              if (cardLike.classList.contains('card__like_active')) {
+                api.delete(`/cards/likes/${cardData._id}`)
+                  .then((result) => {
+                    const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
+
+                    cardLikeQuantity.textContent = result.likes.length;
+                  });
+              } else {
+                api.put(`/cards/likes/${cardData._id}`)
                 .then((result) => {
                   const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
 
                   cardLikeQuantity.textContent = result.likes.length;
-
-
                 });
-
-
+              }
             }
           });
 
