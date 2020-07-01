@@ -1,6 +1,7 @@
 //todo вернуть флаг --watch в тело скрипта в файле package.json
 //todo вернуть начальный рэндер в 6 карточек
 //todo проверить чтобы одинаковая логика была при создании новой карточки и при рэндере секции с сервера
+//todo DRY перепроверить еще раз везде
 
 
 //FILES FOR WEBPACK
@@ -44,7 +45,8 @@ const profileUserInfo = new UserInfo({
 const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', {
   handleSubmit: () => {
     cardDeletePopup.close();
-    //todo допилить логику
+    // api.delete(`/cards/${cardData._id}`)
+    //todo допилить логику удаления карточки из вёрстки и из сервера
   }
 });
 
@@ -77,7 +79,6 @@ const addPopup = new PopupWithForm('#add-popup', {
 
           handleCardTrashClick: () => {
             cardDeletePopup.open();
-            //todo допилить логику
           },
 
           handleCardLikeClick: () => {
@@ -158,9 +159,7 @@ api.get('/cards')
             }, //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
 
             handleCardTrashClick: () => {
-              // cardDeletePopup.open();
-              api.delete(`/cards/${cardData._id}`)
-              //todo допилить логику
+              cardDeletePopup.open();
             },
 
             handleCardLikeClick: () => {

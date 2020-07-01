@@ -32,7 +32,7 @@ export class Card {
   }
 
   _deleteCard() {
-    this._element.remove();
+    this._element.remove(); //todo метод пока оказался не нужен, присторить или снести
   }
 
   _setEventListeners() {
@@ -43,7 +43,6 @@ export class Card {
 
     this._cardTrash.addEventListener('click', () => {
       this._handleCardTrashClick();
-      this._deleteCard();
     });
 
     this._cardPhoto.addEventListener('click', () => {
