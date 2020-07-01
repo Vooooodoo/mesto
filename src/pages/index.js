@@ -78,10 +78,27 @@ const addPopup = new PopupWithForm('#add-popup', {
           handleCardTrashClick: () => {
             cardDeletePopup.open();
             //todo допилить логику
+          },
+
+          handleCardLikeClick: () => {
+            if (cardLike.classList.contains('card__like_active')) {
+              api.delete(`/cards/likes/${result._id}`)
+                .then((result) => {
+                  cardLikeQuantity.textContent = result.likes.length;
+                });
+            } else {
+              api.put(`/cards/likes/${result._id}`)
+              .then((result) => {
+                cardLikeQuantity.textContent = result.likes.length;
+              });
+            }
           }
         }); //*cоздали новый объект-экземпляр класса Card с данными с соответствующего объекта на сервере
+
         const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
         const cardTrash = cardElement.querySelector('.card__trash');
+        const cardLike = cardElement.querySelector('.card__like');
+        const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
 
         cardTrash.classList.add('card__trash_show'); //*сделали так, чтобы иконка удаления была только на созданных нами карточках
         prependNewCard(cardElement, cardsList); //*добавили новую карточку, в начало разметки списка
@@ -150,15 +167,11 @@ api.get('/cards')
               if (cardLike.classList.contains('card__like_active')) {
                 api.delete(`/cards/likes/${cardData._id}`)
                   .then((result) => {
-                    const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
-
                     cardLikeQuantity.textContent = result.likes.length;
                   });
               } else {
                 api.put(`/cards/likes/${cardData._id}`)
                 .then((result) => {
-                  const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
-
                   cardLikeQuantity.textContent = result.likes.length;
                 });
               }
@@ -168,6 +181,7 @@ api.get('/cards')
           const cardElement = card.createCard();
           const cardTrash = cardElement.querySelector('.card__trash');
           const cardLike = cardElement.querySelector('.card__like');
+          const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
 
           if (cardData.owner._id === 'b19d14969ea2cb4e8b131ced') { //*наш уникальный идентификатор
             cardTrash.classList.add('card__trash_show');
