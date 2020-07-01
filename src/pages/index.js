@@ -142,11 +142,15 @@ api.get('/cards')
             handleCardTrashClick: () => {
               // cardDeletePopup.open();
               api.delete(`/cards/${cardData._id}`)
+            },
+
+            handleCardLikeClick: () => {
+              api.put(`/cards/likes/${cardData._id}`)
                 .then((result) => {
-                  console.log(result);
+                  const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
+
+                  cardLikeQuantity.textContent = result.likes.length;
                 });
-
-
             }
           });
           const cardElement = card.createCard();
