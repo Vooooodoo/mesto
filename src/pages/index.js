@@ -88,9 +88,9 @@ const addPopup = new PopupWithForm('#add-popup', {
                 });
             } else {
               api.put(`/cards/likes/${result._id}`)
-              .then((result) => {
-                cardLikeQuantity.textContent = result.likes.length;
-              });
+                .then((result) => {
+                  cardLikeQuantity.textContent = result.likes.length;
+                });
             }
           }
         }); //*cоздали новый объект-экземпляр класса Card с данными с соответствующего объекта на сервере
@@ -164,16 +164,16 @@ api.get('/cards')
             },
 
             handleCardLikeClick: () => {
-              if (cardLike.classList.contains('card__like_active')) {
+              if (cardLike.classList.contains('card__like_active')) { //*если сердечко активировано, то удалить лайк с сервера, в ином случае добавить
                 api.delete(`/cards/likes/${cardData._id}`)
                   .then((result) => {
-                    cardLikeQuantity.textContent = result.likes.length;
+                    cardLikeQuantity.textContent = result.likes.length; //*поменяли количество лайков в разметке на данные с сервера
                   });
               } else {
                 api.put(`/cards/likes/${cardData._id}`)
-                .then((result) => {
-                  cardLikeQuantity.textContent = result.likes.length;
-                });
+                  .then((result) => {
+                    cardLikeQuantity.textContent = result.likes.length;
+                  });
               }
             }
           });
