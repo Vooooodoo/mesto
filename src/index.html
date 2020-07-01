@@ -22,6 +22,21 @@
             <button class="profile__edit-button" type="button" aria-label="Редактировать профиль."></button>
             <p class="profile__subtitle"></p>
           </div>
+          <!-- попап с формой обновления аватара -->
+          <div id="avatar-popup" class="popup popup_closed">
+            <form name="avatar" class="popup__form-container" novalidate>
+              <h3 class="popup__form-title">Обновить аватар</h3>
+
+              <fieldset class="popup__fieldset">
+                <input id="avatar-popup-input-link" name="link" class="popup__input-text" type="url" placeholder="Ссылка на новый аватар" required>
+                <span id="avatar-popup-input-link-error" class="popup__input-error popup__input-error_hide"></span>
+              </fieldset>
+
+              <button class="popup__submit popup__submit_valid" type="submit">Сохранить</button>
+
+              <button class="popup__close popup__close_type_form-popup" type="button" aria-label="Закрыть форму обновления аватара."></button>
+            </form>
+          </div>
           <!-- попап с формой редактирования профиля -->
           <div id="edit-popup" class="popup popup_closed">
             <form name="edit" class="popup__form-container" novalidate>
@@ -72,12 +87,12 @@
               <button class="popup__close popup__close_type_photo-popup" type="button" aria-label="Закрыть окно с фотографией."></button>
             </div>
           </div>
-          <!-- попап удаления карточки -->
+          <!-- попап с подтверждением удаления карточки -->
           <div id="card-delete-popup" class="popup popup_closed">
             <div class="popup__form-container">
               <h3 class="popup__form-title">Вы уверены?</h3>
               <button class="popup__submit popup__submit_valid" type="button">Да</button>
-              <button class="popup__close popup__close_type_form-popup" type="button" aria-label="Закрыть попап удаления карточки."></button>
+              <button class="popup__close popup__close_type_form-popup" type="button" aria-label="Закрыть попап подтверждения удаления карточки."></button>
             </div>
           </div>
         </section>
