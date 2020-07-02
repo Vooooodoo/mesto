@@ -10,12 +10,7 @@
   background-repeat: no-repeat;
   background-size: 26px;
   background-position: center;
-}
-
-.profile__avatar-button:hover {
   cursor: pointer;
-  opacity: .5;
-  transition: opacity .2s linear;
 }
 
 .profile__avatar-button:focus {
