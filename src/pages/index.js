@@ -26,6 +26,7 @@ const editPopupForm = document.forms.edit;
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
+const profileAvatarContainer = document.querySelector('.profile__container');
 
 //form-popups submit elements
 const editPopupNameInput = editPopupForm.elements.name;
@@ -109,12 +110,19 @@ const addPopup = new PopupWithForm('#add-popup', {
   }
 });
 
+const avatarPopup = new PopupWithForm('#avatar-popup', {
+  handleSubmit: (formData) => {
+    console.log(formData);
+  }
+});
+
 //PopupWithImage
 const photoPopup = new PopupWithImage('#photo-popup');
 
 //FormValidator
 const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
 const addForm = new FormValidator(enableValidationArgs, '#add-popup');
+const avatarForm = new FormValidator(enableValidationArgs, '#avatar-popup');
 
 //Api
 const api = new Api({
@@ -221,6 +229,15 @@ profileAddButton.addEventListener('click', () => {
 });
 
 addPopup.setEventListeners();
+
+//avatar-popup open/close listeners
+profileAvatarContainer.addEventListener('click', () => {
+  avatarPopup.open();
+  avatarForm.resetInputErrors();
+  avatarForm.disableSubmitButton();
+});
+
+avatarPopup.setEventListeners();
 
 //photo-popup close listeners
 photoPopup.setEventListeners();
