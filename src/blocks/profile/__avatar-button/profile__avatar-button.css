@@ -1,4 +1,5 @@
 .profile__avatar-button {
+  display: none;
   position: absolute;
   width: 26px;
   height: 26px;

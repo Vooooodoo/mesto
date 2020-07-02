@@ -18,6 +18,10 @@
   transition: background-color .2s linear;
 }
 
+.profile__container:hover .profile__avatar-button {
+  display: block;
+}
+
 @media all and (max-width: 628px) {
 	.profile__container {
     margin: 0 auto 14px;
