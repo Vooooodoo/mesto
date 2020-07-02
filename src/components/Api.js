@@ -10,7 +10,7 @@ export class Api {
   _fetch(url, options) {
     if (options.body) {
       options.body = JSON.stringify(options.body);
-    }
+    } //*если в опциях будет body, добавить свойство с преобразованием объекта JSON в строку, для будущей передачи на сервер
 
     options.headers = this._headers;
 
