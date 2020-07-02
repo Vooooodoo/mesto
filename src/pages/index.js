@@ -194,6 +194,7 @@ api.get('/cards')
 
             handleCardTrashClick: () => {
               cardDeletePopup.open();
+              console.log(cardData._id);
             },
 
             handleCardLikeClick: () => {
