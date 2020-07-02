@@ -158,6 +158,7 @@ function prependNewCard(card, container) {
 //form-popups validation method
 editForm.enableValidation();
 addForm.enableValidation();
+avatarForm.enableValidation();
 
 //api methods
 api.get('/users/me')
