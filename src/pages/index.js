@@ -32,6 +32,8 @@ const profileAvatarContainer = document.querySelector('.profile__container');
 const editPopupNameInput = editPopupForm.elements.name;
 const editPopupAboutInput = editPopupForm.elements.about;
 
+const profileAvatar = document.querySelector('.profile__avatar');
+
 //render cards element
 const cardsList = document.querySelector('.cards__list');
 
@@ -112,7 +114,14 @@ const addPopup = new PopupWithForm('#add-popup', {
 
 const avatarPopup = new PopupWithForm('#avatar-popup', {
   handleSubmit: (formData) => {
-    console.log(formData);
+    api.patch('/users/me/avatar', {
+      avatar: formData.link
+    })
+      .then((result) => {
+        profileAvatar.src = result.avatar;
+      });
+
+    avatarPopup.close();
   }
 });
 
