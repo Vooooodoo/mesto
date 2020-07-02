@@ -8,7 +8,9 @@ export class PopupWithForm extends Popup { //*расширили родител�
     super(popupSelector); //*ключевое слово, которое возвращает объект с унаследованными свойствами и методами родительского класса
     this._handleSubmit = handleSubmit; //*колбэк-функция, которая вызывается при сабмите формы (обработчик сабмита формы)
     this._form = this._popup.querySelector('.popup__form-container');
-  } //*расширили конструктор за счёт добавления нового свойства this._handleSubmit
+    this._submitButton = this._popup.querySelector('.popup__submit');
+    this._submitButtonText = this._submitButton.textContent;
+  } //*расширили конструктор за счёт добавления новых свойств
 
   _getInputValues() {
     this._inputList = this._popup.querySelectorAll('.popup__input-text'); //*нашли все инпуты внутри формы
@@ -21,6 +23,14 @@ export class PopupWithForm extends Popup { //*расширили родител�
 
     return this._formValues; //*вернули объект со значениями
   }
+
+  dataLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = 'Сохранение...';
+    } else {
+      this._submitButton.textContent = this._submitButtonText;
+    }
+  } //*метод, который меняет текст кнопки сабмита пока грузятся данные с сервера и возвращает исходный текст после загрузки
 
   close() {
     super.close();  //*метод close() родительского класса

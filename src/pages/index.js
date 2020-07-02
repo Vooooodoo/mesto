@@ -56,20 +56,27 @@ const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', {
 //PopupWithForm
 const editPopup = new PopupWithForm('#edit-popup', {
   handleSubmit: (formData) => { //*formData - объект с данными формы, которые получены с помощью приватного метода _getInputValues() класса PopupWithForm
+    editPopup.dataLoading(true); //*сообщили пользователю, что идёт загрузка данных с сервера, поменяв текст кнопки сабмита
+
     api.patch('/users/me', {
       name: formData.name,
       about: formData.about
     }) //*обновили на сервере информацию о пользователе, полученную из формы
       .then((result) => { //*eсли запрос выполнен успешно, сработает обработчик then с описанием последующих действий
         profileUserInfo.setUserInfo(result); //*result - это объект на сервере с информацией о пользователе
-      }); //*получили обратно информацию с сервера и добавили её на страницу
+      }) //*получили обратно информацию с сервера и добавили её на страницу
 
-    editPopup.close();
+      .finally(() => {
+        editPopup.dataLoading(false); //*после успешной загрузки данных с сервера вернули текст кнопки сабмита к исходному значению
+        editPopup.close();
+      });
   }
 });
 
 const addPopup = new PopupWithForm('#add-popup', {
   handleSubmit: (formData) => {
+    addPopup.dataLoading(true);
+
     api.post('/cards', {
       name: formData.name,
       link: formData.link
@@ -106,22 +113,30 @@ const addPopup = new PopupWithForm('#add-popup', {
 
         cardTrash.classList.add('card__trash_show'); //*сделали так, чтобы иконка удаления была только на созданных нами карточках
         prependNewCard(cardElement, cardsList); //*добавили новую карточку, в начало разметки списка
-      });
+      })
 
-    addPopup.close();
+      .finally(() => {
+        addPopup.dataLoading(false);
+        addPopup.close();
+      });
   }
 });
 
 const avatarPopup = new PopupWithForm('#avatar-popup', {
   handleSubmit: (formData) => {
+    avatarPopup.dataLoading(true);
+
     api.patch('/users/me/avatar', {
       avatar: formData.link
     })
       .then((result) => {
         profileAvatar.src = result.avatar;
-      });
+      })
 
-    avatarPopup.close();
+      .finally(() => {
+        avatarPopup.dataLoading(false);
+        avatarPopup.close();
+      });
   }
 });
 
@@ -164,6 +179,7 @@ avatarForm.enableValidation();
 api.get('/users/me')
   .then((result) => { //*eсли запрос выполнен успешно, сработает обработчик then с описанием последующих действий
     profileUserInfo.setUserInfo(result); //*result - это объект на сервере с информацией о пользователе
+    profileAvatar.src = result.avatar;
   }); //*получили с сервера информацию и добавили её на страницу
 
 api.get('/cards')
@@ -203,7 +219,6 @@ api.get('/cards')
           if (cardData.owner._id === 'b19d14969ea2cb4e8b131ced') { //*наш уникальный идентификатор
             cardTrash.classList.add('card__trash_show');
           } //*при рэндере карточек с сервера, сделали так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
-            //todo скорей всего не оптимальное решение, так как айдишник у другого пользователя моим сервисом будет отличаться...
 
           cardData.likes.forEach(item => {
             if (item._id === 'b19d14969ea2cb4e8b131ced') {
