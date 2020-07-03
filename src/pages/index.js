@@ -48,9 +48,9 @@ const profileUserInfo = new UserInfo({
 const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', {
   handleSubmit: ({ cardId, cardElement }) => {
     cardDeletePopup.close();
-    api.delete(`/cards/${cardId}`)
+    api.delete(`/cards/${cardId}`);
     cardElement.remove();
-  }
+  } //*cardId и cardElement передали из хэндлера handleCardTrashClick класса Card
 });
 
 //PopupWithForm
