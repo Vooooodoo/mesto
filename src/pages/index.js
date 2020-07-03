@@ -3,6 +3,7 @@
 //todo проверить чтобы одинаковая логика была при создании новой карточки и при рэндере секции с сервера
 //todo DRY перепроверить еще раз везде
 //todo разобрать зачем +1 и -1 мутить в отображении количества лайков, если можно сразу инфу с сервера брать
+//todo заглушки src="#" в HTML проставить там где нет
 
 
 //FILES FOR WEBPACK
@@ -202,7 +203,7 @@ api.get('/cards')
                 api.delete(`/cards/likes/${cardData._id}`)
                   .then((result) => {
                     cardLikeQuantity.textContent = result.likes.length; //*поменяли количество лайков в разметке на данные с сервера
-                  });
+                  }); //*todo можно попобовать вытащить из .then смену количества лайков и пихнуть выше, брать лайки из cardData и +-1 как раз заюзать, тогда лага не будет с сервером походу
               } else {
                 api.put(`/cards/likes/${cardData._id}`)
                   .then((result) => {
@@ -218,7 +219,7 @@ api.get('/cards')
           const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
 
           if (cardData.owner._id === 'b19d14969ea2cb4e8b131ced') { //*наш уникальный идентификатор
-            cardTrash.classList.add('card__trash_show');
+            cardTrash.classList.add('card__trash_show'); //todo можно попробовать вместо id владельца каротчки подставить id из инфы о пользователе, заранее закинув его в константу с объектом
           } //*при рэндере карточек с сервера, сделали так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
 
           cardData.likes.forEach(item => {
