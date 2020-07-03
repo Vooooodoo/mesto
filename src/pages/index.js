@@ -249,10 +249,7 @@ api.get('/cards')
 //LISTENERS
 //edit-popup open/close listeners
 profileEditButton.addEventListener('click', () => {
-  openPopup(editPopup, editForm)
-  editPopup.open();
-  editForm.resetInputErrors(); //*сбросили залипшие ошибки валидации
-  editForm.disableSubmitButton(); //*деактивировали кнопку сабмита
+  openPopup(editPopup, editForm);
   fillUserInfo(); //*при открытии заполнили инпуты в соответствии с ТЗ
 });
 
@@ -260,18 +257,14 @@ editPopup.setEventListeners();
 
 //add-popup open/close listeners
 profileAddButton.addEventListener('click', () => {
-  addPopup.open();
-  addForm.resetInputErrors();
-  addForm.disableSubmitButton();
+  openPopup(addPopup, addForm);
 });
 
 addPopup.setEventListeners();
 
 //avatar-popup open/close listeners
 profileAvatarContainer.addEventListener('click', () => {
-  avatarPopup.open();
-  avatarForm.resetInputErrors();
-  avatarForm.disableSubmitButton();
+  openPopup(avatarPopup, avatarForm);
 });
 
 avatarPopup.setEventListeners();
