@@ -31,13 +31,13 @@ const profileAvatar = document.querySelector('.profile__avatar');
 const cardsList = document.querySelector('.cards__list');
 
 //INSTANCES
-//UserInfo
+//UserInfo instance
 const profileUserInfo = new UserInfo({
   nameSelector: '.profile__title',
   aboutSelector: '.profile__subtitle'
 });
 
-//Popup
+//Popup instance
 const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', {
   handleSubmit: ({ cardId, cardElement }) => {
     cardDeletePopup.close();
@@ -46,10 +46,10 @@ const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', {
   } //*cardId и cardElement передали из хэндлера handleCardTrashClick класса Card
 });
 
-//PopupWithForm
+//PopupWithForm instances
 const editPopup = new PopupWithForm('#edit-popup', {
-  handleSubmit: (formData) => { //*formData - объект с данными формы, которые получены с помощью приватного метода _getInputValues() класса PopupWithForm
-    editPopup.dataLoading(true); //*сообщили пользователю, что идёт загрузка данных с сервера, поменяв текст кнопки сабмита
+  handleSubmit: (formData) => { //*formData - объект с данными формы, которые получены с помощью приватного метода _getInputValues класса PopupWithForm
+    dataLoadingFunc(editPopup); //*сообщили пользователю, что идёт загрузка данных с сервера, поменяв текст кнопки сабмита
 
     api.patch('/users/me', {
       name: formData.name,
@@ -60,15 +60,14 @@ const editPopup = new PopupWithForm('#edit-popup', {
       }) //*получили обратно информацию с сервера и добавили её на страницу
 
       .finally(() => {
-        editPopup.dataLoading(false); //*после успешной загрузки данных с сервера вернули текст кнопки сабмита к исходному значению
-        editPopup.close();
+        dataLoaded(editPopup); //*после успешной загрузки данных с сервера, вернули текст кнопки сабмита к исходному значению
       });
   }
 });
 
 const addPopup = new PopupWithForm('#add-popup', {
   handleSubmit: (formData) => {
-    addPopup.dataLoading(true);
+    dataLoadingFunc(addPopup);
 
     api.post('/cards', {
       name: formData.name,
@@ -97,9 +96,10 @@ const addPopup = new PopupWithForm('#add-popup', {
                 });
             }
           }
-        }); //*cоздали новый объект-экземпляр класса Card с данными с соответствующего объекта на сервере
+        }); //*cоздали новый объект-экземпляр класса Card с данными из соответствующего объекта на сервере
 
         const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
+
         const cardTrash = cardElement.querySelector('.card__trash');
         const cardLike = cardElement.querySelector('.card__like');
         const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
@@ -109,15 +109,14 @@ const addPopup = new PopupWithForm('#add-popup', {
       })
 
       .finally(() => {
-        addPopup.dataLoading(false);
-        addPopup.close();
+        dataLoaded(addPopup);
       });
   }
 });
 
 const avatarPopup = new PopupWithForm('#avatar-popup', {
   handleSubmit: (formData) => {
-    avatarPopup.dataLoading(true);
+    dataLoadingFunc(avatarPopup);
 
     api.patch('/users/me/avatar', {
       avatar: formData.link
@@ -127,21 +126,20 @@ const avatarPopup = new PopupWithForm('#avatar-popup', {
       })
 
       .finally(() => {
-        avatarPopup.dataLoading(false);
-        avatarPopup.close();
+        dataLoaded(avatarPopup);
       });
   }
 });
 
-//PopupWithImage
+//PopupWithImage instance
 const photoPopup = new PopupWithImage('#photo-popup');
 
-//FormValidator
+//FormValidator instances
 const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
 const addForm = new FormValidator(enableValidationArgs, '#add-popup');
 const avatarForm = new FormValidator(enableValidationArgs, '#avatar-popup');
 
-//Api
+//Api instance
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-12',
   headers: {
@@ -160,6 +158,23 @@ function fillUserInfo() {
 //new card add function
 function prependNewCard(card, container) {
   container.prepend(card);
+}
+
+//data loading submit button state functions
+function dataLoadingFunc(popupInstance) {
+  popupInstance.dataLoading(true);
+}
+
+function dataLoaded(popupInstance) {
+  popupInstance.dataLoading(false);
+  popupInstance.close();
+}
+
+//popup open function
+function openPopup(popupInstance, formInstance) {
+  popupInstance.open();
+  formInstance.resetInputErrors(); //*сбросили залипшие ошибки валидации
+  formInstance.disableSubmitButton(); //*деактивировали кнопку сабмита
 }
 
 //METHODS
@@ -234,6 +249,7 @@ api.get('/cards')
 //LISTENERS
 //edit-popup open/close listeners
 profileEditButton.addEventListener('click', () => {
+  openPopup(editPopup, editForm)
   editPopup.open();
   editForm.resetInputErrors(); //*сбросили залипшие ошибки валидации
   editForm.disableSubmitButton(); //*деактивировали кнопку сабмита
