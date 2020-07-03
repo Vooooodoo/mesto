@@ -14,7 +14,7 @@ export class PopupWithConfirm extends Popup {
     super.open();
 
     this._id = options.id; //*записали в поле идентификатор карточки, чтобы можно было удалить её с сервера
-    this._cardElement = options.cardElement; //*записали в поле элемент карточки, чтобы можно было удалить её с сайта
+    this._cardElement = options.cardElement; //*записали в поле элемент карточки, чтобы можно было удалить её из разметки
   } //*options - это объект с данными, который описали при создании колбэк-функции handleCardTrashClick, в классе Card
 
   setEventListeners() {
