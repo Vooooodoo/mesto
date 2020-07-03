@@ -32,10 +32,6 @@ export class Card {
     this._cardLike.classList.toggle('card__like_active');
   }
 
-  _deleteCard() {
-    this._element.remove();
-  }
-
   _setEventListeners() {
     this._cardLike.addEventListener('click', () => {
       this._handleCardLikeClick();
@@ -46,7 +42,7 @@ export class Card {
       this._handleCardTrashClick({
         id: this._id,
         cardElement: this._element
-      });
+      }); //*объект с данными, который вставили в качестве аргумента, окажется на месте параметра options, при описании колбэк-функции handleCardTrashClick в index.js
     });
 
     this._cardPhoto.addEventListener('click', () => {
