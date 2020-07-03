@@ -4,7 +4,7 @@
 export class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
-    this._handleEscClose = this._handleEscClose.bind(this); //*привязали контекст
+    this._handleEscClose = this._handleEscClose.bind(this); //*привязали контекст, чтобы можно было вызвать в качестве колл бэка
   }
 
   _handleEscClose(evt) {
