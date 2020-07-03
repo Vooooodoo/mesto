@@ -194,7 +194,6 @@ api.get('/cards')
 
             handleCardTrashClick: () => {
               cardDeletePopup.open();
-              console.log(cardData._id);
             },
 
             handleCardLikeClick: () => {
@@ -202,7 +201,7 @@ api.get('/cards')
                 api.delete(`/cards/likes/${cardData._id}`)
                   .then((result) => {
                     cardLikeQuantity.textContent = result.likes.length; //*поменяли количество лайков в разметке на данные с сервера
-                  }); //*todo можно попобовать вытащить из .then смену количества лайков и пихнуть выше, брать лайки из cardData и +-1 как раз заюзать, тогда лага не будет с сервером походу
+                  });
               } else {
                 api.put(`/cards/likes/${cardData._id}`)
                   .then((result) => {
@@ -217,15 +216,18 @@ api.get('/cards')
           const cardLike = cardElement.querySelector('.card__like');
           const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
 
-          if (cardData.owner._id === 'b19d14969ea2cb4e8b131ced') { //*наш уникальный идентификатор
-            cardTrash.classList.add('card__trash_show'); //todo можно попробовать вместо id владельца каротчки подставить id из инфы о пользователе, заранее закинув его в константу с объектом
-          } //*при рэндере карточек с сервера, сделали так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
+          api.get('/users/me')
+            .then((result) => {
+              if (cardData.owner._id === result._id) { //*наш уникальный идентификатор
+                cardTrash.classList.add('card__trash_show');
+              } //*при рэндере карточек с сервера, сделали так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
 
-          cardData.likes.forEach(item => {
-            if (item._id === 'b19d14969ea2cb4e8b131ced') {
-              cardLike.classList.add('card__like_active');
-            }
-          }); //*прошлись по массиву пользователей, которые поставили лайки и активировали сердечко, если в массиве есть наш лайк
+              cardData.likes.forEach(item => {
+                if (item._id === result._id) {
+                  cardLike.classList.add('card__like_active');
+                }
+              }); //*прошлись по массиву пользователей, которые поставили лайки и активировали сердечко, если в массиве есть наш лайк
+            });
 
           section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
         },
