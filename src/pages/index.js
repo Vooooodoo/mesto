@@ -46,10 +46,10 @@ const profileUserInfo = new UserInfo({
 
 //Popup
 const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', {
-  handleSubmit: () => {
+  handleSubmit: ({ cardId, cardElement }) => {
     cardDeletePopup.close();
-    // api.delete(`/cards/${cardData._id}`)
-    //todo допилить логику удаления карточки из вёрстки и из сервера
+    api.delete(`/cards/${cardId}`)
+    cardElement.remove();
   }
 });
 
@@ -87,8 +87,8 @@ const addPopup = new PopupWithForm('#add-popup', {
             photoPopup.open(name, link);
           },
 
-          handleCardTrashClick: () => {
-            cardDeletePopup.open();
+          handleCardTrashClick: (options) => {
+            cardDeletePopup.open(options);
           },
 
           handleCardLikeClick: () => {
@@ -192,8 +192,8 @@ api.get('/cards')
               photoPopup.open(name, link);
             }, //*параметры name и link описали в классе Card, при вызове функции this._handleCardClick, эти значения и окажутся на месте текущих параметров
 
-            handleCardTrashClick: () => {
-              cardDeletePopup.open();
+            handleCardTrashClick: (options) => {
+              cardDeletePopup.open(options);
             },
 
             handleCardLikeClick: () => {

@@ -6,6 +6,7 @@ export class Card {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
+    this._id = data._id;
     this._cardSelector = cardSelector; //*записали селектор в приватное поле
     this._handleCardPhotoClick = handleCardPhotoClick; //*колбэк-функция, которая вызывается при клике на фото карточки, описывается при создании экземпляра класса Card
     this._handleCardTrashClick = handleCardTrashClick;
@@ -32,7 +33,7 @@ export class Card {
   }
 
   _deleteCard() {
-    this._element.remove(); //todo метод пока оказался не нужен, присторить или снести
+    this._element.remove();
   }
 
   _setEventListeners() {
@@ -42,7 +43,10 @@ export class Card {
     });
 
     this._cardTrash.addEventListener('click', () => {
-      this._handleCardTrashClick();
+      this._handleCardTrashClick({
+        id: this._id,
+        cardElement: this._element
+      });
     });
 
     this._cardPhoto.addEventListener('click', () => {

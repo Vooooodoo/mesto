@@ -10,11 +10,21 @@ export class PopupWithConfirm extends Popup {
     this._submitButton = this._popup.querySelector('.popup__submit');
   }
 
+  open(options) {
+    super.open();
+
+    this._id = options.id;
+    this._cardElement = options.cardElement;
+  }
+
   setEventListeners() {
     super.setEventListeners();
 
     this._submitButton.addEventListener('click', () => {
-      this._handleSubmit();
+      this._handleSubmit({
+        cardId: this._id,
+        cardElement: this._cardElement
+      });
     });
   }
 }
