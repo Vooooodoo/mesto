@@ -56,6 +56,14 @@ export class Card {
     }
   } //*при рэндере карточек с сервера, этот метод позволит сделать так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
 
+  activateUserLikes(likesArray, userId) {
+    likesArray.forEach(item => {
+      if (item._id === userId) {
+        this._cardLike.classList.add('card__like_active');
+      }
+    }); //*при рэндере карточек, прошлись по массиву пользователей, которые поставили лайки и активировали сердечко, если в массиве есть наш лайк
+  }
+
   createCard() {
     this._getTemplateClone(); //*создали пустого клона
     this._setComponents(); //*нашли элементы клона

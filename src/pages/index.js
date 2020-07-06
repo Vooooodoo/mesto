@@ -245,12 +245,7 @@ api.get('/cards')
           api.get('/users/me')
             .then((result) => {
               card.showCardTrashButton(cardData.owner._id, result._id); //*при рэндере карточек с сервера, сделали так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
-
-              cardData.likes.forEach(item => {
-                if (item._id === result._id) {
-                  cardLike.classList.add('card__like_active');
-                }
-              }); //*прошлись по массиву пользователей, которые поставили лайки и активировали сердечко, если в массиве есть наш лайк
+              card.activateUserLikes(cardData.likes, result._id); //*прошлись по массиву пользователей, которые поставили лайки и активировали сердечко, если в массиве есть наш лайк
             });
 
           section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
