@@ -105,11 +105,10 @@ const addPopup = new PopupWithForm('#add-popup', '.popup__form-container', '.pop
 
         const cardElement = card.createCard(); //*cоздали готовую карточку и возвратили наружу
 
-        const cardTrash = cardElement.querySelector('.card__trash');
         const cardLike = cardElement.querySelector('.card__like');
         const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
 
-        cardTrash.classList.add('card__trash_show'); //*сделали так, чтобы иконка удаления была только на созданных нами карточках
+        card.showCardTrashButton(true, true); //*сделали так, чтобы иконка удаления была только на созданных нами карточках
         prependNewCard(cardElement, cardsList); //*добавили новую карточку, в начало разметки списка
       })
 
