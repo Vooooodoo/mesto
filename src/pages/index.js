@@ -240,15 +240,12 @@ api.get('/cards')
           });
 
           const cardElement = card.createCard();
-          const cardTrash = cardElement.querySelector('.card__trash');
           const cardLike = cardElement.querySelector('.card__like');
           const cardLikeQuantity = cardElement.querySelector('.card__like-quantity');
 
           api.get('/users/me')
             .then((result) => {
-              if (cardData.owner._id === result._id) { //*наш уникальный идентификатор
-                cardTrash.classList.add('card__trash_show');
-              } //*при рэндере карточек с сервера, сделали так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
+              card.showCardTrashButton(cardData.owner._id, result._id); //*при рэндере карточек с сервера, сделали так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
 
               cardData.likes.forEach(item => {
                 if (item._id === result._id) {
