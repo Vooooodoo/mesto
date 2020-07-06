@@ -93,11 +93,21 @@ const addPopup = new PopupWithForm('#add-popup', '.popup__form-container', '.pop
               api.delete(`/cards/likes/${result._id}`)
                 .then((result) => {
                   cardLikeQuantity.textContent = result.likes.length;
+                })
+
+                .catch((error) => {
+                  alert('Ошибка. Запрос не выполнен.');
+                  console.log('Ошибка. Запрос не выполнен:', error);
                 });
             } else {
               api.put(`/cards/likes/${result._id}`)
                 .then((result) => {
                   cardLikeQuantity.textContent = result.likes.length;
+                })
+
+                .catch((error) => {
+                  alert('Ошибка. Запрос не выполнен.');
+                  console.log('Ошибка. Запрос не выполнен:', error);
                 });
             }
           }
@@ -228,11 +238,21 @@ api.get('/cards')
                 api.delete(`/cards/likes/${cardData._id}`)
                   .then((result) => {
                     cardLikeQuantity.textContent = result.likes.length; //*поменяли количество лайков в разметке на данные с сервера
+                  })
+
+                  .catch((error) => {
+                    alert('Ошибка. Запрос не выполнен.');
+                    console.log('Ошибка. Запрос не выполнен:', error);
                   });
               } else {
                 api.put(`/cards/likes/${cardData._id}`)
                   .then((result) => {
                     cardLikeQuantity.textContent = result.likes.length;
+                  })
+
+                  .catch((error) => {
+                    alert('Ошибка. Запрос не выполнен.');
+                    console.log('Ошибка. Запрос не выполнен:', error);
                   });
               }
             }
@@ -246,6 +266,11 @@ api.get('/cards')
             .then((result) => {
               card.showCardTrashButton(cardData.owner._id, result._id); //*при рэндере карточек с сервера, сделали так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
               card.activateUserLikes(cardData.likes, result._id); //*прошлись по массиву пользователей, которые поставили лайки и активировали сердечко, если в массиве есть наш лайк
+            })
+
+            .catch((error) => {
+              alert('Ошибка. Запрос не выполнен.');
+              console.log('Ошибка. Запрос не выполнен:', error);
             });
 
           section.addItem(cardElement); //*публичный метод класса Section, который добавляет готовую карточку в DOM
