@@ -147,7 +147,7 @@ const avatarPopup = new PopupWithForm('#avatar-popup', {
 });
 
 //PopupWithImage instance
-const photoPopup = new PopupWithImage('#photo-popup');
+const photoPopup = new PopupWithImage('#photo-popup', '.popup__photo', '.popup__photo-title');
 
 //FormValidator instances
 const editForm = new FormValidator(enableValidationArgs, '#edit-popup');
