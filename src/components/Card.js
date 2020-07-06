@@ -50,8 +50,8 @@ export class Card {
     });
   }
 
-  showCardTrashButton(ownerId, resultId) {
-    if (ownerId === resultId) { //*параметр ownerId - это id владельца карточки, параметр userId - это id пользователя сервиса
+  showCardTrashButton(ownerId, userId) {
+    if (ownerId === userId) { //*параметр ownerId - это id владельца карточки, параметр userId - это id пользователя сервиса
       this._cardTrash.classList.add('card__trash_show');
     }
   } //*при рэндере карточек с сервера, этот метод позволит сделать так, чтобы иконка удаления была только на созданных нами карточках, так как удалять чужие карточки нельзя
