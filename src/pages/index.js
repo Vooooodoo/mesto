@@ -47,7 +47,7 @@ const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', '.popup__subm
 });
 
 //PopupWithForm instances
-const editPopup = new PopupWithForm('#edit-popup', '.popup__submit', {
+const editPopup = new PopupWithForm('#edit-popup', '.popup__form-container', '.popup__submit', {
   handleSubmit: (formData) => { //*formData - объект с данными формы, которые получены с помощью приватного метода _getInputValues класса PopupWithForm
     dataLoadingFunc(editPopup); //*сообщили пользователю, что идёт загрузка данных с сервера, поменяв текст кнопки сабмита
 
@@ -70,7 +70,7 @@ const editPopup = new PopupWithForm('#edit-popup', '.popup__submit', {
   }
 });
 
-const addPopup = new PopupWithForm('#add-popup', '.popup__submit', {
+const addPopup = new PopupWithForm('#add-popup', '.popup__form-container', '.popup__submit', {
   handleSubmit: (formData) => {
     dataLoadingFunc(addPopup);
 
@@ -124,7 +124,7 @@ const addPopup = new PopupWithForm('#add-popup', '.popup__submit', {
   }
 });
 
-const avatarPopup = new PopupWithForm('#avatar-popup', '.popup__submit', {
+const avatarPopup = new PopupWithForm('#avatar-popup', '.popup__form-container', '.popup__submit', {
   handleSubmit: (formData) => {
     dataLoadingFunc(avatarPopup);
 

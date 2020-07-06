@@ -4,10 +4,10 @@ import { Popup } from './Popup.js';
 
 //CLASS
 export class PopupWithForm extends Popup { //*расширили родительский класс Popup новым функционалом за счёт наследования
-  constructor(popupSelector, submitButtonSelector, { handleSubmit }) {
+  constructor(popupSelector, formSelector, submitButtonSelector, { handleSubmit }) {
     super(popupSelector); //*ключевое слово, которое возвращает объект с унаследованными свойствами и методами родительского класса
     this._handleSubmit = handleSubmit; //*колбэк-функция, которая вызывается при сабмите формы (обработчик сабмита формы)
-    this._form = this._popup.querySelector('.popup__form-container');
+    this._form = this._popup.querySelector(formSelector);
     this._submitButton = this._popup.querySelector(submitButtonSelector);
     this._submitButtonText = this._submitButton.textContent;
   } //*расширили конструктор за счёт добавления новых свойств
