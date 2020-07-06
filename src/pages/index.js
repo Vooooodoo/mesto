@@ -38,7 +38,7 @@ const profileUserInfo = new UserInfo({
 });
 
 //Popup instance
-const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', {
+const cardDeletePopup = new PopupWithConfirm('#card-delete-popup', '.popup__submit', {
   handleSubmit: ({ cardId, cardElement }) => {
     cardDeletePopup.close();
     api.delete(`/cards/${cardId}`);
