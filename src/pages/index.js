@@ -59,6 +59,11 @@ const editPopup = new PopupWithForm('#edit-popup', {
         profileUserInfo.setUserInfo(result); //*result - это объект на сервере с информацией о пользователе
       }) //*получили обратно информацию с сервера и добавили её на страницу
 
+      .catch((error) => {
+        alert('Ошибка. Запрос не выполнен.');
+        console.log('Ошибка. Запрос не выполнен:', error);
+      }) //*если что-то пошло не так, — например, отвалился интернет — сработает catch
+
       .finally(() => {
         dataLoaded(editPopup); //*после успешной загрузки данных с сервера, вернули текст кнопки сабмита к исходному значению
       });
@@ -108,6 +113,11 @@ const addPopup = new PopupWithForm('#add-popup', {
         prependNewCard(cardElement, cardsList); //*добавили новую карточку, в начало разметки списка
       })
 
+      .catch((error) => {
+        alert('Ошибка. Запрос не выполнен.');
+        console.log('Ошибка. Запрос не выполнен:', error);
+      })
+
       .finally(() => {
         dataLoaded(addPopup);
       });
@@ -123,6 +133,11 @@ const avatarPopup = new PopupWithForm('#avatar-popup', {
     })
       .then((result) => {
         profileAvatar.src = result.avatar;
+      })
+
+      .catch((error) => {
+        alert('Ошибка. Запрос не выполнен.');
+        console.log('Ошибка. Запрос не выполнен:', error);
       })
 
       .finally(() => {
@@ -188,7 +203,12 @@ api.get('/users/me')
   .then((result) => { //*eсли запрос выполнен успешно, сработает обработчик then с описанием последующих действий
     profileUserInfo.setUserInfo(result); //*result - это объект на сервере с информацией о пользователе
     profileAvatar.src = result.avatar;
-  }); //*получили с сервера информацию и добавили её на страницу
+  }) //*получили с сервера информацию и добавили её на страницу
+
+  .catch((error) => {
+    alert('Ошибка. Запрос не выполнен.');
+    console.log('Ошибка. Запрос не выполнен:', error);
+  });
 
 api.get('/cards')
   .then((result) => {
@@ -244,6 +264,11 @@ api.get('/cards')
     );
 
     section.renderItems(); //*используя новый экземпляр класса Section, создали и добавили в DOM карточки всех мест
+  })
+
+  .catch((error) => {
+    alert('Ошибка. Запрос не выполнен.');
+    console.log('Ошибка. Запрос не выполнен:', error);
   });
 
 //LISTENERS
