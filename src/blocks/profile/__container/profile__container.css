@@ -14,12 +14,12 @@
   position: absolute;
   left: 0;
   top: 0;
+  transition: .2s linear;
 }
 
 .profile__container:hover::before {
   cursor: pointer;
   background-color: rgb(0, 0, 0, .5);
-  transition: background-color .2s linear;
 }
 
 .profile__container:hover .profile__avatar-button {
